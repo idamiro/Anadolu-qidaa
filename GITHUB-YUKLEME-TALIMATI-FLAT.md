@@ -1,8 +1,8 @@
 # GitHub Pages Yukleme Talimati
 
-Bu paket flat hazirlandi. Yani tum dosyalar GitHub reposunun ana dizinine yuklenecek.
+Bu paket flat hazirlandi. Tum dosyalar GitHub reposunun ana dizinine yuklenecek.
 
-Bu sekilde gorunmesi dogru:
+Dogru gorunum:
 
 ```text
 index.html
@@ -17,11 +17,9 @@ murvari-logo.jpg
 hero.jpg
 wheat-fields.mp4
 field-road.mp4
-coverr-truck-driving-near-the-beach-8711.mp4
-coverr-road-near-a-field-6275.mp4
 ```
 
-Bu pakette `media` klasoru gerekmez. Video yollari ana dizine gore ayarlandi.
+Bu versiyonda `media` klasoru yoktur. Ana sayfada sadece iki video loop icinde doner; fotograf gecisi ve ucuncu dusuk kaliteli video kaldirildi.
 
 ## Yukleme
 

@@ -188,7 +188,6 @@ body.nav-open .menu-toggle span:nth-child(3) {
 
 .hero-image,
 .hero-video,
-.hero-factory-still,
 .hero-overlay {
   position: absolute;
   inset: 0;
@@ -197,8 +196,7 @@ body.nav-open .menu-toggle span:nth-child(3) {
 }
 
 .hero-image,
-.hero-video,
-.hero-factory-still {
+.hero-video {
   object-fit: cover;
   transform: scale(1.02);
   animation: heroImageSettle 1100ms ease forwards;
@@ -208,38 +206,26 @@ body.nav-open .menu-toggle span:nth-child(3) {
   z-index: 0;
 }
 
-.hero-factory-still {
-  z-index: 0;
-  opacity: 0;
-  transition: opacity 700ms ease, transform 1200ms ease;
-}
-
-.hero.factory-phase .hero-factory-still {
-  opacity: 1;
-  transform: scale(1.045);
-}
-
 .hero-overlay {
   z-index: 0;
   background:
-    radial-gradient(circle at 78% 34%, rgba(178, 147, 91, 0.16), transparent 32%),
-    linear-gradient(90deg, rgba(5, 12, 22, 0.88) 0%, rgba(5, 12, 22, 0.64) 46%, rgba(5, 12, 22, 0.22) 100%),
-    linear-gradient(0deg, rgba(5, 12, 22, 0.52), transparent 50%);
+    linear-gradient(90deg, rgba(5, 12, 22, 0.64) 0%, rgba(5, 12, 22, 0.34) 48%, rgba(5, 12, 22, 0.08) 100%),
+    linear-gradient(0deg, rgba(5, 12, 22, 0.28), transparent 48%);
 }
 
 .hero-inner {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(260px, 0.34fr);
-  gap: clamp(36px, 6vw, 92px);
-  align-items: end;
+  grid-template-columns: 1fr;
+  align-items: center;
   width: 100%;
-  padding: clamp(72px, 8vw, 124px) clamp(18px, 5vw, 88px);
+  min-height: 100vh;
+  padding: clamp(96px, 10vw, 150px) clamp(18px, 5vw, 88px) clamp(56px, 7vw, 96px);
 }
 
 .hero-copy {
-  max-width: 690px;
+  max-width: 760px;
   color: #fff;
 }
 
@@ -307,57 +293,6 @@ h3 {
   background: rgba(255, 255, 255, 0.08);
 }
 
-.hero-panel {
-  display: grid;
-  gap: 1px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.18);
-}
-
-.hero-panel div {
-  padding: 18px;
-  background: rgba(7, 19, 32, 0.52);
-}
-
-.hero-panel span {
-  display: block;
-  margin-bottom: 5px;
-  color: #bdc7d4;
-  font-size: 12px;
-  font-weight: 800;
-}
-
-.hero-panel strong {
-  color: #fff;
-  font-size: 16px;
-}
-
-.hero-sequence {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-self: end;
-  gap: 1px;
-  width: min(720px, 100%);
-  margin-top: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.16);
-}
-
-.hero-sequence span {
-  padding: 12px 14px;
-  color: rgba(255, 255, 255, 0.62);
-  background: rgba(5, 12, 22, 0.46);
-  font-size: 11px;
-  font-weight: 900;
-  text-transform: uppercase;
-  transition: color 220ms ease, background-color 220ms ease;
-}
-
-.hero-sequence span.active {
-  color: #fff;
-  background: rgba(141, 27, 42, 0.86);
-}
 
 .identity-row {
   display: grid;
@@ -919,10 +854,6 @@ h3 {
     padding-block: 72px;
   }
 
-  .hero-panel {
-    max-width: 520px;
-  }
-
   .identity-row article {
     border-right: 0;
     border-bottom: 1px solid var(--line);
@@ -1002,13 +933,8 @@ h3 {
 }
 
 /* Final mobile and motion pass */
-.hero-copy,
-.hero-panel {
+.hero-copy {
   animation: cleanRise 520ms ease both;
-}
-
-.hero-panel {
-  animation-delay: 90ms;
 }
 
 .home-links a,
@@ -1163,15 +1089,6 @@ h3 {
     min-height: 100vh;
   }
 
-  .hero-sequence {
-    grid-template-columns: 1fr;
-    max-width: 260px;
-  }
-
-  .hero-sequence span {
-    padding: 10px 12px;
-  }
-
   .hero-copy p,
   .section-body p,
   .about-copy p,
@@ -1197,10 +1114,6 @@ h3 {
   .mission-vision span,
   .values-head span {
     font-size: 11px;
-  }
-
-  .hero-panel div {
-    padding: 14px;
   }
 
   .home-links a {
