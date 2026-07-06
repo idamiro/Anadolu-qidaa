@@ -36,10 +36,10 @@ if (menuToggle) {
 
 if (heroVideo && hero) {
   const phases = [
-    { type: "video", src: "./media/wheat-fields.mp4", index: 0, duration: 7600 },
+    { type: "video", src: "./wheat-fields.mp4", index: 0, duration: 7600 },
     { type: "factory", index: 1, duration: 3800 },
-    { type: "video", src: "./media/field-road.mp4", index: 2, duration: 7200 },
-    { type: "video", src: "./media/coverr-truck-driving-near-the-beach-8711.mp4", index: 2, duration: 6200 }
+    { type: "video", src: "./field-road.mp4", index: 2, duration: 7200 },
+    { type: "video", src: "./coverr-truck-driving-near-the-beach-8711.mp4", index: 2, duration: 6200 }
   ];
   let phaseIndex = 0;
 
