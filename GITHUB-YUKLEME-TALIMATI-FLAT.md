@@ -19,7 +19,7 @@ wheat-fields.mp4
 field-road.mp4
 ```
 
-Bu versiyonda `media` klasoru yoktur. Ana sayfada sadece iki video loop icinde doner; fotograf gecisi ve ucuncu dusuk kaliteli video kaldirildi.
+Bu versiyonda klasor gerekmez. Ana sayfada iki video loop icinde doner.
 
 ## Yukleme
 

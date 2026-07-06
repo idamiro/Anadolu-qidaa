@@ -2,6 +2,7 @@ const form = document.querySelector(".contact-form");
 const statusText = document.querySelector(".form-status");
 const menuToggle = document.querySelector(".menu-toggle");
 const heroVideo = document.querySelector("#heroVideo");
+const counters = document.querySelectorAll(".counter");
 
 if (form && statusText) {
   form.addEventListener("submit", (event) => {
@@ -53,4 +54,53 @@ if (heroVideo) {
   };
 
   runPhase();
+}
+
+if (counters.length) {
+  const formatNumber = (value, useSpace) => {
+    const rounded = Math.round(value);
+    return useSpace ? rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") : String(rounded);
+  };
+
+  const animateCounter = (counter) => {
+    if (counter.dataset.done === "true") return;
+    counter.dataset.done = "true";
+
+    const target = Number(counter.dataset.count || "0");
+    const start = Number(counter.dataset.start || "0");
+    const duration = Number(counter.dataset.duration || "1200");
+    const prefix = counter.dataset.prefix || "";
+    const suffix = counter.dataset.suffix || "";
+    const useSpace = counter.dataset.format === "space";
+    const startTime = performance.now();
+
+    const tick = (now) => {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      counter.textContent = `${prefix}${formatNumber(start + ((target - start) * eased), useSpace)}${suffix}`;
+
+      if (progress < 1) {
+        requestAnimationFrame(tick);
+      } else {
+        counter.textContent = `${prefix}${formatNumber(target, useSpace)}${suffix}`;
+      }
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+
+    counters.forEach((counter) => observer.observe(counter));
+  } else {
+    counters.forEach(animateCounter);
+  }
 }
