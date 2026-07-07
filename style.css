@@ -1,13 +1,13 @@
 :root {
   --ink: #111723;
   --muted: #66707d;
-  --paper: #f5f2ec;
+  --paper: #f7f8fa;
   --panel: #ffffff;
-  --line: #ddd8cf;
-  --navy: #0a2238;
-  --wine: #8d1b2a;
-  --wheat: #b2935b;
-  --soft: #ebe7de;
+  --line: #d9dee7;
+  --navy: #10233f;
+  --wine: #b51224;
+  --wheat: #b51224;
+  --soft: #eef2f7;
 }
 
 * {
@@ -46,9 +46,9 @@ a {
   gap: 28px;
   min-height: 64px;
   padding: 8px clamp(18px, 5vw, 88px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(8, 16, 27, 0.94);
-  color: #fff;
+  border-bottom: 1px solid rgba(16, 35, 63, 0.12);
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--ink);
   backdrop-filter: blur(14px);
 }
 
@@ -56,31 +56,28 @@ a {
   position: fixed;
   left: 0;
   right: 0;
-  background: rgba(8, 16, 27, 0.94);
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+  background: rgba(8, 16, 27, 0.86);
+  color: #fff;
 }
 
-.nav,
 .home-page .nav {
   color: rgba(255, 255, 255, 0.82);
 }
 
-.nav a:hover,
 .home-page .nav a:hover {
   color: #fff;
 }
 
-.brand img,
 .home-page .brand img {
   border-color: rgba(255, 255, 255, 0.22);
 }
 
-.menu-toggle,
 .home-page .menu-toggle {
   border-color: rgba(255, 255, 255, 0.28);
   background: rgba(255, 255, 255, 0.12);
 }
 
-.menu-toggle span,
 .home-page .menu-toggle span {
   background: #fff;
 }
@@ -140,17 +137,40 @@ body.nav-open .menu-toggle span:nth-child(3) {
   display: flex;
   justify-content: center;
   gap: clamp(16px, 2.4vw, 34px);
-  color: #3c4653;
+  color: #293447;
   font-size: 13px;
   font-weight: 700;
 }
 
 .nav a {
+  position: relative;
+  padding: 21px 0;
   transition: color 180ms ease;
+}
+
+.nav a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 3px;
+  background: var(--wine);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 200ms ease;
+}
+
+.home-page .nav a::before {
+  background: #fff;
 }
 
 .nav a:hover {
   color: var(--wine);
+}
+
+.nav a:hover::before {
+  transform: scaleX(1);
 }
 
 .header-cta,
@@ -516,7 +536,7 @@ h3 {
 
 .home-values {
   overflow: hidden;
-  background: #f5f2ec;
+  background: #f7f8fa;
 }
 
 .home-values .values-head {
@@ -619,16 +639,18 @@ h3 {
   height: 54px;
   border: 1px solid var(--line);
   border-radius: 50%;
-  background: #ebe3d7;
-  color: var(--wheat);
+  background: #fff;
+  color: var(--wine);
   font: inherit;
   font-size: 20px;
   cursor: pointer;
-  transition: transform 180ms ease, background-color 180ms ease;
+  transition: transform 180ms ease, background-color 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 
 .values-nav:hover {
-  background: #e2d7c8;
+  border-color: var(--wine);
+  background: var(--wine);
+  color: #fff;
   transform: translateY(-2px);
 }
 
@@ -1248,7 +1270,6 @@ h3 {
     box-shadow: 0 18px 28px rgba(17, 23, 35, 0.08);
   }
 
-  .nav,
   .home-page .nav {
     border-top-color: rgba(255, 255, 255, 0.18);
     background: rgba(8, 16, 27, 0.96);
@@ -1268,7 +1289,6 @@ h3 {
     font-size: 15px;
   }
 
-  .nav a,
   .home-page .nav a {
     border-bottom-color: rgba(255, 255, 255, 0.14);
   }
