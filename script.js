@@ -5,6 +5,9 @@ const heroVideo = document.querySelector("#heroVideo");
 const counters = document.querySelectorAll(".counter");
 const requestTopic = document.querySelector("#requestTopic");
 const topicPanels = document.querySelectorAll("[data-topic-panel]");
+const revealBlocks = document.querySelectorAll(".reveal-on-scroll");
+const valuesCarousel = document.querySelector("#valuesCarousel");
+const valuesNavButtons = document.querySelectorAll("[data-values-dir]");
 
 if (form && statusText) {
   form.addEventListener("submit", (event) => {
@@ -29,6 +32,37 @@ const updateTopicPanels = () => {
 if (requestTopic) {
   requestTopic.addEventListener("change", updateTopicPanels);
   updateTopicPanels();
+}
+
+if (valuesCarousel && valuesNavButtons.length) {
+  valuesNavButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const direction = Number(button.dataset.valuesDir || "1");
+      valuesCarousel.scrollBy({
+        left: direction * Math.max(valuesCarousel.clientWidth * 0.82, 280),
+        behavior: "smooth"
+      });
+    });
+  });
+}
+
+if (revealBlocks.length) {
+  const reveal = (block) => block.classList.add("in-view");
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          reveal(entry.target);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    revealBlocks.forEach((block) => revealObserver.observe(block));
+  } else {
+    revealBlocks.forEach(reveal);
+  }
 }
 
 if (menuToggle) {
