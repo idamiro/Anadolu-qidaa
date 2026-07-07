@@ -877,11 +877,63 @@ h3 {
   grid-template-columns: minmax(280px, 0.82fr) minmax(340px, 1fr);
   gap: clamp(34px, 6vw, 90px);
   align-items: start;
-  background: #e6e1d7;
+  background: var(--paper);
 }
 
 .page-contact {
-  min-height: 58vh;
+  position: relative;
+  min-height: calc(100vh - 64px);
+  padding-top: clamp(46px, 7vw, 94px);
+  padding-bottom: clamp(60px, 7vw, 110px);
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(16, 35, 63, 0.045) 1px, transparent 1px) 0 0 / 112px 112px,
+    linear-gradient(180deg, #fff 0%, #f7f8fa 100%);
+}
+
+.page-contact::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: clamp(5px, 0.7vw, 10px);
+  background: var(--wine);
+}
+
+.page-contact .contact-copy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 22px;
+  padding: clamp(30px, 4.4vw, 56px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(135deg, rgba(181, 18, 36, 0.16), transparent 42%),
+    var(--navy);
+  color: #fff;
+  box-shadow: 0 28px 70px rgba(16, 35, 63, 0.22);
+}
+
+.page-contact .contact-copy > span,
+.form-intro span {
+  display: inline-flex;
+  width: fit-content;
+  color: #b51224;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page-contact .contact-copy > span {
+  color: #fff;
+}
+
+.page-contact .contact-copy h1 {
+  max-width: 650px;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(38px, 5vw, 72px);
+  line-height: 0.98;
 }
 
 .contact-copy p {
@@ -891,33 +943,95 @@ h3 {
   font-size: 18px;
 }
 
+.page-contact .contact-copy p {
+  margin: 0;
+  color: #d7e0ea;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.72;
+}
+
 .contact-email {
   font-weight: 800;
 }
 
-.contact-email a {
-  color: var(--wine);
+.page-contact .contact-email {
+  display: grid;
+  gap: 6px;
+  width: fit-content;
+  margin-top: 2px;
+  padding: 18px 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-size: clamp(20px, 2vw, 28px);
+}
+
+.page-contact .contact-email span {
+  color: #aebdcb;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.contact-service-list {
+  display: grid;
+  gap: 0;
+  margin-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.contact-service-list div {
+  display: grid;
+  gap: 7px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.contact-service-list strong {
+  color: #fff;
+  font-size: 17px;
+}
+
+.contact-service-list span {
+  color: #bdc9d5;
+  line-height: 1.55;
 }
 
 .contact-form {
+  position: relative;
+  z-index: 1;
   display: grid;
-  gap: 15px;
-  padding: 28px;
-  border: 1px solid var(--line);
+  gap: 18px;
+  padding: clamp(24px, 3vw, 38px);
+  border: 1px solid rgba(16, 35, 63, 0.12);
   background: #fff;
+  box-shadow: 0 24px 60px rgba(16, 35, 63, 0.12);
+}
+
+.form-intro {
+  display: grid;
+  gap: 8px;
+  padding-bottom: 4px;
+}
+
+.form-intro h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.08;
 }
 
 .form-section {
   display: grid;
-  gap: 14px;
+  gap: 16px;
   margin: 0;
-  padding: 0 0 18px;
-  border: 0;
-  border-bottom: 1px solid var(--line);
+  padding: 18px;
+  border: 1px solid rgba(16, 35, 63, 0.1);
+  background: #fbfcfe;
 }
 
 .form-section legend {
-  margin: 0 0 4px;
+  margin: 0 0 2px;
   padding: 0;
   color: var(--navy);
   font-size: 16px;
@@ -927,7 +1041,7 @@ h3 {
 .contact-form label {
   display: grid;
   gap: 8px;
-  color: #2f3845;
+  color: #202a38;
   font-size: 14px;
   font-weight: 800;
 }
@@ -944,7 +1058,7 @@ h3 {
   align-items: center;
   gap: 8px;
   padding: 0 14px;
-  border: 1px solid #cfd4da;
+  border: 1px solid #cbd3df;
   background: #fff;
 }
 
@@ -965,8 +1079,8 @@ h3 {
 .contact-form select,
 .contact-form textarea {
   width: 100%;
-  border: 1px solid #cfd4da;
-  padding: 13px 14px;
+  border: 1px solid #cbd3df;
+  padding: 14px 15px;
   color: var(--ink);
   background: #fff;
   font: inherit;
@@ -1167,6 +1281,31 @@ h3 {
   .site-header,
   .site-footer {
     padding-inline: 16px;
+  }
+
+  .page-contact {
+    padding-top: 30px;
+  }
+
+  .page-contact::before {
+    width: 4px;
+  }
+
+  .page-contact .contact-copy {
+    padding: 26px 20px;
+  }
+
+  .page-contact .contact-copy h1 {
+    font-size: clamp(32px, 10vw, 42px);
+    line-height: 1.04;
+  }
+
+  .contact-form {
+    padding: 20px 16px;
+  }
+
+  .form-section {
+    padding: 15px;
   }
 
   .site-footer {
