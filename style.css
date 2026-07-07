@@ -742,12 +742,58 @@ h3 {
   background: #fff;
 }
 
+.form-section {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0 0 18px;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.form-section legend {
+  margin: 0 0 4px;
+  padding: 0;
+  color: var(--navy);
+  font-size: 16px;
+  font-weight: 900;
+}
+
 .contact-form label {
   display: grid;
   gap: 8px;
   color: #2f3845;
   font-size: 14px;
   font-weight: 800;
+}
+
+.radio-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.radio-row label {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border: 1px solid #cfd4da;
+  background: #fff;
+}
+
+.radio-row input {
+  width: auto;
+}
+
+.conditional-fields {
+  display: none;
+  gap: 15px;
+}
+
+.conditional-fields.active {
+  display: grid;
 }
 
 .contact-form input,
@@ -759,6 +805,13 @@ h3 {
   color: var(--ink);
   background: #fff;
   font: inherit;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: 2px solid rgba(141, 27, 42, 0.24);
+  border-color: var(--wine);
 }
 
 .contact-form textarea {

@@ -38,21 +38,97 @@
           <p class="contact-email">E-po&#231;t: <a href="mailto:anadoluqida@gmail.com">anadoluqida@gmail.com</a></p>
         </div>
         <form class="contact-form">
-          <label>
-            Ad, soyad / &#350;irk&#601;t
-            <input type="text" name="name" placeholder="&#350;irk&#601;t ad&#305;">
-          </label>
+          <fieldset class="form-section">
+            <legend>Al&#305;c&#305;n&#305;n m&#601;lumatlar&#305;</legend>
+            <label>
+              Ad&#305;
+              <input type="text" name="buyer_name" placeholder="Ad v&#601; ya &#351;irk&#601;t ad&#305;">
+            </label>
+            <label>
+              V&#214;EN
+              <input type="text" name="voen" placeholder="V&#214;EN">
+            </label>
+          </fieldset>
+
           <label>
             M&#252;raci&#601;t m&#246;vzusu
-            <select name="need">
-              <option>Un sifari&#351;i</option>
-              <option>Logistika xidm&#601;ti</option>
-              <option>Maliyy&#601; xidm&#601;ti</option>
+            <select name="request_topic" id="requestTopic">
+              <option value="product">M&#601;hsul sifari&#351;i</option>
+              <option value="shipping">Da&#351;&#305;nma sifari&#351;i</option>
             </select>
           </label>
+
+          <div class="conditional-fields active" data-topic-panel="product">
+            <fieldset class="form-section">
+              <legend>&#199;atd&#305;r&#305;lma daxil</legend>
+              <div class="radio-row">
+                <label><input type="radio" name="delivery_included" value="H&#601;" checked> H&#601;</label>
+                <label><input type="radio" name="delivery_included" value="Yox"> Yox</label>
+              </div>
+            </fieldset>
+
+            <fieldset class="form-section">
+              <legend>M&#601;hsul sifari&#351;i</legend>
+              <label>
+                M&#601;hsul
+                <select name="product">
+                  <option>ANADOLU 50 kq</option>
+                  <option>A&#286; K&#304;S&#399; 50 KG</option>
+                  <option>ANADOLU 25 kq</option>
+                  <option>ANADOLU 10 kq</option>
+                  <option>ANADOLU 5 kq</option>
+                  <option>M&#304;RVAR&#304; 50 KQ (t&#601;ndirlik)</option>
+                  <option>M&#304;RVAR&#304; 50 KQ</option>
+                  <option>M&#304;RVAR&#304; 25 KG</option>
+                  <option>M&#304;RVAR&#304; 25 KG (SUPER UN)</option>
+                  <option>M&#304;RVAR&#304; 10 KG</option>
+                  <option>M&#304;RVAR&#304; 5 KG</option>
+                  <option>BONKAL&#304;TE 35 kq</option>
+                  <option>BONKAL&#304;TE 30 kq</option>
+                  <option>OBOY 29 kg</option>
+                  <option>1-C&#304; N&#214;V 45 kg</option>
+                  <option>K&#399;P&#399;K 20 kg</option>
+                  <option>K&#399;P&#399;K 19 kq</option>
+                  <option>K&#399;P&#399;K 17 KQ</option>
+                  <option>K&#399;P&#399;K 16 KQ</option>
+                  <option>BU&#286;DA YARMASI</option>
+                  <option>TOZ SAMAN</option>
+                  <option>RUS BU&#286;DASI</option>
+                  <option>ARPA</option>
+                </select>
+              </label>
+              <label>
+                Miqdar
+                <input type="text" name="quantity" placeholder="M&#601;s&#601;l&#601;n: 50 kis&#601; / 10 ton">
+              </label>
+              <label>
+                &#199;atd&#305;r&#305;lma &#252;nvan&#305;
+                <input type="text" name="delivery_address" placeholder="&#350;&#601;h&#601;r, rayon, &#252;nvan">
+              </label>
+            </fieldset>
+          </div>
+
+          <div class="conditional-fields" data-topic-panel="shipping">
+            <fieldset class="form-section">
+              <legend>Da&#351;&#305;nma sifari&#351;i</legend>
+              <label>
+                Y&#252;kl&#601;m&#601; &#252;nvan&#305;
+                <input type="text" name="pickup_address" placeholder="Y&#252;k haradan g&#246;t&#252;r&#252;l&#601;c&#601;k">
+              </label>
+              <label>
+                T&#601;hvil &#252;nvan&#305;
+                <input type="text" name="dropoff_address" placeholder="Y&#252;k hara &#231;atd&#305;r&#305;lacaq">
+              </label>
+              <label>
+                Y&#252;k haqq&#305;nda m&#601;lumat
+                <input type="text" name="cargo_details" placeholder="M&#601;hsul, &#231;&#601;ki, h&#601;cm">
+              </label>
+            </fieldset>
+          </div>
+
           <label>
-            Mesaj
-            <textarea name="message" rows="4" placeholder="M&#601;hsul, miqdar v&#601; &#231;atd&#305;r&#305;lma &#351;&#601;h&#601;ri"></textarea>
+            &#399;lav&#601; qeyd
+            <textarea name="message" rows="4" placeholder="Sifari&#351;l&#601; ba&#287;l&#305; &#601;lav&#601; m&#601;lumat"></textarea>
           </label>
           <button type="submit">Sor&#287;u g&#246;nd&#601;r</button>
           <p class="form-status" role="status" aria-live="polite"></p>

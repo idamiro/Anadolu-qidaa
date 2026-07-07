@@ -3,13 +3,32 @@ const statusText = document.querySelector(".form-status");
 const menuToggle = document.querySelector(".menu-toggle");
 const heroVideo = document.querySelector("#heroVideo");
 const counters = document.querySelectorAll(".counter");
+const requestTopic = document.querySelector("#requestTopic");
+const topicPanels = document.querySelectorAll("[data-topic-panel]");
 
 if (form && statusText) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     statusText.textContent = "Sor\u011fu qey\u0259 al\u0131nd\u0131. Anadolu Qida komandas\u0131 sizinl\u0259 \u0259laq\u0259 saxlayacaq.";
     form.reset();
+    updateTopicPanels();
   });
+}
+
+const updateTopicPanels = () => {
+  if (!requestTopic || !topicPanels.length) return;
+  topicPanels.forEach((panel) => {
+    const isActive = panel.dataset.topicPanel === requestTopic.value;
+    panel.classList.toggle("active", isActive);
+    panel.querySelectorAll("input, select, textarea").forEach((field) => {
+      field.disabled = !isActive;
+    });
+  });
+};
+
+if (requestTopic) {
+  requestTopic.addEventListener("change", updateTopicPanels);
+  updateTopicPanels();
 }
 
 if (menuToggle) {
