@@ -92,8 +92,8 @@ if (menuToggle) {
 
 if (heroVideo) {
   const phases = [
-    { src: "./media/wheat-fields.mp4", duration: 9000 },
-    { src: "./media/field-road.mp4", duration: 9000 }
+    { src: "./wheat-fields.mp4", duration: 9000 },
+    { src: "./field-road.mp4", duration: 9000 }
   ];
   let phaseIndex = 0;
 
