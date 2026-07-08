@@ -1071,58 +1071,82 @@ h3 {
   min-height: 42vh;
 }
 
-.certificates {
+.documents-section {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(22px, 3vw, 34px);
+  grid-template-columns: minmax(240px, 0.42fr) minmax(360px, 1fr);
+  gap: clamp(28px, 5vw, 78px);
   padding: clamp(54px, 7vw, 96px) clamp(18px, 5vw, 88px);
+  border-bottom: 1px solid var(--line);
   background: var(--paper);
 }
 
-.certificate-card {
-  display: grid;
-  gap: 22px;
-  padding: clamp(22px, 3vw, 34px);
-  border: 1px solid rgba(16, 35, 63, 0.12);
+.audit-documents {
   background: #fff;
-  box-shadow: 0 24px 60px rgba(16, 35, 63, 0.08);
 }
 
-.certificate-card span {
+.documents-head {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
+.documents-head span {
   color: var(--wine);
   font-size: 13px;
   font-weight: 900;
 }
 
-.certificate-card h2 {
-  margin: 8px 0 8px;
-  font-size: clamp(28px, 3vw, 42px);
-}
-
-.certificate-card p {
+.documents-head h2 {
   margin: 0;
-  color: var(--muted);
-  font-size: 17px;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 1.02;
 }
 
-.certificate-card object {
-  width: 100%;
-  height: clamp(360px, 54vw, 620px);
-  border: 1px solid var(--line);
-  background: #f2f4f7;
+.document-list {
+  display: grid;
+  border-top: 1px solid rgba(16, 35, 63, 0.16);
 }
 
-.certificate-link {
+.document-link {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) 32px;
+  align-items: center;
+  gap: 18px;
+  min-height: 88px;
+  padding: 22px 0;
+  border-bottom: 1px solid rgba(16, 35, 63, 0.16);
+  transition: color 180ms ease, padding-left 180ms ease;
+}
+
+.document-link::after {
+  content: "↗";
+  color: var(--wine);
+  font-size: 20px;
+  font-weight: 900;
+  text-align: right;
+}
+
+.document-link span {
   display: inline-flex;
-  width: fit-content;
+  width: 54px;
+  height: 54px;
   align-items: center;
   justify-content: center;
-  min-height: 42px;
-  padding: 0 18px;
-  background: var(--wine);
+  background: var(--navy);
   color: #fff;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 900;
+}
+
+.document-link strong {
+  color: var(--ink);
+  font-size: clamp(18px, 2vw, 26px);
+  line-height: 1.15;
+}
+
+.document-link:hover {
+  padding-left: 10px;
+  color: var(--wine);
 }
 
 .site-footer {
@@ -1245,7 +1269,7 @@ h3 {
   .about-strategy,
   .mission-vision,
   .logistics,
-  .certificates,
+  .documents-section,
   .contact {
     grid-template-columns: 1fr;
   }
@@ -1323,7 +1347,7 @@ h3 {
   .capabilities,
   .products,
   .logistics,
-  .certificates,
+  .documents-section,
   .contact,
   .page-hero,
   .site-header,
@@ -1365,8 +1389,19 @@ h3 {
     justify-content: flex-start;
   }
 
-  .certificate-card object {
-    height: 430px;
+  .document-link {
+    grid-template-columns: 58px minmax(0, 1fr) 26px;
+    gap: 12px;
+    min-height: 78px;
+  }
+
+  .document-link span {
+    width: 46px;
+    height: 46px;
+  }
+
+  .document-link strong {
+    font-size: 16px;
   }
 }
 
