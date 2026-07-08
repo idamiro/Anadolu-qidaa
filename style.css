@@ -4,9 +4,10 @@
   --paper: #f7f8fa;
   --panel: #ffffff;
   --line: #d9dee7;
-  --navy: #10233f;
-  --wine: #b51224;
-  --wheat: #b51224;
+  --navy: #08265a;
+  --wine: #d80a24;
+  --wheat: #d80a24;
+  --footer: #08182d;
   --soft: #eef2f7;
 }
 
@@ -49,9 +50,9 @@ a {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 28px;
-  min-height: 82px;
-  padding: 8px clamp(18px, 5vw, 88px);
+  gap: 22px;
+  min-height: 66px;
+  padding: 4px clamp(18px, 5vw, 88px);
   border-bottom: 1px solid rgba(16, 35, 63, 0.1);
   background: rgba(255, 255, 255, 0.94);
   color: var(--ink);
@@ -99,9 +100,10 @@ a {
 }
 
 .brand img {
-  width: 218px;
-  height: 66px;
-  object-fit: contain;
+  width: 234px;
+  height: 56px;
+  object-fit: cover;
+  object-position: 48% 52%;
   padding: 0;
   border: 0;
   background: transparent;
@@ -160,7 +162,7 @@ body.nav-open .menu-toggle span:nth-child(3) {
 
 .nav a {
   position: relative;
-  padding: 21px 0;
+  padding: 17px 0;
   transition: color 180ms ease;
 }
 
@@ -899,7 +901,7 @@ h3 {
   border-radius: clamp(22px, 4vw, 48px);
   background:
     linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px) 0 0 / 92px 92px,
-    #08111f;
+    var(--footer);
   box-shadow: 0 34px 90px rgba(8, 17, 31, 0.2);
 }
 
@@ -931,7 +933,7 @@ h3 {
 .form-intro span {
   display: inline-flex;
   width: fit-content;
-  color: #b51224;
+  color: var(--wine);
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -1127,7 +1129,7 @@ h3 {
 .page-contact .contact-form button {
   min-height: 58px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #b51224, #d64545);
+  background: linear-gradient(90deg, var(--wine), #f02a3d);
   color: #fff;
   font-size: 15px;
   box-shadow: 0 18px 38px rgba(181, 18, 36, 0.26);
@@ -1135,7 +1137,7 @@ h3 {
 
 .page-contact .contact-form button:hover {
   transform: translateY(-2px);
-  background: linear-gradient(90deg, #9e0f1f, #c93434);
+  background: linear-gradient(90deg, #a7071c, var(--wine));
 }
 
 .form-status {
@@ -1230,65 +1232,74 @@ h3 {
 
 .site-footer {
   display: grid;
-  grid-template-columns: minmax(260px, 0.9fr) minmax(360px, 1fr);
+  grid-template-columns: minmax(280px, 1.2fr) repeat(3, minmax(150px, 0.7fr));
   align-items: start;
-  gap: clamp(32px, 7vw, 110px);
-  padding: clamp(54px, 7vw, 84px) clamp(18px, 5vw, 88px);
-  color: #dce5ee;
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 96px 96px,
-    #08111f;
+  gap: clamp(28px, 5vw, 82px);
+  padding: clamp(48px, 6vw, 70px) clamp(18px, 5vw, 88px) 26px;
+  color: rgba(255, 255, 255, 0.78);
+  background: var(--footer);
 }
 
-.site-footer div {
+.footer-brand {
+  display: grid;
+  gap: 18px;
+  max-width: 420px;
+}
+
+.footer-brand img {
+  width: 178px;
+  height: 72px;
+  object-fit: cover;
+  object-position: 48% 52%;
+}
+
+.footer-brand p {
+  max-width: 360px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.footer-col {
   display: grid;
   gap: 12px;
-  max-width: 440px;
 }
 
-.site-footer div::before {
-  content: "";
-  width: 190px;
-  height: 92px;
-  margin-bottom: 8px;
-  background: url("./anadolu-qida-logo.png") left center / contain no-repeat;
-}
-
-.site-footer strong {
+.footer-col h3 {
+  margin: 0 0 6px;
   color: #fff;
-  font-size: clamp(20px, 2vw, 28px);
+  font-size: 18px;
+  font-weight: 900;
 }
 
-.site-footer span {
-  color: #aeb9c7;
+.footer-col a,
+.footer-col span {
+  color: rgba(255, 255, 255, 0.72);
   font-size: 15px;
+  transition: color 180ms ease, transform 180ms ease;
 }
 
-.site-footer a {
-  font-weight: 800;
-}
-
-.footer-nav {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(130px, 1fr));
-  gap: 12px 18px;
-  justify-self: end;
-  width: min(520px, 100%);
-}
-
-.footer-nav a {
-  display: inline-flex;
-  min-height: 42px;
-  align-items: center;
-  padding: 0 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
-  color: #dce5ee;
-  font-size: 14px;
-  transition: color 180ms ease;
-}
-
-.footer-nav a:hover {
+.footer-col a:hover {
   color: #fff;
+  transform: translateX(4px);
+}
+
+.footer-bottom {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 14px;
+}
+
+.footer-bottom a {
+  color: #fff;
+  font-weight: 800;
 }
 
 .video-credit {
@@ -1480,11 +1491,14 @@ h3 {
     gap: 24px;
   }
 
-  .footer-nav {
-    grid-template-columns: 1fr;
-    width: 100%;
-    justify-self: stretch;
-    justify-content: flex-start;
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-brand img {
+    width: 166px;
+    height: 66px;
   }
 
   .document-link {
