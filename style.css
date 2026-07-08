@@ -50,11 +50,12 @@ a {
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 28px;
-  min-height: 64px;
+  min-height: 82px;
   padding: 8px clamp(18px, 5vw, 88px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(8, 16, 27, 0.9);
-  color: #fff;
+  border-bottom: 1px solid rgba(16, 35, 63, 0.1);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+  box-shadow: 0 14px 36px rgba(16, 35, 63, 0.08);
   backdrop-filter: blur(14px);
 }
 
@@ -62,13 +63,13 @@ a {
   position: fixed;
   left: 0;
   right: 0;
-  border-bottom-color: rgba(255, 255, 255, 0.16);
-  background: rgba(8, 16, 27, 0.9);
-  color: #fff;
+  border-bottom-color: rgba(16, 35, 63, 0.1);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
 }
 
 .home-page .nav {
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--ink);
 }
 
 .home-page .nav a:hover {
@@ -76,16 +77,16 @@ a {
 }
 
 .home-page .brand img {
-  border-color: rgba(255, 255, 255, 0.22);
+  border-color: transparent;
 }
 
 .home-page .menu-toggle {
-  border-color: rgba(255, 255, 255, 0.28);
-  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(16, 35, 63, 0.16);
+  background: #fff;
 }
 
 .home-page .menu-toggle span {
-  background: #fff;
+  background: var(--ink);
 }
 
 .brand {
@@ -98,8 +99,8 @@ a {
 }
 
 .brand img {
-  width: 172px;
-  height: 58px;
+  width: 218px;
+  height: 66px;
   object-fit: contain;
   padding: 0;
   border: 0;
@@ -123,8 +124,8 @@ a {
   justify-content: center;
   gap: 5px;
   flex-direction: column;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(16, 35, 63, 0.16);
+  background: #fff;
   cursor: pointer;
 }
 
@@ -132,7 +133,7 @@ a {
   display: block;
   width: 18px;
   height: 2px;
-  background: #fff;
+  background: var(--ink);
   transition: transform 180ms ease, opacity 180ms ease;
 }
 
@@ -152,7 +153,7 @@ body.nav-open .menu-toggle span:nth-child(3) {
   display: flex;
   justify-content: center;
   gap: clamp(14px, 2vw, 28px);
-  color: rgba(255, 255, 255, 0.82);
+  color: var(--ink);
   font-size: 13px;
   font-weight: 700;
 }
@@ -1336,9 +1337,9 @@ h3 {
     gap: 0;
     margin-inline: -16px;
     padding: 10px 16px 14px;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-    background: rgba(8, 16, 27, 0.96);
-    color: #fff;
+    border-top: 1px solid rgba(16, 35, 63, 0.1);
+    background: rgba(255, 255, 255, 0.98);
+    color: var(--ink);
     font-size: 15px;
   }
 
@@ -1348,7 +1349,7 @@ h3 {
 
   .nav a {
     padding: 13px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    border-bottom: 1px solid rgba(16, 35, 63, 0.1);
   }
 
   .header-cta {
@@ -1562,19 +1563,19 @@ h3 {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 44px;
     align-items: center;
-    min-height: 62px;
+    min-height: 70px;
     padding: 10px 16px;
   }
 
   .brand {
     min-width: 0;
-    max-width: 184px;
+    max-width: 190px;
     font-size: 14px;
   }
 
   .brand img {
-    width: 154px;
-    height: 50px;
+    width: 184px;
+    height: 56px;
     flex: 0 0 auto;
   }
 
@@ -1600,17 +1601,17 @@ h3 {
     grid-row: 2;
     margin: 10px -16px -10px;
     padding: 4px 16px 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-    background: rgba(8, 16, 27, 0.96);
-    color: #fff;
-    box-shadow: 0 18px 28px rgba(0, 0, 0, 0.24);
+    border-top: 1px solid rgba(16, 35, 63, 0.1);
+    background: rgba(255, 255, 255, 0.98);
+    color: var(--ink);
+    box-shadow: 0 18px 28px rgba(16, 35, 63, 0.12);
   }
 
   .home-page .nav {
-    border-top-color: rgba(255, 255, 255, 0.18);
-    background: rgba(8, 16, 27, 0.96);
-    color: #fff;
-    box-shadow: 0 18px 28px rgba(0, 0, 0, 0.24);
+    border-top-color: rgba(16, 35, 63, 0.1);
+    background: rgba(255, 255, 255, 0.98);
+    color: var(--ink);
+    box-shadow: 0 18px 28px rgba(16, 35, 63, 0.12);
   }
 
   body.nav-open .nav {
@@ -1626,7 +1627,7 @@ h3 {
   }
 
   .home-page .nav a {
-    border-bottom-color: rgba(255, 255, 255, 0.14);
+    border-bottom-color: rgba(16, 35, 63, 0.1);
   }
 
   .nav a:last-child {
