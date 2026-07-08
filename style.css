@@ -241,8 +241,8 @@ body.nav-open .menu-toggle span:nth-child(3) {
 .hero-overlay {
   z-index: 0;
   background:
-    linear-gradient(90deg, rgba(5, 12, 22, 0.64) 0%, rgba(5, 12, 22, 0.34) 48%, rgba(5, 12, 22, 0.08) 100%),
-    linear-gradient(0deg, rgba(5, 12, 22, 0.28), transparent 48%);
+    linear-gradient(90deg, rgba(5, 12, 22, 0.72) 0%, rgba(5, 12, 22, 0.42) 48%, rgba(5, 12, 22, 0.14) 100%),
+    linear-gradient(0deg, rgba(5, 12, 22, 0.34), transparent 48%);
 }
 
 .hero-inner {
@@ -260,6 +260,8 @@ body.nav-open .menu-toggle span:nth-child(3) {
 .hero-copy {
   max-width: 720px;
   color: #fff;
+  padding-left: clamp(0px, 2vw, 28px);
+  border-left: 4px solid rgba(181, 18, 36, 0.9);
 }
 
 .eyebrow,
@@ -334,124 +336,12 @@ h3 {
 .identity-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 3vw, 34px);
+  padding: clamp(22px, 4vw, 46px) clamp(18px, 5vw, 88px);
   border-bottom: 1px solid var(--line);
-  background: #fff;
-}
-
-.operations-strip {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  padding: clamp(18px, 3vw, 34px) clamp(18px, 5vw, 88px);
-  gap: 1px;
-  background: var(--line);
-}
-
-.operations-strip article {
-  min-height: 190px;
-  display: grid;
-  align-content: space-between;
-  padding: clamp(22px, 3vw, 34px);
   background:
-    linear-gradient(135deg, rgba(181, 18, 36, 0.08), transparent 45%),
+    linear-gradient(90deg, rgba(16, 35, 63, 0.032) 1px, transparent 1px) 0 0 / 96px 96px,
     #fff;
-  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease;
-}
-
-.operations-strip article:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 48px rgba(16, 35, 63, 0.12);
-}
-
-.operations-strip span,
-.process-head span,
-.site-cta span {
-  color: var(--wine);
-  font-size: 12px;
-  font-weight: 900;
-}
-
-.operations-strip strong {
-  display: block;
-  margin-top: 32px;
-  color: var(--navy);
-  font-size: clamp(28px, 3.5vw, 48px);
-  line-height: 1;
-}
-
-.operations-strip p {
-  max-width: 360px;
-  margin: 18px 0 0;
-  color: var(--muted);
-}
-
-.process-section {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(260px, 0.55fr) minmax(420px, 1fr);
-  gap: clamp(34px, 6vw, 88px);
-  padding: clamp(72px, 8vw, 126px) clamp(18px, 5vw, 88px);
-  color: #fff;
-  background:
-    linear-gradient(90deg, rgba(16, 35, 63, 0.94), rgba(16, 35, 63, 0.82)),
-    url("./hero.jpg") center / cover;
-}
-
-.process-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px) 0 0 / 112px 112px;
-  pointer-events: none;
-}
-
-.process-head,
-.process-grid {
-  position: relative;
-  z-index: 1;
-}
-
-.process-head h2 {
-  margin-top: 14px;
-  color: #fff;
-}
-
-.process-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-  background: rgba(255, 255, 255, 0.18);
-}
-
-.process-grid article {
-  min-height: 230px;
-  display: grid;
-  align-content: space-between;
-  padding: clamp(22px, 3vw, 34px);
-  background: rgba(9, 19, 33, 0.72);
-  backdrop-filter: blur(10px);
-  transition: background-color 200ms ease, transform 200ms ease;
-}
-
-.process-grid article:hover {
-  background: rgba(181, 18, 36, 0.82);
-  transform: translateY(-3px);
-}
-
-.process-grid span {
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 13px;
-  font-weight: 900;
-}
-
-.process-grid h3 {
-  margin: 42px 0 12px;
-  color: #fff;
-  font-size: 24px;
-}
-
-.process-grid p {
-  margin: 0;
-  color: #d8e1eb;
 }
 
 .page-hero {
@@ -650,7 +540,7 @@ h3 {
   overflow: hidden;
   background:
     linear-gradient(90deg, rgba(16, 35, 63, 0.032) 1px, transparent 1px) 0 0 / 96px 96px,
-    #f7f8fa;
+    linear-gradient(180deg, #fff 0%, #f7f8fa 100%);
 }
 
 .home-values .values-head {
@@ -704,9 +594,9 @@ h3 {
   align-content: start;
   scroll-snap-align: start;
   padding: 44px 42px;
-  border: 1px solid rgba(221, 216, 207, 0.88);
+  border: 1px solid rgba(16, 35, 63, 0.1);
   background: #fff;
-  box-shadow: 0 18px 36px rgba(17, 23, 35, 0.06);
+  box-shadow: 0 20px 48px rgba(16, 35, 63, 0.08);
   opacity: 0;
   transform: translateY(28px);
   transition: opacity 520ms ease, transform 520ms ease, box-shadow 180ms ease;
@@ -751,8 +641,8 @@ h3 {
 }
 
 .value-card:hover {
-  box-shadow: 0 24px 48px rgba(17, 23, 35, 0.1);
-  transform: translateY(-3px);
+  box-shadow: 0 28px 62px rgba(16, 35, 63, 0.14);
+  transform: translateY(-5px);
 }
 
 .value-card:hover::after {
@@ -846,21 +736,28 @@ h3 {
   grid-template-columns: 62px 1fr;
   gap: 18px;
   align-items: center;
-  min-height: 112px;
-  padding: 20px clamp(18px, 5vw, 88px);
-  border-right: 1px solid var(--line);
+  min-height: 138px;
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid rgba(16, 35, 63, 0.12);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 18px 42px rgba(16, 35, 63, 0.08);
   transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease;
 }
 
 .identity-row article:last-child {
-  border-right: 0;
+  border-right: 1px solid rgba(16, 35, 63, 0.12);
+}
+
+.identity-row article:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 54px rgba(16, 35, 63, 0.12);
 }
 
 .identity-row img {
-  width: 62px;
-  height: 62px;
+  width: 70px;
+  height: 70px;
   object-fit: contain;
-  padding: 4px;
+  padding: 6px;
   border: 1px solid var(--line);
   background: #fff;
 }
@@ -1314,7 +1211,7 @@ h3 {
 }
 
 .document-link::after {
-  content: "open";
+  content: "PDF";
   color: var(--wine);
   font-size: 11px;
   font-weight: 900;
@@ -1345,32 +1242,16 @@ h3 {
   color: var(--wine);
 }
 
-.site-cta {
-  display: grid;
-  grid-template-columns: minmax(280px, 1fr) auto;
-  align-items: center;
-  gap: 28px;
-  padding: clamp(54px, 7vw, 88px) clamp(18px, 5vw, 88px);
-  color: #fff;
-  background:
-    linear-gradient(90deg, rgba(16, 35, 63, 0.94), rgba(16, 35, 63, 0.76)),
-    url("./hero.jpg") center / cover;
-}
-
-.site-cta h2 {
-  max-width: 820px;
-  margin-top: 12px;
-  color: #fff;
-}
-
 .site-footer {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: 18px;
-  padding: clamp(34px, 4vw, 48px) clamp(18px, 5vw, 88px);
+  gap: clamp(28px, 6vw, 90px);
+  padding: clamp(44px, 6vw, 72px) clamp(18px, 5vw, 88px);
   color: #dce5ee;
-  background: #0b1624;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 96px 96px,
+    #0b1624;
 }
 
 .site-footer div {
@@ -1380,12 +1261,12 @@ h3 {
 
 .site-footer strong {
   color: #fff;
-  font-size: 18px;
+  font-size: clamp(20px, 2vw, 28px);
 }
 
 .site-footer span {
   color: #aeb9c7;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .site-footer a {
@@ -1396,17 +1277,23 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
-  gap: 10px 18px;
+  gap: 10px 12px;
   max-width: 620px;
 }
 
 .footer-nav a {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   color: #dce5ee;
   font-size: 14px;
   transition: color 180ms ease;
 }
 
 .footer-nav a:hover {
+  border-color: rgba(255, 255, 255, 0.34);
   color: #fff;
 }
 
@@ -1422,11 +1309,6 @@ h3 {
 
   .values-carousel {
     grid-auto-columns: calc((100% - 28px) / 2);
-  }
-
-  .operations-strip,
-  .process-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .capability-grid.three,
@@ -1481,8 +1363,6 @@ h3 {
 
   .hero-inner,
   .identity-row,
-  .operations-strip,
-  .process-section,
   .section,
   .about-stats,
   .about-profile,
@@ -1491,8 +1371,7 @@ h3 {
   .mission-vision,
   .logistics,
   .documents-section,
-  .contact,
-  .site-cta {
+  .contact {
     grid-template-columns: 1fr;
   }
 
@@ -1553,16 +1432,6 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .operations-strip,
-  .process-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .operations-strip article,
-  .process-grid article {
-    min-height: 170px;
-  }
-
   .capability-grid.three {
     grid-template-columns: 1fr;
   }
@@ -1576,14 +1445,11 @@ h3 {
   .about-production,
   .about-strategy,
   .values-section,
-  .operations-strip,
-  .process-section,
   .capabilities,
   .products,
   .logistics,
   .documents-section,
   .contact,
-  .site-cta,
   .page-hero,
   .site-header,
   .site-footer {
@@ -1639,9 +1505,6 @@ h3 {
     font-size: 16px;
   }
 
-  .site-cta {
-    align-items: start;
-  }
 }
 
 /* Final mobile and motion pass */
