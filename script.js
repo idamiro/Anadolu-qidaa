@@ -5,6 +5,10 @@ const heroVideo = document.querySelector("#heroVideo");
 const counters = document.querySelectorAll(".counter");
 const requestTopic = document.querySelector("#requestTopic");
 const topicPanels = document.querySelectorAll("[data-topic-panel]");
+document.querySelectorAll("main > section:not(.hero)").forEach((block) => {
+  block.classList.add("reveal-ready");
+  block.classList.add("reveal-on-scroll");
+});
 const revealBlocks = document.querySelectorAll(".reveal-on-scroll");
 const valuesCarousel = document.querySelector("#valuesCarousel");
 const valuesNavButtons = document.querySelectorAll("[data-values-dir]");
@@ -88,8 +92,8 @@ if (menuToggle) {
 
 if (heroVideo) {
   const phases = [
-    { src: "./wheat-fields.mp4", duration: 9000 },
-    { src: "./field-road.mp4", duration: 9000 }
+    { src: "./media/wheat-fields.mp4", duration: 9000 },
+    { src: "./media/field-road.mp4", duration: 9000 }
   ];
   let phaseIndex = 0;
 
