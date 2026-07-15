@@ -48,7 +48,7 @@ a {
   top: 0;
   z-index: 50;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 22px;
   min-height: 62px;
@@ -58,6 +58,54 @@ a {
   color: var(--ink);
   box-shadow: 0 14px 36px rgba(16, 35, 63, 0.08);
   backdrop-filter: blur(14px);
+}
+
+.brand-switch-trigger {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 9px;
+  padding: 0 13px;
+  border: 1px solid rgba(16, 35, 63, 0.16);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.brand-switch-trigger > span {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+
+.brand-switch-trigger > span::before,
+.brand-switch-trigger > span::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border: 2px solid currentColor;
+}
+
+.brand-switch-trigger > span::before {
+  left: 0;
+  top: 0;
+  color: var(--navy);
+}
+
+.brand-switch-trigger > span::after {
+  right: 0;
+  bottom: 0;
+  color: var(--wine);
+}
+
+.brand-switch-trigger:hover {
+  border-color: var(--wine);
+  color: var(--wine);
+  transform: translateY(-1px);
 }
 
 .home-page .site-header {
@@ -1311,6 +1359,372 @@ h3 {
   font-size: 12px;
 }
 
+body.brand-gateway-open {
+  overflow: hidden;
+}
+
+.brand-gateway[hidden] {
+  display: none;
+}
+
+.brand-gateway {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
+.brand-gateway.is-visible {
+  opacity: 1;
+}
+
+.brand-gateway-backdrop,
+.brand-gateway-panel,
+.brand-intro {
+  position: absolute;
+  inset: 0;
+}
+
+.brand-gateway-backdrop {
+  background: rgba(4, 12, 24, 0.82);
+  backdrop-filter: blur(18px);
+}
+
+.brand-gateway-panel {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: clamp(34px, 5vh, 64px);
+  overflow: auto;
+  padding: clamp(32px, 5vw, 76px);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 120px 120px,
+    #07182c;
+  color: #fff;
+  transform: scale(1.015);
+  transition: opacity 280ms ease, transform 420ms ease;
+}
+
+.brand-gateway.is-visible .brand-gateway-panel {
+  transform: scale(1);
+}
+
+.brand-gateway-close {
+  position: fixed;
+  top: clamp(18px, 3vw, 38px);
+  right: clamp(18px, 3vw, 38px);
+  z-index: 2;
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.07);
+  color: #fff;
+  font: inherit;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.brand-gateway-heading {
+  align-self: end;
+  max-width: 760px;
+}
+
+.brand-gateway-heading > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #f05a6b;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand-gateway-heading > span::before {
+  content: "";
+  width: 44px;
+  height: 2px;
+  background: var(--wine);
+}
+
+.brand-gateway-heading h2 {
+  margin: 14px 0 10px;
+  color: #fff;
+  font-size: clamp(42px, 6vw, 82px);
+  line-height: 0.96;
+}
+
+.brand-gateway-heading p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.66);
+  font-size: clamp(15px, 1.5vw, 19px);
+}
+
+.brand-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-self: start;
+}
+
+.brand-option {
+  position: relative;
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr) 34px;
+  grid-template-rows: minmax(150px, 1fr) auto;
+  gap: 24px;
+  min-height: clamp(290px, 34vh, 390px);
+  padding: clamp(24px, 3vw, 42px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+}
+
+.brand-option::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: var(--wine);
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 280ms ease;
+}
+
+.brand-option:hover {
+  z-index: 1;
+  transform: translateY(-8px);
+  border-color: rgba(216, 10, 36, 0.5);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.26);
+}
+
+.brand-option:hover::before {
+  transform: scaleY(1);
+}
+
+.brand-option-index {
+  align-self: start;
+  color: var(--wine);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.brand-option-logo {
+  display: grid;
+  min-height: 150px;
+  place-items: center;
+}
+
+.brand-option-logo img {
+  width: min(100%, 340px);
+  max-height: 170px;
+  object-fit: contain;
+}
+
+.brand-option-mirvari .brand-option-logo img {
+  width: min(100%, 300px);
+  mix-blend-mode: multiply;
+}
+
+.brand-option-copy {
+  grid-column: 1 / 3;
+  display: grid;
+  gap: 5px;
+}
+
+.brand-option-copy strong {
+  font-size: clamp(21px, 2.2vw, 32px);
+  line-height: 1.05;
+}
+
+.brand-option-copy small {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.brand-option-arrow {
+  grid-column: 3;
+  align-self: end;
+  justify-self: end;
+  color: var(--wine);
+  font-size: 28px;
+  transition: transform 220ms ease;
+}
+
+.brand-option:hover .brand-option-arrow {
+  transform: translate(4px, -4px);
+}
+
+.brand-intro {
+  z-index: 4;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  gap: 24px;
+  padding: 28px;
+  visibility: hidden;
+  opacity: 0;
+  background: var(--navy);
+  color: rgba(255, 255, 255, 0.72);
+  transition: opacity 260ms ease, visibility 0s linear 260ms;
+}
+
+.brand-gateway.is-launching .brand-gateway-panel {
+  opacity: 0;
+  transform: scale(0.985);
+}
+
+.brand-gateway.is-launching .brand-intro {
+  visibility: visible;
+  opacity: 1;
+  transition-delay: 160ms, 0s;
+}
+
+.brand-intro-mark {
+  display: grid;
+  width: min(72vw, 360px);
+  min-height: 150px;
+  place-items: center;
+  animation: brandMarkIn 680ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.brand-intro-mark img {
+  width: 100%;
+  max-height: 210px;
+  object-fit: contain;
+}
+
+.brand-intro p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.brand-intro-line {
+  width: min(220px, 46vw);
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.brand-intro-line::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--wine);
+  transform-origin: left;
+  animation: brandLine 1050ms 180ms ease both;
+}
+
+.brand-gateway.intro-mirvari .brand-intro {
+  background: #f4f1ee;
+  color: #4e5156;
+}
+
+.brand-gateway.intro-mirvari .brand-intro-mark img {
+  mix-blend-mode: multiply;
+}
+
+.brand-gateway.intro-mirvari .brand-intro-line {
+  background: rgba(17, 23, 35, 0.12);
+}
+
+.mirvari-page {
+  --navy: #171a1e;
+  --footer: #111418;
+  --wine: #b7072b;
+}
+
+.brand-mirvari img {
+  width: 142px;
+  height: 54px;
+  padding: 2px 8px;
+  object-fit: contain;
+  background: #fff;
+}
+
+.mirvari-hero .hero-overlay {
+  background:
+    linear-gradient(90deg, rgba(13, 15, 18, 0.84) 0%, rgba(13, 15, 18, 0.48) 52%, rgba(13, 15, 18, 0.2) 100%),
+    linear-gradient(0deg, rgba(13, 15, 18, 0.4), transparent 52%);
+}
+
+.mirvari-services {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.6fr) minmax(0, 1fr);
+  gap: clamp(40px, 7vw, 110px);
+  padding: clamp(76px, 9vw, 138px) clamp(18px, 5vw, 88px);
+  background: #f5f5f4;
+}
+
+.mirvari-services-head > span {
+  color: var(--wine);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.mirvari-services-head h2 {
+  margin: 16px 0 0;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 1.04;
+}
+
+.mirvari-service-grid {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.mirvari-service-grid article {
+  display: grid;
+  grid-template-columns: 46px minmax(190px, 0.7fr) minmax(220px, 1fr);
+  gap: 22px;
+  align-items: start;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.mirvari-service-grid article > span {
+  color: var(--wine);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.mirvari-service-grid h3,
+.mirvari-service-grid p {
+  margin: 0;
+}
+
+.mirvari-service-grid p {
+  color: var(--muted);
+}
+
+.mirvari-footer .footer-brand img {
+  object-fit: contain;
+}
+
+@keyframes brandMarkIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes brandLine {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 @media (max-width: 1080px) {
   .capability-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1333,13 +1747,13 @@ h3 {
 
 @media (max-width: 860px) {
   .site-header {
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 1fr) 40px 44px;
     gap: 12px;
   }
 
   .menu-toggle {
     display: inline-flex;
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 1;
   }
 
@@ -1356,6 +1770,35 @@ h3 {
     background: rgba(255, 255, 255, 0.98);
     color: var(--ink);
     font-size: 15px;
+  }
+
+  .brand-switch-trigger {
+    grid-column: 2;
+    grid-row: 1;
+    width: 40px;
+    min-height: 40px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .brand-switch-trigger b {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .brand-options {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-option {
+    min-height: 270px;
+  }
+
+  .mirvari-services {
+    grid-template-columns: 1fr;
   }
 
   body.nav-open .nav {
@@ -1448,6 +1891,48 @@ h3 {
   .site-header,
   .site-footer {
     padding-inline: 16px;
+  }
+
+  .brand-gateway-panel {
+    gap: 28px;
+    padding: 74px 16px 24px;
+  }
+
+  .brand-gateway-heading h2 {
+    font-size: clamp(38px, 12vw, 52px);
+  }
+
+  .brand-option {
+    grid-template-columns: 44px minmax(0, 1fr) 28px;
+    grid-template-rows: 118px auto;
+    gap: 14px;
+    min-height: 226px;
+    padding: 20px;
+  }
+
+  .brand-option-logo {
+    min-height: 112px;
+  }
+
+  .brand-option-logo img {
+    max-height: 112px;
+  }
+
+  .brand-option-copy strong {
+    font-size: 21px;
+  }
+
+  .brand-option-copy small {
+    font-size: 12px;
+  }
+
+  .mirvari-service-grid article {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 10px 14px;
+  }
+
+  .mirvari-service-grid p {
+    grid-column: 2;
   }
 
   body,
@@ -1597,7 +2082,7 @@ h3 {
 @media (max-width: 860px) {
   .site-header {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 44px;
+    grid-template-columns: minmax(0, 1fr) 40px 44px;
     align-items: center;
     min-height: 64px;
     padding: 6px 18px;
@@ -1610,7 +2095,7 @@ h3 {
   }
 
   .brand img {
-    width: 188px;
+    width: 158px;
     height: 54px;
     flex: 0 0 auto;
   }
@@ -1627,7 +2112,7 @@ h3 {
   .menu-toggle {
     display: inline-flex;
     justify-self: end;
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 1;
   }
 
@@ -1641,6 +2126,10 @@ h3 {
     background: rgba(255, 255, 255, 0.98);
     color: var(--ink);
     box-shadow: 0 18px 28px rgba(16, 35, 63, 0.12);
+  }
+
+  .brand-mirvari img {
+    width: 122px;
   }
 
   .home-page .nav {
