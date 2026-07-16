@@ -51,15 +51,14 @@ if (currentBrand === "mirvari" && requestedBrand === "mirvari") {
 
   if (contextNav) {
     contextNav.innerHTML = `
-      <a href="mirvari.html">Ana s\u0259hif\u0259</a>
-      <a href="logistika.html">Xidm\u0259tl\u0259r</a>
-      <a href="elaqe.html?brand=mirvari">Da\u015f\u0131nma sifari\u015fi</a>
-      <a href="elaqe.html?brand=mirvari">\u018flaq\u0259</a>
+      <a href="mirvari-haqqimizda.html">Haqq\u0131m\u0131zda</a>
+      <a href="mirvari-mehsullar.html">M\u0259hsullar</a>
+      <a href="mirvari-elaqe.html">\u018flaq\u0259</a>
     `;
   }
 
   if (contextCta) {
-    contextCta.href = "elaqe.html?brand=mirvari";
+    contextCta.href = "mirvari-elaqe.html";
     contextCta.textContent = "Sor\u011fu g\u00f6nd\u0259r";
   }
 
@@ -77,8 +76,8 @@ if (currentBrand === "mirvari" && requestedBrand === "mirvari") {
   }
 
   if (footerNavs?.length >= 2) {
-    footerNavs[0].innerHTML = '<h3>\u015eirk\u0259t</h3><a href="mirvari.html">Ana s\u0259hif\u0259</a><a href="logistika.html">Logistika</a><a href="elaqe.html?brand=mirvari">\u018flaq\u0259</a>';
-    footerNavs[1].innerHTML = '<h3>Xidm\u0259tl\u0259r</h3><a href="logistika.html">Anbar koordinasiyas\u0131</a><a href="logistika.html">Avtomobil da\u015f\u0131malar\u0131</a><a href="elaqe.html?brand=mirvari">Da\u015f\u0131nma sifari\u015fi</a>';
+    footerNavs[0].innerHTML = '<h3>\u015eirk\u0259t</h3><a href="mirvari-haqqimizda.html">Haqq\u0131m\u0131zda</a><a href="mirvari-mehsullar.html">M\u0259hsullar</a><a href="mirvari-elaqe.html">\u018flaq\u0259</a>';
+    footerNavs[1].innerHTML = '<h3>Xidm\u0259tl\u0259r</h3><a href="mirvari-mehsullar.html">Anbar koordinasiyas\u0131</a><a href="mirvari-mehsullar.html">Avtomobil da\u015f\u0131malar\u0131</a><a href="mirvari-elaqe.html">Da\u015f\u0131nma sifari\u015fi</a>';
   }
 
   if (footerInfo) {
@@ -96,21 +95,21 @@ document.body.insertAdjacentHTML("afterbegin", `
     <section class="brand-gateway-panel" role="dialog" aria-modal="true" aria-labelledby="brandGatewayTitle">
       <button class="brand-gateway-close" type="button" aria-label="Ba\u011fla" data-brand-close>&#215;</button>
       <div class="brand-gateway-heading">
-        <span>Bir qrup, iki ixtisasla\u015fma</span>
-        <h2 id="brandGatewayTitle">\u015eirk\u0259ti se\u00e7in</h2>
-        <p>Davam etm\u0259k ist\u0259diyiniz xidm\u0259t sah\u0259sini se\u00e7in.</p>
+        <span>\u0130ki ixtisasla\u015fm\u0131\u015f \u015firk\u0259t</span>
+        <h2 id="brandGatewayTitle">\u0130stiqam\u0259tinizi se\u00e7in</h2>
+        <p>Un istehsal\u0131 v\u0259 ya logistika xidm\u0259tl\u0259ri il\u0259 davam edin.</p>
       </div>
       <div class="brand-options">
         <button class="brand-option brand-option-anadolu" type="button" data-brand-choice="anadolu">
           <span class="brand-option-index">01</span>
           <span class="brand-option-logo"><img src="./anadolu-qida-logo.png" alt="Anadolu Qida loqosu"></span>
-          <span class="brand-option-copy"><strong>Anadolu Qida</strong><small>Un istehsal\u0131 v\u0259 qida t\u0259chizat\u0131</small></span>
+          <span class="brand-option-copy"><em>\u0130stehsal</em><strong>Anadolu Qida</strong><small>Un istehsal\u0131 v\u0259 qida t\u0259chizat\u0131</small></span>
           <span class="brand-option-arrow" aria-hidden="true">&#8599;</span>
         </button>
         <button class="brand-option brand-option-mirvari" type="button" data-brand-choice="mirvari">
           <span class="brand-option-index">02</span>
           <span class="brand-option-logo"><img src="./murvari-logo.jpg" alt="Mirvari Logistics loqosu"></span>
-          <span class="brand-option-copy"><strong>Mirvari Logistics</strong><small>Da\u015f\u0131nma v\u0259 logistika xidm\u0259tl\u0259ri</small></span>
+          <span class="brand-option-copy"><em>Logistika</em><strong>Mirvari Logistics</strong><small>Da\u015f\u0131nma v\u0259 logistika xidm\u0259tl\u0259ri</small></span>
           <span class="brand-option-arrow" aria-hidden="true">&#8599;</span>
         </button>
       </div>
@@ -175,7 +174,7 @@ if (siteHeader && brandGateway) {
       } else {
         window.location.href = profile.target;
       }
-    }, 1250);
+    }, 1650);
   };
 
   brandSwitch.addEventListener("click", openBrandGateway);
@@ -205,7 +204,8 @@ if (siteHeader && brandGateway) {
 if (form && statusText) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-    statusText.textContent = "Sor\u011fu qey\u0259 al\u0131nd\u0131. Anadolu Qida komandas\u0131 sizinl\u0259 \u0259laq\u0259 saxlayacaq.";
+    const companyName = currentBrand === "mirvari" ? "Mirvari Logistics" : "Anadolu Qida";
+    statusText.textContent = `Sor\u011fu qey\u0259 al\u0131nd\u0131. ${companyName} komandas\u0131 sizinl\u0259 \u0259laq\u0259 saxlayacaq.`;
     form.reset();
     updateTopicPanels();
   });

@@ -1507,6 +1507,15 @@ body.brand-gateway-open {
   box-shadow: 0 28px 70px rgba(0, 0, 0, 0.26);
 }
 
+.brand-option:focus {
+  outline: none;
+}
+
+.brand-option:focus-visible {
+  outline: 3px solid var(--wine);
+  outline-offset: 3px;
+}
+
 .brand-option:hover::before {
   transform: scaleY(1);
 }
@@ -1539,6 +1548,16 @@ body.brand-gateway-open {
   grid-column: 1 / 3;
   display: grid;
   gap: 5px;
+}
+
+.brand-option-copy em {
+  margin-bottom: 5px;
+  color: var(--wine);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .brand-option-copy strong {
@@ -1581,12 +1600,13 @@ body.brand-gateway-open {
 .brand-gateway.is-launching .brand-gateway-panel {
   opacity: 0;
   transform: scale(0.985);
+  visibility: hidden;
 }
 
 .brand-gateway.is-launching .brand-intro {
   visibility: visible;
   opacity: 1;
-  transition-delay: 160ms, 0s;
+  transition: none;
 }
 
 .brand-intro-mark {
@@ -2280,6 +2300,461 @@ body.brand-gateway-open {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* Two-brand corporate structure */
+.brand-gateway-backdrop {
+  background: rgba(9, 20, 36, 0.28);
+  backdrop-filter: blur(12px);
+}
+
+.brand-gateway-panel {
+  gap: clamp(30px, 4vh, 52px);
+  padding: clamp(34px, 4.5vw, 68px);
+  background:
+    linear-gradient(90deg, rgba(8, 38, 90, 0.045) 1px, transparent 1px) 0 0 / 128px 128px,
+    #f4f6f9;
+  color: var(--ink);
+}
+
+.brand-gateway-close {
+  border-color: rgba(16, 35, 63, 0.18);
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 12px 30px rgba(8, 24, 45, 0.1);
+}
+
+.brand-gateway-heading {
+  max-width: 920px;
+}
+
+.brand-gateway-heading > span {
+  color: var(--wine);
+}
+
+.brand-gateway-heading h2 {
+  color: var(--ink);
+  font-size: clamp(40px, 5vw, 70px);
+}
+
+.brand-gateway-heading p {
+  color: var(--muted);
+}
+
+.brand-options {
+  gap: clamp(14px, 2vw, 28px);
+}
+
+.brand-option {
+  grid-template-columns: 58px minmax(0, 1fr) 34px;
+  grid-template-rows: minmax(180px, 1fr) auto;
+  min-height: clamp(330px, 40vh, 450px);
+  border-color: rgba(16, 35, 63, 0.14);
+  background: #fff;
+  box-shadow: 0 22px 55px rgba(8, 24, 45, 0.08);
+}
+
+.brand-option-anadolu {
+  background:
+    linear-gradient(135deg, rgba(8, 38, 90, 0.055), transparent 44%),
+    #fff;
+}
+
+.brand-option-mirvari {
+  background:
+    linear-gradient(135deg, rgba(183, 7, 43, 0.045), transparent 44%),
+    #fff;
+}
+
+.brand-option-logo {
+  min-height: 180px;
+}
+
+.brand-option-logo img {
+  max-height: 190px;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.brand-option:hover .brand-option-logo img {
+  transform: scale(1.045);
+}
+
+.brand-option-copy strong {
+  font-size: clamp(24px, 2.3vw, 36px);
+}
+
+.brand-option-copy small {
+  font-size: 15px;
+}
+
+.brand-intro,
+.brand-gateway.intro-mirvari .brand-intro {
+  overflow: hidden;
+  background: #fff;
+  color: #465160;
+}
+
+.brand-intro::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(8, 38, 90, 0.055) 1px, transparent 1px) 0 0 / 112px 112px,
+    linear-gradient(rgba(8, 38, 90, 0.04) 1px, transparent 1px) 0 0 / 112px 112px;
+  opacity: 0;
+  animation: introGridReveal 1100ms 180ms ease forwards;
+}
+
+.brand-intro::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--wine);
+  transform: scaleY(0);
+  transform-origin: top;
+  animation: introAxis 920ms ease both;
+}
+
+.brand-intro-mark {
+  position: relative;
+  z-index: 1;
+  width: min(76vw, 420px);
+  min-height: 190px;
+  padding: 22px;
+  animation: brandMarkReveal 880ms 220ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.brand-intro-mark::before,
+.brand-intro-mark::after {
+  content: "";
+  position: absolute;
+  left: -38px;
+  right: -38px;
+  height: 1px;
+  background: rgba(8, 38, 90, 0.2);
+  transform: scaleX(0);
+  animation: introFrame 760ms 420ms ease forwards;
+}
+
+.brand-intro-mark::before {
+  top: 0;
+  transform-origin: right;
+}
+
+.brand-intro-mark::after {
+  bottom: 0;
+  transform-origin: left;
+}
+
+.brand-intro-mark img {
+  max-height: 230px;
+}
+
+.brand-intro p,
+.brand-intro-line {
+  position: relative;
+  z-index: 1;
+}
+
+.brand-intro p {
+  color: #596574;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.brand-intro-line {
+  height: 3px;
+  background: rgba(8, 38, 90, 0.12);
+}
+
+.brand-gateway.intro-anadolu .brand-intro-mark {
+  width: min(78vw, 470px);
+}
+
+.brand-gateway.intro-mirvari .brand-intro-mark {
+  width: min(72vw, 390px);
+}
+
+.brand-page-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(260px, 0.55fr);
+  align-items: center;
+  gap: clamp(34px, 7vw, 110px);
+  min-height: clamp(460px, 60vh, 650px);
+  padding: clamp(72px, 9vw, 132px) clamp(18px, 5vw, 88px);
+  border-bottom: 1px solid var(--line);
+  background:
+    linear-gradient(90deg, rgba(16, 35, 63, 0.04) 1px, transparent 1px) 0 0 / 112px 112px,
+    #f4f6f8;
+}
+
+.brand-page-hero > div:first-child {
+  max-width: 880px;
+}
+
+.brand-page-hero span,
+.mirvari-about-lead > span {
+  color: var(--wine);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.brand-page-hero h1 {
+  margin: 18px 0 20px;
+  font-size: clamp(40px, 5.2vw, 72px);
+  line-height: 1.02;
+}
+
+.brand-page-hero p {
+  max-width: 700px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.brand-page-mark {
+  display: grid;
+  min-height: 280px;
+  place-items: center;
+  border-left: 1px solid var(--line);
+}
+
+.brand-page-mark img {
+  width: min(100%, 360px);
+  mix-blend-mode: multiply;
+}
+
+.mirvari-about-grid,
+.mirvari-principles,
+.mirvari-products,
+.about-documents {
+  padding: clamp(70px, 8vw, 120px) clamp(18px, 5vw, 88px);
+}
+
+.mirvari-about-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.85fr) minmax(320px, 1fr);
+  gap: clamp(40px, 7vw, 110px);
+  background: #fff;
+}
+
+.mirvari-about-lead h2 {
+  margin: 16px 0 0;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 1.05;
+}
+
+.mirvari-about-copy {
+  display: grid;
+  gap: 24px;
+  align-content: start;
+  padding-top: 30px;
+  border-top: 2px solid var(--wine);
+}
+
+.mirvari-about-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.72;
+}
+
+.mirvari-principles,
+.mirvari-products {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.65fr) minmax(0, 1fr);
+  gap: clamp(42px, 7vw, 110px);
+  background: #f4f5f6;
+}
+
+.mirvari-product-list {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.mirvari-product-list article {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: start;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.mirvari-product-list article > span,
+.mirvari-product-list article > a {
+  color: var(--wine);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.mirvari-product-list h3,
+.mirvari-product-list p {
+  margin: 0;
+}
+
+.mirvari-product-list p {
+  margin-top: 8px;
+  color: var(--muted);
+}
+
+.mirvari-product-list article > a {
+  padding-top: 4px;
+}
+
+.about-documents {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.5fr) minmax(0, 1.2fr);
+  gap: clamp(38px, 7vw, 100px);
+  border-top: 1px solid var(--line);
+  background: #f4f6f8;
+  scroll-margin-top: 76px;
+}
+
+.about-documents .documents-head p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.about-document-groups {
+  display: grid;
+  gap: 52px;
+}
+
+.about-document-group h3 {
+  margin: 0 0 14px;
+  font-size: 18px;
+}
+
+.mirvari-contact {
+  --footer: #111418;
+}
+
+@keyframes introGridReveal {
+  from { opacity: 0; transform: scale(1.04); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes introAxis {
+  0% { transform: scaleY(0); transform-origin: top; }
+  48% { transform: scaleY(1); transform-origin: top; }
+  52% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes brandMarkReveal {
+  from { opacity: 0; transform: translateY(20px) scale(0.94); clip-path: inset(46% 0 46% 0); }
+  to { opacity: 1; transform: translateY(0) scale(1); clip-path: inset(0 0 0 0); }
+}
+
+@keyframes introFrame {
+  to { transform: scaleX(1); }
+}
+
+@media (max-width: 860px) {
+  .site-footer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px 42px;
+  }
+
+  .footer-bottom {
+    grid-column: 1 / -1;
+  }
+
+  .brand-page-hero,
+  .mirvari-about-grid,
+  .mirvari-principles,
+  .mirvari-products,
+  .about-documents {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-page-mark {
+    min-height: 190px;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .brand-page-mark img {
+    width: min(78%, 320px);
+  }
+}
+
+@media (max-width: 560px) {
+  .brand-gateway-panel {
+    gap: 24px;
+    padding: 70px 16px 24px;
+  }
+
+  .brand-gateway-heading h2 {
+    font-size: clamp(36px, 11vw, 48px);
+  }
+
+  .brand-options {
+    gap: 14px;
+  }
+
+  .brand-option {
+    grid-template-columns: 40px minmax(0, 1fr) 26px;
+    grid-template-rows: 112px auto;
+    min-height: 218px;
+    box-shadow: 0 14px 32px rgba(8, 24, 45, 0.08);
+  }
+
+  .brand-option-logo {
+    min-height: 108px;
+  }
+
+  .brand-option-copy strong {
+    font-size: 21px;
+  }
+
+  .brand-option-copy small {
+    font-size: 12px;
+  }
+
+  .brand-page-hero {
+    min-height: 0;
+    padding-top: 64px;
+    padding-bottom: 48px;
+  }
+
+  .brand-page-hero h1 {
+    font-size: clamp(32px, 9vw, 42px);
+  }
+
+  .brand-page-hero p,
+  .mirvari-about-copy p {
+    font-size: 15px;
+  }
+
+  .mirvari-product-list article {
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .mirvari-product-list article > a {
+    grid-column: 2;
+  }
+
+  .about-document-groups {
+    gap: 38px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand-intro::before,
+  .brand-intro::after,
+  .brand-intro-mark,
+  .brand-intro-mark::before,
+  .brand-intro-mark::after {
+    animation-duration: 0.001ms !important;
   }
 }
 
