@@ -12,6 +12,7 @@ document.querySelectorAll("main > section:not(.hero)").forEach((block) => {
 const revealBlocks = document.querySelectorAll(".reveal-on-scroll");
 const valuesCarousel = document.querySelector("#valuesCarousel");
 const valuesNavButtons = document.querySelectorAll("[data-values-dir]");
+const siteFooter = document.querySelector(".site-footer");
 
 const brandProfiles = {
   anadolu: {
@@ -255,6 +256,25 @@ if (revealBlocks.length) {
     revealBlocks.forEach((block) => revealObserver.observe(block));
   } else {
     revealBlocks.forEach(reveal);
+  }
+}
+
+if (siteFooter) {
+  siteFooter.classList.add("footer-motion-ready");
+
+  if ("IntersectionObserver" in window) {
+    const footerObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          siteFooter.classList.add("footer-in-view");
+          footerObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.16 });
+
+    footerObserver.observe(siteFooter);
+  } else {
+    siteFooter.classList.add("footer-in-view");
   }
 }
 
