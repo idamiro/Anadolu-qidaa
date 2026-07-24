@@ -5,9 +5,49 @@ const heroVideo = document.querySelector("#heroVideo");
 const counters = document.querySelectorAll(".counter");
 const requestTopic = document.querySelector("#requestTopic");
 const topicPanels = document.querySelectorAll("[data-topic-panel]");
+document.documentElement.classList.add("motion-enabled");
+
+document.querySelectorAll(".hero-copy > *").forEach((item, index) => {
+  item.classList.add("hero-motion-item");
+  item.style.setProperty("--motion-delay", `${120 + (index * 95)}ms`);
+});
+
 document.querySelectorAll("main > section:not(.hero)").forEach((block) => {
   block.classList.add("reveal-ready");
   block.classList.add("reveal-on-scroll");
+
+  const motionItems = block.querySelectorAll(`
+    .values-head > *,
+    .value-card,
+    .page-hero > *,
+    .about-stats > *,
+    .about-copy > *,
+    .about-panel > *,
+    .about-text-grid > *,
+    .about-strategy > *,
+    .mission-vision > *,
+    .about-documents > .section-heading,
+    .about-document-group,
+    .product-head > *,
+    .product-table > *,
+    .brand-page-hero > *,
+    .mirvari-about-grid > *,
+    .mirvari-principles > .section-heading,
+    .mirvari-service-grid > *,
+    .mirvari-products > .section-heading,
+    .mirvari-product-list > *,
+    .contact-copy > span,
+    .contact-copy > h1,
+    .contact-copy > p,
+    .contact-copy > .contact-email,
+    .contact-service-list > *,
+    .contact-form > *
+  `);
+
+  motionItems.forEach((item, index) => {
+    item.classList.add("motion-item");
+    item.style.setProperty("--motion-delay", `${Math.min(index * 70, 560)}ms`);
+  });
 });
 const revealBlocks = document.querySelectorAll(".reveal-on-scroll");
 const valuesCarousel = document.querySelector("#valuesCarousel");
@@ -251,7 +291,7 @@ if (revealBlocks.length) {
           revealObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.1, rootMargin: "0px 0px -8% 0px" });
 
     revealBlocks.forEach((block) => revealObserver.observe(block));
   } else {
