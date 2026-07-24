@@ -65,6 +65,83 @@ if (heroVideos.length > 1) {
   });
 }
 
+const valuesSlider = document.querySelector("[data-values-slider]");
+const valuesPrev = document.querySelector("[data-values-prev]");
+const valuesNext = document.querySelector("[data-values-next]");
+
+if (valuesSlider && valuesPrev && valuesNext) {
+  valuesSlider.scrollLeft = 0;
+
+  const getStep = () => {
+    const card = valuesSlider.querySelector(".value-card");
+    if (!card) return valuesSlider.clientWidth;
+    const gap = Number.parseFloat(getComputedStyle(valuesSlider.querySelector(".values-track")).gap) || 0;
+    return card.getBoundingClientRect().width + gap;
+  };
+
+  const move = (direction) => {
+    valuesSlider.scrollBy({ left: getStep() * direction, behavior: "smooth" });
+  };
+
+  valuesPrev.addEventListener("click", () => move(-1));
+  valuesNext.addEventListener("click", () => move(1));
+
+  let dragging = false;
+  let dragStart = 0;
+  let scrollStart = 0;
+
+  valuesSlider.addEventListener("pointerdown", (event) => {
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    dragging = true;
+    dragStart = event.clientX;
+    scrollStart = valuesSlider.scrollLeft;
+    valuesSlider.classList.add("dragging");
+    valuesSlider.setPointerCapture(event.pointerId);
+  });
+
+  valuesSlider.addEventListener("pointermove", (event) => {
+    if (!dragging) return;
+    valuesSlider.scrollLeft = scrollStart - (event.clientX - dragStart);
+  });
+
+  const stopDragging = () => {
+    dragging = false;
+    valuesSlider.classList.remove("dragging");
+  };
+
+  valuesSlider.addEventListener("pointerup", stopDragging);
+  valuesSlider.addEventListener("pointercancel", stopDragging);
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let autoplay;
+    let sliderVisible = false;
+    const stopAutoplay = () => window.clearInterval(autoplay);
+    const startAutoplay = () => {
+      stopAutoplay();
+      if (!sliderVisible) return;
+      autoplay = window.setInterval(() => {
+        const atEnd = valuesSlider.scrollLeft + valuesSlider.clientWidth >= valuesSlider.scrollWidth - 8;
+        valuesSlider.scrollTo({ left: atEnd ? 0 : valuesSlider.scrollLeft + getStep(), behavior: "smooth" });
+      }, 5200);
+    };
+
+    valuesSlider.addEventListener("pointerenter", stopAutoplay);
+    valuesSlider.addEventListener("pointerleave", startAutoplay);
+    valuesSlider.addEventListener("touchstart", stopAutoplay, { passive: true });
+    valuesSlider.addEventListener("touchend", startAutoplay, { passive: true });
+    valuesSlider.addEventListener("focusin", stopAutoplay);
+    valuesSlider.addEventListener("focusout", startAutoplay);
+
+    const autoplayObserver = new IntersectionObserver((entries) => {
+      sliderVisible = entries[0]?.isIntersecting ?? false;
+      if (sliderVisible) startAutoplay();
+      else stopAutoplay();
+    }, { threshold: .25 });
+
+    autoplayObserver.observe(valuesSlider);
+  }
+}
+
 const counterObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (!entry.isIntersecting) return;
