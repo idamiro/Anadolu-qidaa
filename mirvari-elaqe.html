@@ -1,61 +1,71 @@
 <!doctype html>
 <html lang="az">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Əlaqə | Mirvari Logistics</title>
-  <meta name="description" content="Mirvari Logistics daşınma sifarişi və korporativ əlaqə forması.">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="mirvari-page">
-  <header class="site-header">
-    <a class="brand brand-mirvari" href="mirvari.html" aria-label="Mirvari Logistics"><img src="./murvari-logo.jpg" alt="Mirvari Logistics loqosu"><span>Mirvari Logistics</span></a>
-    <button class="menu-toggle" type="button" aria-label="Menyunu aç" aria-expanded="false"><span></span><span></span><span></span></button>
-    <nav class="nav" aria-label="Əsas menyu"><a href="mirvari-haqqimizda.html">Haqqımızda</a><a href="mirvari-mehsullar.html">Xidmətlər</a><a href="mirvari-elaqe.html" aria-current="page">Əlaqə</a></nav>
-    <div class="header-actions"><button class="brand-switch" type="button" data-brand-switch>Şirkət seç</button><a class="header-cta" href="mirvari-elaqe.html">Daşınma sorğusu</a></div>
-  </header>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>&#399;laq&#601; | Mirvari Logistics</title>
+    <meta name="description" content="Mirvari Logistics da&#351;&#305;nma sifari&#351;i v&#601; korporativ &#601;laq&#601;.">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="mirvari-page" data-brand="mirvari">
+    <header class="site-header">
+      <a class="brand brand-mirvari" href="mirvari.html" aria-label="Mirvari Logistics ana s&#601;hif&#601;si">
+        <img src="./murvari-logo.jpg" alt="Mirvari Logistics loqosu">
+        <span>Mirvari Logistics</span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="Menyunu a&#231;" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="nav" aria-label="&#399;sas menyu">
+        <a href="mirvari-haqqimizda.html">Haqq&#305;m&#305;zda</a>
+        <a href="mirvari-mehsullar.html">M&#601;hsullar</a>
+        <a href="mirvari-elaqe.html">&#399;laq&#601;</a>
+      </nav>
+      <a class="header-cta" href="mirvari-elaqe.html">Sor&#287;u g&#246;nd&#601;r</a>
+    </header>
 
-  <main>
-    <section class="section section-white">
-      <div class="contact-layout">
-        <div class="contact-copy reveal">
-          <span class="eyebrow">Əlaqə</span>
-          <h1>Daşınmanı birlikdə planlayaq.</h1>
-          <p>Yük, götürülmə ünvanı və təhvil məlumatlarını qeyd edin. Komandamız sorğunu nəzərdən keçirəcək.</p>
-          <a class="contact-email" href="mailto:anadoluqida@gmail.com"><span>E-poçt</span>anadoluqida@gmail.com</a>
-          <div class="contact-points">
-            <div class="contact-point"><b>01</b><div><strong>Daşınma sifarişi</strong><p>Yük, marşrut və təhvil məlumatları.</p></div></div>
-            <div class="contact-point"><b>02</b><div><strong>Anbar koordinasiyası</strong><p>Yükləmə vaxtı və çıxış ardıcıllığı.</p></div></div>
-            <div class="contact-point"><b>03</b><div><strong>Əməliyyat məlumatı</strong><p>Sifariş və təhvil statusu üzrə əlaqə.</p></div></div>
+    <main>
+      <section class="contact page-contact mirvari-contact">
+        <div class="contact-copy">
+          <span>&#399;laq&#601;</span>
+          <h1>Da&#351;&#305;nma sor&#287;unuzu g&#246;nd&#601;rin</h1>
+          <p>Y&#252;k, g&#246;t&#252;r&#252;lm&#601; &#252;nvan&#305; v&#601; t&#601;hvil m&#601;lumatlar&#305;n&#305; qeyd edin. Komandam&#305;z sor&#287;unu yoxlay&#305;b sizinl&#601; &#601;laq&#601; saxlayacaq.</p>
+          <a class="contact-email" href="mailto:anadoluqida@gmail.com"><span>E-po&#231;t</span>anadoluqida@gmail.com</a>
+          <div class="contact-service-list" aria-label="Xidm&#601;t istiqam&#601;tl&#601;ri">
+            <div><strong>Da&#351;&#305;nma sifari&#351;i</strong><span>Y&#252;k, mar&#351;rut v&#601; t&#601;hvil m&#601;lumatlar&#305;.</span></div>
+            <div><strong>Anbar koordinasiyas&#305;</strong><span>Y&#252;kl&#601;m&#601; vaxt&#305; v&#601; &#231;&#305;x&#305;&#351; plan&#305;.</span></div>
           </div>
         </div>
-
-        <form class="contact-form reveal">
-          <h2>Daşınma məlumatları</h2>
-          <p class="form-note">Dəqiq ünvan və yük məlumatı ilkin planlamanı sürətləndirir.</p>
-          <div class="form-grid">
-            <div class="field"><label for="logName">Adı / şirkət adı</label><input id="logName" name="buyer_name" type="text" required autocomplete="name"></div>
-            <div class="field"><label for="logVoen">VÖEN</label><input id="logVoen" name="voen" type="text" inputmode="numeric"></div>
-            <div class="field-full"><label for="cargo">Yük haqqında məlumat</label><input id="cargo" name="cargo_details" type="text" required placeholder="Məhsul, çəki və həcm"></div>
-            <div class="field"><label for="pickup">Yükləmə ünvanı</label><input id="pickup" name="pickup_address" type="text" required placeholder="Yük haradan götürüləcək"></div>
-            <div class="field"><label for="dropoff">Təhvil ünvanı</label><input id="dropoff" name="dropoff_address" type="text" required placeholder="Yük hara çatdırılacaq"></div>
-            <div class="field"><label for="date">Planlaşdırılan tarix</label><input id="date" name="delivery_date" type="date"></div>
-            <div class="field"><label for="phone">Əlaqə nömrəsi</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+994"></div>
-            <div class="field-full"><label for="logMessage">Əlavə qeyd</label><textarea id="logMessage" name="message" placeholder="Daşınma ilə bağlı əlavə tələb"></textarea></div>
-            <div class="field-full"><button type="submit">Sorğu göndər</button><p class="form-status" role="status" aria-live="polite"></p></div>
+        <form class="contact-form">
+          <div class="form-intro">
+            <span>Logistika sor&#287;usu</span>
+            <h2>Da&#351;&#305;nma m&#601;lumatlar&#305;</h2>
+            <p>Mar&#351;rut v&#601; y&#252;k m&#601;lumatlar&#305;n&#305; qeyd edin, sor&#287;unuz planlama &#252;&#231;&#252;n yoxlan&#305;ls&#305;n.</p>
           </div>
+          <fieldset class="form-section">
+            <legend>M&#252;raci&#601;t ed&#601;n &#351;&#601;xsin m&#601;lumatlar&#305;</legend>
+            <label>Ad&#305;<input type="text" name="buyer_name" placeholder="Ad v&#601; ya &#351;irk&#601;t ad&#305;"></label>
+            <label>V&#214;EN<input type="text" name="voen" placeholder="V&#214;EN"></label>
+          </fieldset>
+          <fieldset class="form-section">
+            <legend>Da&#351;&#305;nma m&#601;lumatlar&#305;</legend>
+            <label>Y&#252;kl&#601;m&#601; &#252;nvan&#305;<input type="text" name="pickup_address" placeholder="Y&#252;k haradan g&#246;t&#252;r&#252;l&#601;c&#601;k"></label>
+            <label>T&#601;hvil &#252;nvan&#305;<input type="text" name="dropoff_address" placeholder="Y&#252;k hara &#231;atd&#305;r&#305;lacaq"></label>
+            <label>Y&#252;k haqq&#305;nda m&#601;lumat<input type="text" name="cargo_details" placeholder="M&#601;hsul, &#231;&#601;ki, h&#601;cm"></label>
+          </fieldset>
+          <label>&#399;lav&#601; qeyd<textarea name="message" rows="4" placeholder="Da&#351;&#305;nma il&#601; ba&#287;l&#305; &#601;lav&#601; m&#601;lumat"></textarea></label>
+          <button type="submit">Sor&#287;u g&#246;nd&#601;r</button>
+          <p class="form-status" role="status" aria-live="polite"></p>
         </form>
-      </div>
-    </section>
-  </main>
+      </section>
+    </main>
 
-  <footer class="site-footer">
-    <div class="footer-brand"><img src="./murvari-logo.jpg" alt="Mirvari Logistics"><p>Anbar, yükləmə, marşrut planlaması və korporativ daşınma həlləri.</p></div>
-    <nav class="footer-col"><h3>Şirkət</h3><a href="mirvari-haqqimizda.html">Haqqımızda</a><a href="mirvari-mehsullar.html">Xidmətlər</a><a href="mirvari-elaqe.html">Əlaqə</a></nav>
-    <nav class="footer-col"><h3>Xidmətlər</h3><a href="mirvari-mehsullar.html">Avtomobil daşımaları</a><a href="mirvari-mehsullar.html">Anbar koordinasiyası</a><a href="mirvari-elaqe.html">Daşınma sifarişi</a></nav>
-    <div class="footer-col"><h3>Brendlər</h3><a href="index.html">Anadolu Qida</a><button class="brand-switch" type="button" data-brand-switch>Şirkət seç</button></div>
-    <div class="footer-bottom"><span>© 2026 Mirvari Logistics MMC. Bütün hüquqlar qorunur.</span><span>Bakı, Azərbaycan</span></div>
-  </footer>
-  <script src="script.js"></script>
-</body>
+    <footer class="site-footer mirvari-footer">
+      <div class="footer-brand"><img src="./murvari-logo.jpg" alt="Mirvari Logistics loqosu"><p>Anbar, y&#252;kl&#601;m&#601;, mar&#351;rut planlamas&#305; v&#601; m&#252;&#351;t&#601;riy&#601; &#231;atd&#305;r&#305;lma xidm&#601;tl&#601;ri.</p></div>
+      <nav class="footer-col" aria-label="&#350;irk&#601;t"><h3>&#350;irk&#601;t</h3><a href="mirvari-haqqimizda.html">Haqq&#305;m&#305;zda</a><a href="mirvari-mehsullar.html">M&#601;hsullar</a><a href="mirvari-elaqe.html">&#399;laq&#601;</a></nav>
+      <nav class="footer-col" aria-label="Xidm&#601;tl&#601;r"><h3>Xidm&#601;tl&#601;r</h3><a href="mirvari-mehsullar.html">Anbar koordinasiyas&#305;</a><a href="mirvari-mehsullar.html">Avtomobil da&#351;&#305;malar&#305;</a><a href="mirvari-elaqe.html">Da&#351;&#305;nma sifari&#351;i</a></nav>
+      <div class="footer-col"><h3>Brendl&#601;r</h3><a href="index.html">Anadolu Qida</a><a href="mirvari.html">Mirvari Logistics</a></div>
+      <div class="footer-bottom"><span>&#169; 2026 Mirvari Logistics MMC. B&#252;t&#252;n h&#252;quqlar qorunur.</span><a href="mirvari.html">Ana s&#601;hif&#601;</a></div>
+    </footer>
+    <script src="script.js"></script>
+  </body>
 </html>
