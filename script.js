@@ -1,496 +1,169 @@
-const form = document.querySelector(".contact-form");
-const statusText = document.querySelector(".form-status");
-const menuToggle = document.querySelector(".menu-toggle");
-const heroVideo = document.querySelector("#heroVideo");
-const pageFile = window.location.pathname.split("/").pop() || "index.html";
-const mainElement = document.querySelector("main");
+const body = document.body;
+const menuButton = document.querySelector(".menu-toggle");
+const nav = document.querySelector(".nav");
 
-if (mainElement && pageFile === "index.html" && !document.querySelector(".corporate-feature")) {
-  mainElement.insertAdjacentHTML("beforeend", `
-    <section class="corporate-feature anadolu-feature" aria-labelledby="anadoluFeatureTitle">
-      <div class="feature-copy">
-        <span>İstehsal miqyası</span>
-        <h2 id="anadoluFeatureTitle">Sabit təchizat üçün qurulmuş istehsal sistemi.</h2>
-        <p>Müasir avadanlıq, nəzarət olunan istehsal mərhələləri və korporativ sifarişlərə uyğun planlama.</p>
-        <a href="haqqimizda.html">İstehsal modelimiz <span aria-hidden="true">↗</span></a>
-      </div>
-      <div class="feature-metrics" aria-label="Əsas göstəricilər">
-        <article><span>01</span><strong>200</strong><small>ton gündəlik istehsal gücü</small></article>
-        <article><span>02</span><strong>600 000</strong><small>manat nizamnamə kapitalı</small></article>
-        <article><span>03</span><strong>2018</strong><small>təsis ili</small></article>
-      </div>
-    </section>
-  `);
-}
+if (menuButton && nav) {
+  const mobileSwitch = document.createElement("button");
+  mobileSwitch.className = "mobile-switch";
+  mobileSwitch.type = "button";
+  mobileSwitch.textContent = "Şirkət seç";
+  nav.appendChild(mobileSwitch);
 
-if (mainElement && pageFile === "mirvari.html" && !document.querySelector(".corporate-feature")) {
-  mainElement.insertAdjacentHTML("beforeend", `
-    <section class="corporate-feature logistics-feature" aria-labelledby="logisticsFeatureTitle">
-      <div class="feature-copy">
-        <span>Əməliyyat modeli</span>
-        <h2 id="logisticsFeatureTitle">Yükün hərəkəti əvvəlcədən planlanır.</h2>
-        <p>Anbardan çıxışdan təhvil nöqtəsinə qədər hər mərhələ vahid əməliyyat ardıcıllığı ilə idarə olunur.</p>
-        <a href="mirvari-haqqimizda.html">İş prinsipimiz <span aria-hidden="true">↗</span></a>
-      </div>
-      <ol class="logistics-route">
-        <li><span>01</span><strong>Anbar</strong><small>Yük və çıxış vaxtının koordinasiyası</small></li>
-        <li><span>02</span><strong>Marşrut</strong><small>Ünvan və təhvil vaxtına uyğun planlama</small></li>
-        <li><span>03</span><strong>Təhvil</strong><small>Müştəriyə qədər nəzarətli hərəkət</small></li>
-      </ol>
-    </section>
-  `);
-}
-
-const counters = document.querySelectorAll(".counter");
-const requestTopic = document.querySelector("#requestTopic");
-const topicPanels = document.querySelectorAll("[data-topic-panel]");
-document.documentElement.classList.add("motion-enabled");
-
-document.querySelectorAll(".hero-copy > *").forEach((item, index) => {
-  item.classList.add("hero-motion-item");
-  item.style.setProperty("--motion-delay", `${120 + (index * 95)}ms`);
-});
-
-document.querySelectorAll("main > section:not(.hero)").forEach((block) => {
-  block.classList.add("reveal-ready");
-  block.classList.add("reveal-on-scroll");
-
-  const motionItems = block.querySelectorAll(`
-    .values-head > *,
-    .value-card,
-    .page-hero > *,
-    .about-stats > *,
-    .about-copy > *,
-    .about-panel > *,
-    .about-text-grid > *,
-    .about-strategy > *,
-    .mission-vision > *,
-    .about-documents > .section-heading,
-    .about-document-group,
-    .product-head > *,
-    .product-table > *,
-    .brand-page-hero > *,
-    .mirvari-about-grid > *,
-    .mirvari-principles > .section-heading,
-    .mirvari-service-grid > *,
-    .mirvari-products > .section-heading,
-    .mirvari-product-list > *,
-    .corporate-feature > *,
-    .feature-metrics > *,
-    .logistics-route > *,
-    .contact-copy > span,
-    .contact-copy > h1,
-    .contact-copy > p,
-    .contact-copy > .contact-email,
-    .contact-service-list > *,
-    .contact-form > *
-  `);
-
-  motionItems.forEach((item, index) => {
-    item.classList.add("motion-item");
-    item.style.setProperty("--motion-delay", `${Math.min(index * 70, 560)}ms`);
-  });
-});
-const revealBlocks = document.querySelectorAll(".reveal-on-scroll");
-const valuesCarousel = document.querySelector("#valuesCarousel");
-const valuesNavButtons = document.querySelectorAll("[data-values-dir]");
-const siteFooter = document.querySelector(".site-footer");
-
-document.body.insertAdjacentHTML("afterbegin", '<div class="page-progress" aria-hidden="true"><span></span></div>');
-
-if (siteFooter && !siteFooter.querySelector(".footer-marquee")) {
-  const marqueeText = document.body.dataset.brand === "mirvari"
-    ? "MİRVARİ LOGISTICS · ANBAR · MARŞRUT · TƏHVİL · "
-    : "ANADOLU QİDA · İSTEHSAL · KEYFİYYƏT · TƏCHİZAT · ";
-
-  siteFooter.insertAdjacentHTML("afterbegin", `
-    <div class="footer-marquee" aria-hidden="true">
-      <div><span>${marqueeText}</span><span>${marqueeText}</span></div>
-    </div>
-  `);
-}
-
-const brandProfiles = {
-  anadolu: {
-    name: "Anadolu Qida",
-    description: "Un istehsal\u0131 v\u0259 korporativ qida t\u0259chizat\u0131",
-    logo: "./anadolu-qida-logo.png",
-    target: "index.html"
-  },
-  mirvari: {
-    name: "Mirvari Logistics",
-    description: "Planl\u0131 da\u015f\u0131nma v\u0259 logistika xidm\u0259tl\u0259ri",
-    logo: "./murvari-logo.jpg",
-    target: "mirvari.html"
-  }
-};
-
-const requestedBrand = new URLSearchParams(window.location.search).get("brand");
-const currentBrand = brandProfiles[requestedBrand] ? requestedBrand : (document.body.dataset.brand || "anadolu");
-const siteHeader = document.querySelector(".site-header");
-
-if (currentBrand === "mirvari" && requestedBrand === "mirvari") {
-  document.body.classList.add("mirvari-page");
-  const contextBrand = siteHeader?.querySelector(".brand");
-  const contextLogo = contextBrand?.querySelector("img");
-  const contextName = contextBrand?.querySelector("span");
-  const contextNav = siteHeader?.querySelector(".nav");
-  const contextCta = siteHeader?.querySelector(".header-cta");
-
-  if (contextBrand && contextLogo && contextName) {
-    contextBrand.classList.add("brand-mirvari");
-    contextBrand.href = "mirvari.html";
-    contextBrand.setAttribute("aria-label", "Mirvari Logistics ana s\u0259hif\u0259si");
-    contextLogo.src = "./murvari-logo.jpg";
-    contextLogo.alt = "Mirvari Logistics loqosu";
-    contextName.textContent = "Mirvari Logistics";
-  }
-
-  if (contextNav) {
-    contextNav.innerHTML = `
-      <a href="mirvari-haqqimizda.html">Haqq\u0131m\u0131zda</a>
-      <a href="mirvari-mehsullar.html">M\u0259hsullar</a>
-      <a href="mirvari-elaqe.html">\u018flaq\u0259</a>
-    `;
-  }
-
-  if (contextCta) {
-    contextCta.href = "mirvari-elaqe.html";
-    contextCta.textContent = "Sor\u011fu g\u00f6nd\u0259r";
-  }
-
-  const contextFooter = document.querySelector(".site-footer");
-  const footerLogo = contextFooter?.querySelector(".footer-brand img");
-  const footerDescription = contextFooter?.querySelector(".footer-brand p");
-  const footerNavs = contextFooter?.querySelectorAll("nav.footer-col");
-  const footerInfo = contextFooter?.querySelector(".footer-col:not(nav)");
-  const footerBottom = contextFooter?.querySelector(".footer-bottom");
-
-  if (footerLogo && footerDescription) {
-    footerLogo.src = "./murvari-logo.jpg";
-    footerLogo.alt = "Mirvari Logistics loqosu";
-    footerDescription.textContent = "Anbar, y\u00fckl\u0259m\u0259, mar\u015frut planlamas\u0131 v\u0259 m\u00fc\u015ft\u0259riy\u0259 \u00e7atd\u0131r\u0131lma xidm\u0259tl\u0259ri.";
-  }
-
-  if (footerNavs?.length >= 2) {
-    footerNavs[0].innerHTML = '<h3>\u015eirk\u0259t</h3><a href="mirvari-haqqimizda.html">Haqq\u0131m\u0131zda</a><a href="mirvari-mehsullar.html">M\u0259hsullar</a><a href="mirvari-elaqe.html">\u018flaq\u0259</a>';
-    footerNavs[1].innerHTML = '<h3>Xidm\u0259tl\u0259r</h3><a href="mirvari-mehsullar.html">Anbar koordinasiyas\u0131</a><a href="mirvari-mehsullar.html">Avtomobil da\u015f\u0131malar\u0131</a><a href="mirvari-elaqe.html">Da\u015f\u0131nma sifari\u015fi</a>';
-  }
-
-  if (footerInfo) {
-    footerInfo.innerHTML = '<h3>Brendl\u0259r</h3><a href="index.html">Anadolu Qida</a><a href="mirvari.html">Mirvari Logistics</a>';
-  }
-
-  if (footerBottom) {
-    footerBottom.innerHTML = '<span>\u00a9 2026 Mirvari Logistics MMC. B\u00fct\u00fcn h\u00fcquqlar qorunur.</span><a href="mirvari.html">Ana s\u0259hif\u0259</a>';
-  }
-}
-
-document.body.insertAdjacentHTML("afterbegin", `
-  <div class="brand-gateway" data-brand-gateway hidden>
-    <div class="brand-gateway-backdrop" aria-hidden="true"></div>
-    <section class="brand-gateway-panel" role="dialog" aria-modal="true" aria-labelledby="brandGatewayTitle">
-      <button class="brand-gateway-close" type="button" aria-label="Ba\u011fla" data-brand-close>&#215;</button>
-      <div class="brand-gateway-heading">
-        <span>\u0130ki ixtisasla\u015fm\u0131\u015f \u015firk\u0259t</span>
-        <h2 id="brandGatewayTitle">\u0130stiqam\u0259tinizi se\u00e7in</h2>
-        <p>Un istehsal\u0131 v\u0259 ya logistika xidm\u0259tl\u0259ri il\u0259 davam edin.</p>
-      </div>
-      <div class="brand-options">
-        <button class="brand-option brand-option-anadolu" type="button" data-brand-choice="anadolu">
-          <span class="brand-option-index">01</span>
-          <span class="brand-option-logo"><img src="./anadolu-qida-logo.png" alt="Anadolu Qida loqosu"></span>
-          <span class="brand-option-copy"><em>\u0130stehsal</em><strong>Anadolu Qida</strong><small>Un istehsal\u0131 v\u0259 qida t\u0259chizat\u0131</small></span>
-          <span class="brand-option-arrow" aria-hidden="true">&#8599;</span>
-        </button>
-        <button class="brand-option brand-option-mirvari" type="button" data-brand-choice="mirvari">
-          <span class="brand-option-index">02</span>
-          <span class="brand-option-logo"><img src="./murvari-logo.jpg" alt="Mirvari Logistics loqosu"></span>
-          <span class="brand-option-copy"><em>Logistika</em><strong>Mirvari Logistics</strong><small>Da\u015f\u0131nma v\u0259 logistika xidm\u0259tl\u0259ri</small></span>
-          <span class="brand-option-arrow" aria-hidden="true">&#8599;</span>
-        </button>
-      </div>
-    </section>
-    <div class="brand-intro" data-brand-intro aria-hidden="true">
-      <div class="brand-intro-mark"><img src="" alt=""></div>
-      <p></p>
-      <span class="brand-intro-line"></span>
-    </div>
-  </div>
-`);
-
-const brandGateway = document.querySelector("[data-brand-gateway]");
-const brandIntro = document.querySelector("[data-brand-intro]");
-const brandClose = document.querySelector("[data-brand-close]");
-
-if (siteHeader && brandGateway) {
-  const brandSwitch = document.createElement("button");
-  brandSwitch.className = "brand-switch-trigger";
-  brandSwitch.type = "button";
-  brandSwitch.innerHTML = '<span aria-hidden="true"></span><b>\u015eirk\u0259t se\u00e7</b>';
-  brandSwitch.setAttribute("aria-label", "\u015eirk\u0259ti d\u0259yi\u015f");
-  const headerCta = siteHeader.querySelector(".header-cta");
-  siteHeader.insertBefore(brandSwitch, headerCta || null);
-
-  const openBrandGateway = () => {
-    brandGateway.hidden = false;
-    document.body.classList.add("brand-gateway-open");
-    requestAnimationFrame(() => brandGateway.classList.add("is-visible"));
+  const closeMenu = () => {
+    nav.classList.remove("open");
+    menuButton.setAttribute("aria-expanded", "false");
+    body.classList.remove("menu-open");
   };
 
-  const closeBrandGateway = () => {
-    brandGateway.classList.remove("is-visible", "is-launching", "intro-anadolu", "intro-mirvari");
-    document.body.classList.remove("brand-gateway-open");
-    window.setTimeout(() => {
-      brandGateway.hidden = true;
-    }, 320);
-  };
-
-  const launchBrand = (brandKey) => {
-    const profile = brandProfiles[brandKey];
-    if (!profile || !brandIntro) return;
-
-    try {
-      window.sessionStorage.setItem("anadolu-active-brand", brandKey);
-    } catch (error) {
-      // The selector still works when browser storage is disabled.
-    }
-
-    const introImage = brandIntro.querySelector("img");
-    const introText = brandIntro.querySelector("p");
-    introImage.src = profile.logo;
-    introImage.alt = `${profile.name} loqosu`;
-    introText.textContent = profile.description;
-    brandGateway.classList.remove("intro-anadolu", "intro-mirvari");
-    brandGateway.classList.add("is-launching", `intro-${brandKey}`);
-
-    window.setTimeout(() => {
-      const currentFile = window.location.pathname.split("/").pop() || "index.html";
-      if (currentFile === profile.target) {
-        closeBrandGateway();
-      } else {
-        window.location.href = profile.target;
-      }
-    }, 1650);
-  };
-
-  brandSwitch.addEventListener("click", openBrandGateway);
-  brandClose.addEventListener("click", closeBrandGateway);
-  brandGateway.querySelectorAll("[data-brand-choice]").forEach((choice) => {
-    choice.addEventListener("click", () => launchBrand(choice.dataset.brandChoice));
+  menuButton.addEventListener("click", () => {
+    const open = !nav.classList.contains("open");
+    nav.classList.toggle("open", open);
+    menuButton.setAttribute("aria-expanded", String(open));
+    body.classList.toggle("menu-open", open);
   });
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && brandGateway.classList.contains("is-visible") && !brandGateway.classList.contains("is-launching")) {
-      closeBrandGateway();
-    }
-  });
-
-  let savedBrand = null;
-  try {
-    savedBrand = window.sessionStorage.getItem("anadolu-active-brand");
-  } catch (error) {
-    savedBrand = null;
-  }
-
-  if (!savedBrand) {
-    window.setTimeout(openBrandGateway, 180);
-  }
-}
-
-if (brandGateway) {
-  brandGateway.addEventListener("pointermove", (event) => {
-    const x = (event.clientX / Math.max(window.innerWidth, 1)) - 0.5;
-    const y = (event.clientY / Math.max(window.innerHeight, 1)) - 0.5;
-    brandGateway.style.setProperty("--gateway-x", `${x * 18}px`);
-    brandGateway.style.setProperty("--gateway-y", `${y * 14}px`);
-  });
-}
-
-if (form && statusText) {
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const companyName = currentBrand === "mirvari" ? "Mirvari Logistics" : "Anadolu Qida";
-    statusText.textContent = `Sor\u011fu qey\u0259 al\u0131nd\u0131. ${companyName} komandas\u0131 sizinl\u0259 \u0259laq\u0259 saxlayacaq.`;
-    form.reset();
-    updateTopicPanels();
-  });
-}
-
-const updateTopicPanels = () => {
-  if (!requestTopic || !topicPanels.length) return;
-  topicPanels.forEach((panel) => {
-    const isActive = panel.dataset.topicPanel === requestTopic.value;
-    panel.classList.toggle("active", isActive);
-    panel.querySelectorAll("input, select, textarea").forEach((field) => {
-      field.disabled = !isActive;
-    });
-  });
-};
-
-if (requestTopic) {
-  requestTopic.addEventListener("change", updateTopicPanels);
-  updateTopicPanels();
-}
-
-if (valuesCarousel && valuesNavButtons.length) {
-  valuesNavButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const direction = Number(button.dataset.valuesDir || "1");
-      valuesCarousel.scrollBy({
-        left: direction * Math.max(valuesCarousel.clientWidth * 0.82, 280),
-        behavior: "smooth"
-      });
-    });
-  });
-}
-
-if (revealBlocks.length) {
-  const reveal = (block) => block.classList.add("in-view");
-
-  if ("IntersectionObserver" in window) {
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          reveal(entry.target);
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: "0px 0px -8% 0px" });
-
-    revealBlocks.forEach((block) => revealObserver.observe(block));
-  } else {
-    revealBlocks.forEach(reveal);
-  }
-}
-
-if (siteFooter) {
-  siteFooter.classList.add("footer-motion-ready");
-
-  if ("IntersectionObserver" in window) {
-    const footerObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          siteFooter.classList.add("footer-in-view");
-          footerObserver.disconnect();
-        }
-      });
-    }, { threshold: 0.16 });
-
-    footerObserver.observe(siteFooter);
-  } else {
-    siteFooter.classList.add("footer-in-view");
-  }
-}
-
-const pageProgress = document.querySelector(".page-progress span");
-let scrollFrame = null;
-
-const updateScrollEffects = () => {
-  const scrollRange = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-  const progress = Math.min(Math.max(window.scrollY / scrollRange, 0), 1);
-  pageProgress?.style.setProperty("--page-progress", String(progress));
-  siteHeader?.classList.toggle("is-scrolled", window.scrollY > 24);
-  document.documentElement.style.setProperty("--hero-shift", `${Math.min(window.scrollY * 0.08, 42)}px`);
-  scrollFrame = null;
-};
-
-window.addEventListener("scroll", () => {
-  if (scrollFrame !== null) return;
-  scrollFrame = window.requestAnimationFrame(updateScrollEffects);
-}, { passive: true });
-
-updateScrollEffects();
-
-if (menuToggle) {
-  menuToggle.addEventListener("click", () => {
-    const isOpen = document.body.classList.toggle("nav-open");
-    menuToggle.setAttribute("aria-expanded", String(isOpen));
-  });
-
-  document.querySelectorAll(".nav a").forEach((link) => {
-    link.addEventListener("click", () => {
-      document.body.classList.remove("nav-open");
-      menuToggle.setAttribute("aria-expanded", "false");
-    });
-  });
-
+  nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 860) {
-      document.body.classList.remove("nav-open");
-      menuToggle.setAttribute("aria-expanded", "false");
-    }
+    if (window.innerWidth > 980) closeMenu();
   });
 }
 
-if (heroVideo) {
-  const phases = [
-    { src: "./wheat-fields.mp4", duration: 9000 },
-    { src: "./field-road.mp4", duration: 9000 }
-  ];
-  let phaseIndex = 0;
-
-  const runPhase = () => {
-    const phase = phases[phaseIndex];
-    if (!heroVideo.src.endsWith(phase.src.replace("./", ""))) {
-      heroVideo.src = phase.src;
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("is-visible");
+      revealObserver.unobserve(entry.target);
     }
-    heroVideo.play().catch(() => {});
+  });
+}, { threshold: 0.12 });
 
-    window.setTimeout(() => {
-      phaseIndex = (phaseIndex + 1) % phases.length;
-      runPhase();
-    }, phase.duration);
-  };
+document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
 
-  runPhase();
-}
-
-if (counters.length) {
-  const formatNumber = (value, useSpace) => {
-    const rounded = Math.round(value);
-    return useSpace ? rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") : String(rounded);
-  };
-
-  const animateCounter = (counter) => {
-    if (counter.dataset.done === "true") return;
-    counter.dataset.done = "true";
-
-    const target = Number(counter.dataset.count || "0");
-    const start = Number(counter.dataset.start || "0");
-    const duration = Number(counter.dataset.duration || "1200");
-    const prefix = counter.dataset.prefix || "";
-    const suffix = counter.dataset.suffix || "";
-    const useSpace = counter.dataset.format === "space";
-    const startTime = performance.now();
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    const element = entry.target;
+    const target = Number(element.dataset.count || 0);
+    const duration = 1100;
+    const started = performance.now();
 
     const tick = (now) => {
-      const progress = Math.min((now - startTime) / duration, 1);
+      const progress = Math.min((now - started) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      counter.textContent = `${prefix}${formatNumber(start + ((target - start) * eased), useSpace)}${suffix}`;
-
-      if (progress < 1) {
-        requestAnimationFrame(tick);
-      } else {
-        counter.textContent = `${prefix}${formatNumber(target, useSpace)}${suffix}`;
-      }
+      const value = Math.round(target * eased);
+      element.textContent = element.dataset.plain === "true" ? String(value) : value.toLocaleString("az-AZ");
+      if (progress < 1) requestAnimationFrame(tick);
     };
 
     requestAnimationFrame(tick);
-  };
+    counterObserver.unobserve(element);
+  });
+}, { threshold: 0.65 });
 
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.35 });
+document.querySelectorAll("[data-count]").forEach((element) => counterObserver.observe(element));
 
-    counters.forEach((counter) => observer.observe(counter));
-  } else {
-    counters.forEach(animateCounter);
+body.insertAdjacentHTML("beforeend", `
+  <div class="brand-gateway" data-brand-gateway aria-hidden="true" role="dialog" aria-modal="true" aria-label="Şirkət seçimi">
+    <div class="gateway-title">Fəaliyyət sahəsini seçin</div>
+    <button class="gateway-close" type="button" data-brand-close aria-label="Bağla">×</button>
+    <button class="brand-choice" type="button" data-brand-choice data-target="index.html" data-logo="./anadolu-qida-logo.png">
+      <video class="gateway-media" autoplay muted loop playsinline aria-hidden="true"><source src="./wheat-fields.mp4" type="video/mp4"></video>
+      <span class="brand-choice-content"><img class="brand-choice-logo" src="./anadolu-qida-logo.png" alt=""><strong>Anadolu Qida</strong><span>Un istehsalı və korporativ təchizat</span></span>
+      <span class="brand-choice-arrow" aria-hidden="true">→</span>
+    </button>
+    <button class="brand-choice" type="button" data-brand-choice data-target="mirvari.html" data-logo="./murvari-logo.jpg">
+      <video class="gateway-media" autoplay muted loop playsinline aria-hidden="true"><source src="./field-road.mp4" type="video/mp4"></video>
+      <span class="brand-choice-content"><img class="brand-choice-logo" src="./murvari-logo.jpg" alt=""><strong>Mirvari Logistics</strong><span>Planlı daşınma və logistika həlləri</span></span>
+      <span class="brand-choice-arrow" aria-hidden="true">→</span>
+    </button>
+  </div>
+  <div class="brand-intro" data-brand-intro aria-hidden="true"><img src="./anadolu-qida-logo.png" alt=""></div>
+`);
+
+const gateway = document.querySelector("[data-brand-gateway]");
+const intro = document.querySelector("[data-brand-intro]");
+
+const openGateway = () => {
+  if (!gateway) return;
+  gateway.classList.add("open");
+  gateway.setAttribute("aria-hidden", "false");
+  body.classList.add("gateway-open");
+};
+
+const closeGateway = () => {
+  if (!gateway) return;
+  gateway.classList.remove("open");
+  gateway.setAttribute("aria-hidden", "true");
+  body.classList.remove("gateway-open");
+};
+
+const playIntroAndGo = (choice) => {
+  const target = choice.dataset.target;
+  const logo = choice.dataset.logo;
+  sessionStorage.setItem("brand-selected", "1");
+  closeGateway();
+
+  if (!intro) {
+    window.location.href = target;
+    return;
+  }
+
+  const image = intro.querySelector("img");
+  image.src = logo;
+  intro.classList.add("playing");
+  window.setTimeout(() => {
+    window.location.href = target;
+  }, 1050);
+};
+
+document.querySelectorAll("[data-brand-switch]").forEach((button) => {
+  button.addEventListener("click", openGateway);
+});
+
+if (gateway) {
+  gateway.querySelector("[data-brand-close]")?.addEventListener("click", closeGateway);
+  gateway.querySelectorAll("[data-brand-choice]").forEach((choice) => {
+    choice.addEventListener("click", () => playIntroAndGo(choice));
+  });
+
+  if (body.dataset.gateway === "initial" && !sessionStorage.getItem("brand-selected")) {
+    window.setTimeout(openGateway, 300);
   }
 }
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeGateway();
+});
+
+const requestTopic = document.querySelector("#requestTopic");
+const topicPanels = document.querySelectorAll("[data-topic-panel]");
+
+const updateTopicPanels = () => {
+  if (!requestTopic) return;
+  topicPanels.forEach((panel) => {
+    const active = panel.dataset.topicPanel === requestTopic.value;
+    panel.classList.toggle("active", active);
+    panel.querySelectorAll("input, select, textarea").forEach((field) => {
+      field.disabled = !active;
+    });
+  });
+};
+
+requestTopic?.addEventListener("change", updateTopicPanels);
+updateTopicPanels();
+
+document.querySelectorAll(".contact-form").forEach((form) => {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const status = form.querySelector(".form-status");
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    if (status) {
+      status.textContent = "Müraciətiniz hazırlandı. Komandamız sizinlə əlaqə saxlayacaq.";
+    }
+    form.reset();
+    updateTopicPanels();
+  });
+});
