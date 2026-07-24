@@ -87,7 +87,8 @@ h3 {
 }
 
 .site-header {
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 50;
   height: var(--header);
   display: grid;
@@ -97,6 +98,10 @@ h3 {
   padding: 0 clamp(20px, 3vw, 52px);
   border-bottom: 1px solid var(--line);
   background: rgba(255, 255, 255, .97);
+  transition:
+    background-color .3s var(--ease),
+    border-color .3s var(--ease),
+    box-shadow .3s var(--ease);
 }
 
 .header-actions {
@@ -154,6 +159,41 @@ h3 {
   border-bottom-color: rgba(255, 255, 255, .18);
   background: transparent;
   color: var(--white);
+}
+
+.site-header.is-scrolled {
+  position: sticky;
+  right: 0;
+  left: 0;
+  border-bottom-color: rgba(23, 33, 44, .1);
+  background: rgba(255, 255, 255, .86);
+  box-shadow: 0 10px 30px rgba(14, 25, 36, .09);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  animation: header-slide-in .38s var(--ease) both;
+}
+
+.home-page .site-header.is-scrolled {
+  position: fixed;
+  border-bottom-color: rgba(255, 255, 255, .12);
+  background: rgba(8, 29, 46, .82);
+  box-shadow: 0 12px 34px rgba(4, 17, 29, .22);
+}
+
+.mirvari-page.home-page .site-header.is-scrolled {
+  background: rgba(11, 12, 15, .84);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, .25);
+}
+
+@keyframes header-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .home-page .brand img {

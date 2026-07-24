@@ -1,6 +1,24 @@
 const body = document.body;
+const siteHeader = document.querySelector(".site-header");
 const menuButton = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
+
+if (siteHeader) {
+  let headerTicking = false;
+
+  const updateHeader = () => {
+    siteHeader.classList.toggle("is-scrolled", window.scrollY > 36);
+    headerTicking = false;
+  };
+
+  window.addEventListener("scroll", () => {
+    if (headerTicking) return;
+    headerTicking = true;
+    window.requestAnimationFrame(updateHeader);
+  }, { passive: true });
+
+  updateHeader();
+}
 
 if (menuButton && nav) {
   const brandSwitch = document.querySelector(".brand-switch");
