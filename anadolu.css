@@ -72,10 +72,10 @@ h3 {
   z-index: 50;
   height: var(--header);
   display: grid;
-  grid-template-columns: 210px 1fr auto;
+  grid-template-columns: 220px 1fr 160px;
   align-items: center;
   gap: 30px;
-  padding: 0 max(24px, calc((100vw - var(--max)) / 2));
+  padding: 0 clamp(20px, 3vw, 52px);
   border-bottom: 1px solid var(--line);
   background: rgba(255, 255, 255, .98);
 }
@@ -279,30 +279,52 @@ h3 {
   background: var(--white);
 }
 
-.hero-visual img {
+.hero-visual img,
+.hero-video-layer {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.quality-mark {
+.hero-video-layer {
   position: absolute;
-  left: 34px;
-  bottom: 32px;
-  width: 104px;
-  height: 104px;
-  display: grid;
-  place-items: center;
-  border: 1px solid var(--blue);
-  border-radius: 50%;
-  background: rgba(255,255,255,.92);
-  color: var(--blue);
-  text-align: center;
-  font-size: .68rem;
-  font-weight: 900;
-  line-height: 1.2;
-  text-transform: uppercase;
-  transform: rotate(-7deg);
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.025);
+  transition: opacity 1s var(--ease), transform 7s linear;
+}
+
+.hero-video-layer.active {
+  z-index: 1;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-video-shade {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(8, 43, 76, .22), transparent 45%);
+  pointer-events: none;
+}
+
+.hero-video-status {
+  position: absolute;
+  z-index: 3;
+  right: 28px;
+  bottom: 26px;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 255, 255, .4);
+  background: rgba(8, 43, 76, .72);
+  color: var(--white);
+  font-size: .72rem;
+}
+
+.hero-video-status strong {
+  font-size: 1rem;
 }
 
 .section {
@@ -414,11 +436,8 @@ h3 {
   gap: 14px;
 }
 
-.story-media video {
+.story-media img:first-child {
   grid-row: 1 / 3;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .story-media img {
@@ -429,6 +448,67 @@ h3 {
 
 .story-media img:last-child {
   background: var(--blue);
+}
+
+.values-section {
+  border-top: 1px solid var(--line);
+  background: var(--white);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.value-card {
+  min-height: 250px;
+  padding: 30px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+  transition: background .35s var(--ease), transform .35s var(--ease);
+}
+
+.value-card:hover {
+  z-index: 1;
+  background: var(--paper);
+  transform: translateY(-4px);
+}
+
+.value-card span {
+  display: block;
+  margin-bottom: 45px;
+  color: var(--red);
+  font-size: .78rem;
+  font-weight: 850;
+}
+
+.value-card h3 {
+  max-width: 240px;
+  margin-bottom: 16px;
+  color: var(--blue);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.55rem;
+  font-weight: 500;
+  line-height: 1.18;
+}
+
+.value-card p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+.value-card:nth-child(2),
+.value-card:nth-child(5) {
+  transition-delay: .08s;
+}
+
+.value-card:nth-child(3),
+.value-card:nth-child(6) {
+  transition-delay: .16s;
 }
 
 .story-copy h2 {
@@ -1079,6 +1159,10 @@ textarea:focus {
     gap: 36px;
   }
 
+  .values-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .about-body {
     columns: 1;
   }
@@ -1125,12 +1209,9 @@ textarea:focus {
     min-height: 340px;
   }
 
-  .quality-mark {
-    left: 20px;
+  .hero-video-status {
+    right: 20px;
     bottom: 20px;
-    width: 88px;
-    height: 88px;
-    font-size: .58rem;
   }
 
   .section {
@@ -1151,7 +1232,8 @@ textarea:focus {
   .product-grid,
   .stat-band,
   .mission-grid,
-  .documents {
+  .documents,
+  .values-grid {
     grid-template-columns: 1fr;
   }
 
@@ -1165,9 +1247,18 @@ textarea:focus {
     grid-template-rows: 240px 180px;
   }
 
-  .story-media video {
+  .story-media img:first-child {
     grid-row: 1;
     grid-column: 1 / -1;
+  }
+
+  .value-card {
+    min-height: 220px;
+    padding: 26px;
+  }
+
+  .value-card span {
+    margin-bottom: 34px;
   }
 
   .stat {
