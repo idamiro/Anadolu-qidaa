@@ -7,7 +7,7 @@
   <meta name="description" content="Anadolu Qida MMC - müasir texnologiyalarla un istehsalı və korporativ təchizat.">
   <link rel="stylesheet" href="anadolu.css">
 </head>
-<body>
+<body class="home-page">
   <header class="site-header">
     <a class="brand" href="index.html" aria-label="Anadolu Qida"><img src="./anadolu-qida-logo.png" alt="Anadolu Qida loqosu"></a>
     <button class="menu-toggle" type="button" aria-label="Menyunu aç" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -21,23 +21,21 @@
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-visual hero-video" aria-label="Anadolu Qida istehsal və buğda görüntüləri">
-        <video class="hero-video-layer active" autoplay muted playsinline preload="auto">
-          <source src="./anadolu-hero-silos.mp4" type="video/mp4">
-        </video>
-        <video class="hero-video-layer" muted playsinline preload="metadata">
-          <source src="./anadolu-hero-harvest.mp4" type="video/mp4">
-        </video>
-        <div class="hero-video-shade"></div>
-        <div class="hero-copy">
-          <span class="eyebrow">Müasir istehsal · Sabit keyfiyyət</span>
-          <h1>Unun <em>keyfiyyəti</em> istehsaldan başlayır.</h1>
-          <p>Anadolu Qida gündəlik istehsal ehtiyacları üçün sabit keyfiyyətli un məhsulları və korporativ təchizat həlləri təqdim edir.</p>
-          <div class="button-row">
-            <a class="button primary" href="mehsullar.html">Məhsullara baxın</a>
-            <a class="button" href="haqqimizda.html">Şirkəti tanıyın</a>
+    <section class="hero hero-editorial">
+      <div class="hero-visual" aria-label="Yetişmiş buğda sahəsi">
+        <img class="hero-wheat-image" src="./anadolu-wheat-hero.png" alt="" fetchpriority="high">
+        <div class="hero-wheat-shade"></div>
+        <div class="hero-editorial-grid">
+          <div class="hero-intro">
+            <span class="eyebrow">Anadolu Qida</span>
+            <h2>Saf un düzgün buğdadan başlayır.</h2>
+            <p>Seçilmiş xammal, müasir istehsal və hər partiyada sabit nəticə.</p>
+            <a class="button hero-button" href="mehsullar.html">Məhsullara baxın</a>
           </div>
+          <h1 class="hero-statement">
+            <span>Buğdadan</span>
+            <span>saf una</span>
+          </h1>
         </div>
       </div>
     </section>

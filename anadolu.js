@@ -39,32 +39,6 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
 
-const heroVideos = [...document.querySelectorAll(".hero-video-layer")];
-
-if (heroVideos.length > 1) {
-  let activeVideo = 0;
-
-  const playVideo = (index) => {
-    heroVideos.forEach((video, videoIndex) => {
-      const isActive = videoIndex === index;
-      video.classList.toggle("active", isActive);
-      if (!isActive) video.pause();
-    });
-
-    const video = heroVideos[index];
-    video.currentTime = 0;
-    video.play().catch(() => {});
-  };
-
-  heroVideos.forEach((video, index) => {
-    video.addEventListener("ended", () => {
-      if (index !== activeVideo) return;
-      activeVideo = (activeVideo + 1) % heroVideos.length;
-      playVideo(activeVideo);
-    });
-  });
-}
-
 const valuesSlider = document.querySelector("[data-values-slider]");
 const valuesPrev = document.querySelector("[data-values-prev]");
 const valuesNext = document.querySelector("[data-values-next]");
