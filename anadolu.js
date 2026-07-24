@@ -40,7 +40,6 @@ const revealObserver = new IntersectionObserver((entries) => {
 document.querySelectorAll(".reveal").forEach((item) => revealObserver.observe(item));
 
 const heroVideos = [...document.querySelectorAll(".hero-video-layer")];
-const heroVideoStatus = document.querySelector(".hero-video-status strong");
 
 if (heroVideos.length > 1) {
   let activeVideo = 0;
@@ -55,7 +54,6 @@ if (heroVideos.length > 1) {
     const video = heroVideos[index];
     video.currentTime = 0;
     video.play().catch(() => {});
-    if (heroVideoStatus) heroVideoStatus.textContent = String(index + 1).padStart(2, "0");
   };
 
   heroVideos.forEach((video, index) => {
