@@ -2,6 +2,45 @@ const form = document.querySelector(".contact-form");
 const statusText = document.querySelector(".form-status");
 const menuToggle = document.querySelector(".menu-toggle");
 const heroVideo = document.querySelector("#heroVideo");
+const pageFile = window.location.pathname.split("/").pop() || "index.html";
+const mainElement = document.querySelector("main");
+
+if (mainElement && pageFile === "index.html" && !document.querySelector(".corporate-feature")) {
+  mainElement.insertAdjacentHTML("beforeend", `
+    <section class="corporate-feature anadolu-feature" aria-labelledby="anadoluFeatureTitle">
+      <div class="feature-copy">
+        <span>İstehsal miqyası</span>
+        <h2 id="anadoluFeatureTitle">Sabit təchizat üçün qurulmuş istehsal sistemi.</h2>
+        <p>Müasir avadanlıq, nəzarət olunan istehsal mərhələləri və korporativ sifarişlərə uyğun planlama.</p>
+        <a href="haqqimizda.html">İstehsal modelimiz <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="feature-metrics" aria-label="Əsas göstəricilər">
+        <article><span>01</span><strong>200</strong><small>ton gündəlik istehsal gücü</small></article>
+        <article><span>02</span><strong>600 000</strong><small>manat nizamnamə kapitalı</small></article>
+        <article><span>03</span><strong>2018</strong><small>təsis ili</small></article>
+      </div>
+    </section>
+  `);
+}
+
+if (mainElement && pageFile === "mirvari.html" && !document.querySelector(".corporate-feature")) {
+  mainElement.insertAdjacentHTML("beforeend", `
+    <section class="corporate-feature logistics-feature" aria-labelledby="logisticsFeatureTitle">
+      <div class="feature-copy">
+        <span>Əməliyyat modeli</span>
+        <h2 id="logisticsFeatureTitle">Yükün hərəkəti əvvəlcədən planlanır.</h2>
+        <p>Anbardan çıxışdan təhvil nöqtəsinə qədər hər mərhələ vahid əməliyyat ardıcıllığı ilə idarə olunur.</p>
+        <a href="mirvari-haqqimizda.html">İş prinsipimiz <span aria-hidden="true">↗</span></a>
+      </div>
+      <ol class="logistics-route">
+        <li><span>01</span><strong>Anbar</strong><small>Yük və çıxış vaxtının koordinasiyası</small></li>
+        <li><span>02</span><strong>Marşrut</strong><small>Ünvan və təhvil vaxtına uyğun planlama</small></li>
+        <li><span>03</span><strong>Təhvil</strong><small>Müştəriyə qədər nəzarətli hərəkət</small></li>
+      </ol>
+    </section>
+  `);
+}
+
 const counters = document.querySelectorAll(".counter");
 const requestTopic = document.querySelector("#requestTopic");
 const topicPanels = document.querySelectorAll("[data-topic-panel]");
@@ -36,6 +75,9 @@ document.querySelectorAll("main > section:not(.hero)").forEach((block) => {
     .mirvari-service-grid > *,
     .mirvari-products > .section-heading,
     .mirvari-product-list > *,
+    .corporate-feature > *,
+    .feature-metrics > *,
+    .logistics-route > *,
     .contact-copy > span,
     .contact-copy > h1,
     .contact-copy > p,
@@ -53,6 +95,20 @@ const revealBlocks = document.querySelectorAll(".reveal-on-scroll");
 const valuesCarousel = document.querySelector("#valuesCarousel");
 const valuesNavButtons = document.querySelectorAll("[data-values-dir]");
 const siteFooter = document.querySelector(".site-footer");
+
+document.body.insertAdjacentHTML("afterbegin", '<div class="page-progress" aria-hidden="true"><span></span></div>');
+
+if (siteFooter && !siteFooter.querySelector(".footer-marquee")) {
+  const marqueeText = document.body.dataset.brand === "mirvari"
+    ? "MİRVARİ LOGISTICS · ANBAR · MARŞRUT · TƏHVİL · "
+    : "ANADOLU QİDA · İSTEHSAL · KEYFİYYƏT · TƏCHİZAT · ";
+
+  siteFooter.insertAdjacentHTML("afterbegin", `
+    <div class="footer-marquee" aria-hidden="true">
+      <div><span>${marqueeText}</span><span>${marqueeText}</span></div>
+    </div>
+  `);
+}
 
 const brandProfiles = {
   anadolu: {
@@ -242,6 +298,15 @@ if (siteHeader && brandGateway) {
   }
 }
 
+if (brandGateway) {
+  brandGateway.addEventListener("pointermove", (event) => {
+    const x = (event.clientX / Math.max(window.innerWidth, 1)) - 0.5;
+    const y = (event.clientY / Math.max(window.innerHeight, 1)) - 0.5;
+    brandGateway.style.setProperty("--gateway-x", `${x * 18}px`);
+    brandGateway.style.setProperty("--gateway-y", `${y * 14}px`);
+  });
+}
+
 if (form && statusText) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -317,6 +382,25 @@ if (siteFooter) {
     siteFooter.classList.add("footer-in-view");
   }
 }
+
+const pageProgress = document.querySelector(".page-progress span");
+let scrollFrame = null;
+
+const updateScrollEffects = () => {
+  const scrollRange = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
+  const progress = Math.min(Math.max(window.scrollY / scrollRange, 0), 1);
+  pageProgress?.style.setProperty("--page-progress", String(progress));
+  siteHeader?.classList.toggle("is-scrolled", window.scrollY > 24);
+  document.documentElement.style.setProperty("--hero-shift", `${Math.min(window.scrollY * 0.08, 42)}px`);
+  scrollFrame = null;
+};
+
+window.addEventListener("scroll", () => {
+  if (scrollFrame !== null) return;
+  scrollFrame = window.requestAnimationFrame(updateScrollEffects);
+}, { passive: true });
+
+updateScrollEffects();
 
 if (menuToggle) {
   menuToggle.addEventListener("click", () => {
