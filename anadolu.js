@@ -12,6 +12,7 @@ if (menuButton && nav) {
   const closeMenu = () => {
     nav.classList.remove("open");
     menuButton.setAttribute("aria-expanded", "false");
+    menuButton.setAttribute("aria-label", "Menyunu aç");
     body.classList.remove("menu-open");
   };
 
@@ -19,6 +20,7 @@ if (menuButton && nav) {
     const isOpen = !nav.classList.contains("open");
     nav.classList.toggle("open", isOpen);
     menuButton.setAttribute("aria-expanded", String(isOpen));
+    menuButton.setAttribute("aria-label", isOpen ? "Menyunu bağla" : "Menyunu aç");
     body.classList.toggle("menu-open", isOpen);
   });
 

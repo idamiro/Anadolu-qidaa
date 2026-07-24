@@ -1386,8 +1386,26 @@ textarea:focus {
   }
 
   .home-page .nav.open a {
-    color: var(--ink);
+    color: var(--white);
     text-shadow: none;
+  }
+
+  .home-page .nav {
+    top: 0;
+    z-index: 45;
+    height: 100svh;
+    padding: calc(var(--header) + 28px) 22px 26px;
+    background: rgba(5, 23, 39, .98);
+  }
+
+  .home-page .nav a {
+    border-bottom-color: rgba(255, 255, 255, .14);
+  }
+
+  .home-page .brand,
+  .home-page .menu-toggle {
+    position: relative;
+    z-index: 60;
   }
 
   .nav a {
@@ -1528,15 +1546,15 @@ textarea:focus {
 
   .hero-editorial-grid {
     width: calc(100% - 40px);
-    padding: calc(var(--header) + 34px) 0 42px;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    align-items: end;
-    gap: 28px;
+    padding: 0;
+    display: block;
   }
 
   .hero-intro {
-    grid-row: 2;
+    position: absolute;
+    right: 0;
+    bottom: 48px;
+    left: 0;
     max-width: 340px;
     margin-bottom: 0;
   }
@@ -1552,9 +1570,9 @@ textarea:focus {
   }
 
   .hero-statement {
-    grid-row: 1;
-    justify-self: end;
-    align-self: start;
+    position: absolute;
+    top: clamp(136px, 20vh, 178px);
+    right: 0;
     padding-right: 16px;
     font-size: clamp(2.65rem, 11.7vw, 4rem);
     text-align: right;
