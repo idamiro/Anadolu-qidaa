@@ -1112,16 +1112,6 @@ textarea:focus {
   color: var(--white);
 }
 
-.site-footer::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: max(24px, calc((100vw - var(--max)) / 2));
-  width: 120px;
-  height: 3px;
-  background: var(--red);
-}
-
 .footer-wordmark {
   position: relative;
   display: inline-block;
