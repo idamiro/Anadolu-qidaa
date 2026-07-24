@@ -3,10 +3,18 @@ const menuButton = document.querySelector(".menu-toggle");
 const nav = document.querySelector(".nav");
 
 if (menuButton && nav) {
+  const brandSwitch = document.querySelector(".brand-switch");
+  if (brandSwitch) {
+    const mobileBrandSwitch = brandSwitch.cloneNode(true);
+    mobileBrandSwitch.classList.add("mobile-brand-switch");
+    nav.appendChild(mobileBrandSwitch);
+  }
+
   const mobileCta = document.createElement("a");
-  mobileCta.href = "elaqe.html";
+  const isMirvari = body.classList.contains("mirvari-page");
+  mobileCta.href = isMirvari ? "mirvari-elaqe.html" : "elaqe.html";
   mobileCta.className = "mobile-cta";
-  mobileCta.textContent = "Korporativ sorğu";
+  mobileCta.textContent = isMirvari ? "Daşınma sorğusu" : "Korporativ sorğu";
   nav.appendChild(mobileCta);
 
   const closeMenu = () => {
