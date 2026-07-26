@@ -184,14 +184,54 @@ requestTopic?.addEventListener("change", updatePanels);
 updatePanels();
 
 document.querySelectorAll(".contact-form").forEach((form) => {
-  form.addEventListener("submit", () => {
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
     if (!form.checkValidity()) {
+      form.reportValidity();
       return;
     }
+
     const submitButton = form.querySelector('button[type="submit"]');
+    const status = form.querySelector(".form-status");
+    const buttonText = submitButton?.textContent || "Sorğu göndər";
+
+    status?.classList.remove("is-success", "is-error");
+    if (status) status.textContent = "";
+
     if (submitButton) {
       submitButton.disabled = true;
       submitButton.textContent = "Göndərilir...";
+    }
+
+    try {
+      const response = await fetch(form.action, {
+        method: "POST",
+        body: new FormData(form),
+        headers: { Accept: "application/json" }
+      });
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Form göndərilmədi.");
+      }
+
+      if (status) {
+        status.textContent = "Formunuz göndərildi. Komandamız tezliklə sizinlə əlaqə saxlayacaq.";
+        status.classList.add("is-success");
+      }
+      form.reset();
+      updatePanels();
+    } catch (error) {
+      if (status) {
+        status.textContent = "Göndərilmə zamanı xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.";
+        status.classList.add("is-error");
+      }
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = buttonText;
+      }
     }
   });
 });
