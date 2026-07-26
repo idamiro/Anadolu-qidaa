@@ -31,7 +31,7 @@
           <span class="eyebrow">Logistika sorğusu</span>
           <h2>Dəqiq məlumat, doğru marşrut.</h2>
           <p>Daşınma haqqında əsas məlumatları göndərin. İcra vaxtı və xidmət şərtləri sorğudan sonra dəqiqləşdirilir.</p>
-          <a class="contact-email" href="mailto:anadoluqida@gmail.com"><span>E-poçt</span>anadoluqida@gmail.com</a>
+          <a class="contact-email" href="mailto:hello@anadoluqida.com"><span>E-poçt</span>hello@anadoluqida.com</a>
           <div class="contact-points">
             <div class="contact-point"><b>01</b><div><strong>Daşınma sifarişi</strong><p>Yük, marşrut və təhvil məlumatları.</p></div></div>
             <div class="contact-point"><b>02</b><div><strong>Anbar koordinasiyası</strong><p>Yükləmə vaxtı və çıxış planı.</p></div></div>
@@ -39,17 +39,22 @@
           </div>
         </div>
 
-        <form class="contact-form reveal">
+        <form class="contact-form reveal" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="c033b9a2-4d5a-4f17-9a0d-0ccfbdca5cfb">
+          <input type="hidden" name="subject" value="Mirvari Logistics saytından yeni daşınma sorğusu">
+          <input type="hidden" name="from_name" value="Mirvari Logistics veb saytı">
+          <input type="checkbox" name="botcheck" hidden>
           <h2>Daşınma məlumatları</h2>
           <p class="form-note">Məlumatları tam qeyd etməyiniz sorğunun daha tez planlanmasına kömək edir.</p>
           <div class="form-grid">
-            <div class="field"><label for="logisticsName">Ad / şirkət adı</label><input id="logisticsName" name="buyer_name" type="text" required autocomplete="name"></div>
+            <div class="field"><label for="logisticsName">Ad / şirkət adı</label><input id="logisticsName" name="name" type="text" required autocomplete="name"></div>
+            <div class="field"><label for="logisticsEmail">E-poçt</label><input id="logisticsEmail" name="email" type="email" required autocomplete="email" placeholder="ad@şirkət.az"></div>
             <div class="field"><label for="logisticsVoen">VÖEN</label><input id="logisticsVoen" name="voen" type="text" inputmode="numeric"></div>
             <div class="field"><label for="pickupAddress">Yükləmə ünvanı</label><input id="pickupAddress" name="pickup_address" type="text" required placeholder="Şəhər, rayon, ünvan"></div>
             <div class="field"><label for="dropoffAddress">Təhvil ünvanı</label><input id="dropoffAddress" name="dropoff_address" type="text" required placeholder="Şəhər, rayon, ünvan"></div>
             <div class="field"><label for="cargoType">Yükün növü</label><input id="cargoType" name="cargo_type" type="text" required placeholder="Məhsulun adı"></div>
             <div class="field"><label for="cargoWeight">Çəki / həcm</label><input id="cargoWeight" name="cargo_weight" type="text" placeholder="Məsələn: 10 ton"></div>
-            <div class="field-full"><label for="logisticsMessage">Əlavə qeyd</label><textarea id="logisticsMessage" name="message" placeholder="Daşınma vaxtı və əlavə tələblər"></textarea></div>
+            <div class="field-full"><label for="logisticsMessage">Əlavə qeyd</label><textarea id="logisticsMessage" name="message" required placeholder="Daşınma vaxtı və əlavə tələblər"></textarea></div>
             <div class="field-full"><button type="submit">Sorğu göndər</button><p class="form-status" role="status" aria-live="polite"></p></div>
           </div>
         </form>
@@ -58,12 +63,12 @@
   </main>
 
   <footer class="site-footer mirvari-footer">
-    <div class="footer-brand"><a class="footer-wordmark" href="mirvari.html">Mirvari Logistics</a><p>Planlı avtomobil daşımaları, anbar koordinasiyası və etibarlı təhvil xidməti.</p><a class="footer-email" href="mailto:anadoluqida@gmail.com">anadoluqida@gmail.com</a></div>
+    <div class="footer-brand"><a class="footer-wordmark" href="mirvari.html">Mirvari Logistics</a><p>Planlı avtomobil daşımaları, anbar koordinasiyası və etibarlı təhvil xidməti.</p><a class="footer-email" href="mailto:hello@anadoluqida.com">hello@anadoluqida.com</a></div>
     <nav class="footer-col"><h3>Şirkət</h3><a href="mirvari-haqqimizda.html">Haqqımızda</a><a href="mirvari-mehsullar.html">Xidmətlər</a><a href="mirvari-elaqe.html">Əlaqə</a></nav>
     <nav class="footer-col"><h3>Xidmətlər</h3><a href="mirvari-mehsullar.html">Avtomobil daşımaları</a><a href="mirvari-mehsullar.html">Anbar koordinasiyası</a><a href="mirvari-mehsullar.html">Marşrut planlaması</a></nav>
     <div class="footer-col"><h3>Şirkət seç</h3><a href="index.html">Anadolu Qida</a><a href="mirvari.html">Mirvari Logistics</a><a class="footer-inquiry" href="mirvari-elaqe.html">Daşınma sorğusu ↗</a></div>
     <div class="footer-bottom"><span>© 2026 Mirvari Logistics MMC. Bütün hüquqlar qorunur.</span><span>Bakı, Azərbaycan</span></div>
   </footer>
-  <script src="anadolu.js?v=sticky-header-1"></script>
+  <script src="anadolu.js?v=web3forms-1"></script>
 </body>
 </html>

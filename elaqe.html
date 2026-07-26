@@ -31,7 +31,7 @@
           <span class="eyebrow">Korporativ müraciət</span>
           <h2>Dəqiq məlumat, sürətli cavab.</h2>
           <p>Sifarişiniz haqqında əsas məlumatları göndərin. Məhsul və təchizat şərtləri müraciətdən sonra dəqiqləşdirilir.</p>
-          <a class="contact-email" href="mailto:anadoluqida@gmail.com"><span>E-poçt</span>anadoluqida@gmail.com</a>
+          <a class="contact-email" href="mailto:hello@anadoluqida.com"><span>E-poçt</span>hello@anadoluqida.com</a>
           <div class="contact-points">
             <div class="contact-point"><b>01</b><div><strong>Un sifarişi</strong><p>Məhsul, miqdar və qablaşdırma.</p></div></div>
             <div class="contact-point"><b>02</b><div><strong>Çatdırılma</strong><p>Ünvan və təhvil məlumatları.</p></div></div>
@@ -39,11 +39,16 @@
           </div>
         </div>
 
-        <form class="contact-form reveal">
+        <form class="contact-form reveal" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="c033b9a2-4d5a-4f17-9a0d-0ccfbdca5cfb">
+          <input type="hidden" name="subject" value="Anadolu Qida saytından yeni müraciət">
+          <input type="hidden" name="from_name" value="Anadolu Qida veb saytı">
+          <input type="checkbox" name="botcheck" hidden>
           <h2>Müraciət məlumatları</h2>
           <p class="form-note">Məlumatları tam qeyd etməyiniz sorğunun daha tez cavablandırılmasına kömək edir.</p>
           <div class="form-grid">
-            <div class="field"><label for="buyerName">Adı / şirkət adı</label><input id="buyerName" name="buyer_name" type="text" required autocomplete="name"></div>
+            <div class="field"><label for="buyerName">Adı / şirkət adı</label><input id="buyerName" name="name" type="text" required autocomplete="name"></div>
+            <div class="field"><label for="buyerEmail">E-poçt</label><input id="buyerEmail" name="email" type="email" required autocomplete="email" placeholder="ad@şirkət.az"></div>
             <div class="field"><label for="voen">VÖEN</label><input id="voen" name="voen" type="text" inputmode="numeric"></div>
             <div class="field-full"><label for="requestTopic">Müraciət mövzusu</label><select id="requestTopic" name="request_topic"><option value="product">Məhsul sifarişi</option><option value="finance">Maliyyə xidməti</option></select></div>
 
@@ -64,7 +69,7 @@
               <div class="field-full"><label for="financeDetails">Maliyyə müraciətinin mövzusu</label><input id="financeDetails" name="finance_details" type="text" placeholder="Hesablaşma və ya əməkdaşlıq mövzusu"></div>
             </div>
 
-            <div class="field-full"><label for="message">Əlavə qeyd</label><textarea id="message" name="message" placeholder="Sorğunuzla bağlı əlavə məlumat"></textarea></div>
+            <div class="field-full"><label for="message">Əlavə qeyd</label><textarea id="message" name="message" required placeholder="Sorğunuzla bağlı əlavə məlumat"></textarea></div>
             <div class="field-full"><button type="submit">Sorğu göndər</button><p class="form-status" role="status" aria-live="polite"></p></div>
           </div>
         </form>
@@ -73,12 +78,12 @@
   </main>
 
   <footer class="site-footer">
-    <div class="footer-brand"><a class="footer-wordmark" href="index.html">Anadolu Qida</a><p>Yüksək keyfiyyətli un istehsalı və korporativ qida təchizatı.</p><a class="footer-email" href="mailto:anadoluqida@gmail.com">anadoluqida@gmail.com</a></div>
+    <div class="footer-brand"><a class="footer-wordmark" href="index.html">Anadolu Qida</a><p>Yüksək keyfiyyətli un istehsalı və korporativ qida təchizatı.</p><a class="footer-email" href="mailto:hello@anadoluqida.com">hello@anadoluqida.com</a></div>
     <nav class="footer-col"><h3>Şirkət</h3><a href="haqqimizda.html">Haqqımızda</a><a href="haqqimizda.html#sertifikatlar">Sertifikatlar</a><a href="elaqe.html">Əlaqə</a></nav>
     <nav class="footer-col"><h3>Məhsullar</h3><a href="mehsullar.html">Çörəklik un</a><a href="mehsullar.html">Xəmir unu</a><a href="mehsullar.html">Buğda kəpəyi</a></nav>
     <div class="footer-col"><h3>Əlaqə</h3><p>Un sifarişi və korporativ əməkdaşlıq üçün müraciətinizi göndərin.</p><a class="footer-inquiry" href="elaqe.html">Korporativ sifariş ↗</a></div>
     <div class="footer-bottom"><span>© 2026 Anadolu Qida MMC. Bütün hüquqlar qorunur.</span><span>Bakı, Azərbaycan</span></div>
   </footer>
-  <script src="anadolu.js?v=sticky-header-1"></script>
+  <script src="anadolu.js?v=web3forms-1"></script>
 </body>
 </html>

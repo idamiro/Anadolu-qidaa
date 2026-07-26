@@ -184,15 +184,14 @@ requestTopic?.addEventListener("change", updatePanels);
 updatePanels();
 
 document.querySelectorAll(".contact-form").forEach((form) => {
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+  form.addEventListener("submit", () => {
     if (!form.checkValidity()) {
-      form.reportValidity();
       return;
     }
-    const status = form.querySelector(".form-status");
-    if (status) status.textContent = "Müraciətiniz qəbul edildi. Komandamız sizinlə əlaqə saxlayacaq.";
-    form.reset();
-    updatePanels();
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Göndərilir...";
+    }
   });
 });
