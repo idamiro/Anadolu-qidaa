@@ -30,7 +30,7 @@ if (menuButton && nav) {
 
   const mobileCta = document.createElement("a");
   const isMirvari = body.classList.contains("mirvari-page");
-  mobileCta.href = isMirvari ? "mirvari-elaqe.html" : "elaqe.html";
+  mobileCta.href = isMirvari ? "mirvari-elaqe" : "elaqe";
   mobileCta.className = "mobile-cta";
   mobileCta.textContent = isMirvari ? "Daşınma sorğusu" : "Korporativ sorğu";
   nav.appendChild(mobileCta);

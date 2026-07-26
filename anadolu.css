@@ -1296,6 +1296,40 @@ textarea:focus {
   color: #ffc1c8;
 }
 
+.policy-content {
+  max-width: 900px;
+  display: grid;
+  gap: 38px;
+}
+
+.policy-content article {
+  padding-bottom: 34px;
+  border-bottom: 1px solid var(--line);
+}
+
+.policy-content h2 {
+  margin: 0 0 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.55rem, 3vw, 2.15rem);
+  line-height: 1.15;
+}
+
+.policy-content p {
+  max-width: 760px;
+  margin: 0;
+  color: var(--muted);
+}
+
+.policy-content a {
+  color: var(--red);
+  font-weight: 750;
+}
+
+.policy-updated {
+  font-size: .85rem;
+  font-weight: 700;
+}
+
 .site-footer {
   position: relative;
   padding: 82px max(24px, calc((100vw - var(--max)) / 2)) 26px;
@@ -1347,21 +1381,21 @@ textarea:focus {
 
 .footer-col h3 {
   margin-bottom: 14px;
-  color: rgba(255, 255, 255, .42);
+  color: rgba(255, 255, 255, .64);
   font-size: .7rem;
   font-weight: 750;
   text-transform: uppercase;
 }
 
 .footer-col a {
-  color: rgba(255,255,255,.72);
+  color: rgba(255, 255, 255, .8);
   transition: color .2s, transform .2s;
 }
 
 .footer-col p {
   max-width: 280px;
   margin-bottom: 14px;
-  color: rgba(255, 255, 255, .54);
+  color: rgba(255, 255, 255, .7);
   font-size: .88rem;
 }
 
@@ -1386,7 +1420,7 @@ textarea:focus {
   justify-content: space-between;
   gap: 20px;
   border-top: 1px solid rgba(255,255,255,.12);
-  color: rgba(255,255,255,.4);
+  color: rgba(255, 255, 255, .68);
   font-size: .8rem;
 }
 
