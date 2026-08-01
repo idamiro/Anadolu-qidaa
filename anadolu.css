@@ -1497,6 +1497,44 @@ textarea:focus {
   background: var(--red);
 }
 
+.mirvari-fleet-section {
+  border-top: 1px solid var(--line);
+}
+
+.mirvari-fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
+
+.fleet-shot {
+  margin: 0;
+  overflow: hidden;
+  background: #111;
+}
+
+.fleet-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .55s var(--ease);
+}
+
+.fleet-shot:hover img {
+  transform: scale(1.03);
+}
+
+.fleet-wide {
+  grid-column: span 6;
+  aspect-ratio: 16 / 10;
+}
+
+.fleet-tall {
+  grid-column: span 3;
+  aspect-ratio: 3 / 4;
+}
+
 .single-document {
   max-width: 760px;
   grid-template-columns: 1fr;
@@ -1848,6 +1886,24 @@ textarea:focus {
   .mission-grid,
   .documents {
     grid-template-columns: 1fr;
+  }
+
+  .mirvari-fleet-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .fleet-wide,
+  .fleet-tall {
+    grid-column: span 1;
+  }
+
+  .fleet-wide {
+    aspect-ratio: 16 / 11;
+  }
+
+  .fleet-tall {
+    aspect-ratio: 3 / 4;
   }
 
   .product-card {
