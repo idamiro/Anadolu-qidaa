@@ -1554,24 +1554,30 @@ textarea:focus {
 
 .fleet-collages {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr);
+  grid-template-columns: 1fr;
   gap: 18px;
-  align-items: stretch;
 }
 
 .fleet-collage {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: auto;
   background: #0e1218;
 }
 
 .fleet-collage img {
-  object-fit: contain;
-  object-position: center;
+  width: 100%;
+  height: auto;
+  object-fit: unset;
+  transform: none;
+}
+
+.fleet-collage:hover img {
+  transform: none;
 }
 
 .fleet-collage-tall {
-  aspect-ratio: auto;
-  min-height: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+  width: 100%;
 }
 
 .mirvari-service-cards .product-card img {
@@ -1941,15 +1947,18 @@ textarea:focus {
   }
 
   .fleet-landscapes,
-  .fleet-portraits,
-  .fleet-collages {
+  .fleet-portraits {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
   }
 
+  .fleet-collages {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
   .fleet-collage-tall {
-    min-height: 0;
-    aspect-ratio: 3 / 4;
+    max-width: 420px;
   }
 
   .product-card {
