@@ -1426,10 +1426,15 @@ textarea:focus {
 }
 
 .made-by-vulcet {
-  display: inline-flex;
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
   align-items: baseline;
   gap: .5em;
-  font-size: 1.05rem;
+  width: 100%;
+  margin-top: 18px;
+  padding-top: 4px;
+  font-size: 1.12rem;
   letter-spacing: .03em;
   color: rgba(255, 255, 255, .82);
   text-decoration: none;
@@ -1438,19 +1443,21 @@ textarea:focus {
 
 .made-by-vulcet span {
   font-weight: 500;
+  opacity: .9;
 }
 
 .made-by-vulcet strong {
-  font-weight: 800;
-  letter-spacing: .18em;
+  font-weight: 900;
+  letter-spacing: .2em;
   text-transform: uppercase;
-  color: #fff;
-  border-bottom: 1px solid rgba(255, 255, 255, .7);
+  color: #e8c9a0;
+  border-bottom: 1px solid rgba(232, 201, 160, .8);
   padding-bottom: 2px;
 }
 
 .made-by-vulcet:hover strong {
-  border-bottom-color: #fff;
+  color: #f3d9b8;
+  border-bottom-color: #f3d9b8;
 }
 
 .mirvari-page {
