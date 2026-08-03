@@ -1417,23 +1417,21 @@ textarea:focus {
   margin-top: 20px;
   padding-top: 22px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 18px;
   border-top: 1px solid rgba(255,255,255,.12);
   color: rgba(255, 255, 255, .68);
   font-size: .8rem;
 }
 
 .made-by-vulcet {
-  grid-column: 1 / -1;
-  display: flex;
-  justify-content: center;
+  display: inline-flex;
   align-items: baseline;
-  gap: .5em;
-  width: 100%;
-  margin-top: 18px;
-  padding-top: 4px;
+  justify-content: center;
+  align-self: center;
+  gap: .55em;
+  margin-top: 2px;
   font-size: 1.12rem;
   letter-spacing: .03em;
   color: rgba(255, 255, 255, .82);
@@ -1451,7 +1449,7 @@ textarea:focus {
   letter-spacing: .2em;
   text-transform: uppercase;
   color: #e8c9a0;
-  border-bottom: 1px solid rgba(232, 201, 160, .8);
+  border-bottom: 1px solid rgba(232, 201, 160, .85);
   padding-bottom: 2px;
 }
 
