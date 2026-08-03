@@ -1424,6 +1424,18 @@ textarea:focus {
   font-size: .8rem;
 }
 
+.footer-bottom a {
+  color: rgba(255, 255, 255, .88);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, .35);
+  transition: color .2s ease, border-color .2s ease;
+}
+
+.footer-bottom a:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
 .mirvari-page {
   --blue: #202226;
   --blue-2: #2b2e33;
