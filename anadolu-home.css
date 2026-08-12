@@ -132,14 +132,21 @@
 
 /* Hero */
 .soft-hero {
-  padding: clamp(20px, 4vw, 36px) 0 clamp(72px, 10vw, 120px);
+  position: relative;
+  z-index: 3;
+  padding: clamp(12px, 3vw, 28px) 0 clamp(28px, 5vw, 48px);
 }
 
 .soft-hero-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  align-items: center;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  align-items: end;
   gap: clamp(24px, 5vw, 56px);
+  min-height: clamp(320px, 48vw, 520px);
+}
+
+.soft-hero-copy {
+  padding-bottom: clamp(24px, 4vw, 48px);
 }
 
 .soft-hero-copy h1 {
@@ -155,18 +162,24 @@
 }
 
 .soft-hero-media {
+  position: relative;
+  z-index: 4;
   justify-self: end;
-  width: min(100%, 520px);
-  border-radius: 48% 48% 36% 36% / 42% 42% 48% 48%;
+  width: min(100%, 540px);
+  margin-bottom: -88px;
+  border-radius: 32px;
   overflow: hidden;
-  box-shadow: 0 30px 60px rgba(4, 20, 34, 0.35);
+  background: #0a2438;
+  box-shadow: 0 28px 56px rgba(4, 20, 34, 0.4);
   animation: soft-in 1s 0.1s var(--ease-out) both;
 }
 
 .soft-hero-media img {
   display: block;
   width: 100%;
-  aspect-ratio: 1;
+  height: auto;
+  min-height: 340px;
+  aspect-ratio: 4 / 3;
   object-fit: cover;
   object-position: center 40%;
 }
@@ -218,8 +231,8 @@
   position: relative;
   z-index: 2;
   width: min(100% - 24px, 1180px);
-  margin: -64px auto 0;
-  padding: clamp(40px, 6vw, 72px) clamp(20px, 4vw, 56px) clamp(48px, 7vw, 80px);
+  margin: 0 auto;
+  padding: clamp(72px, 9vw, 110px) clamp(20px, 4vw, 56px) clamp(48px, 7vw, 80px);
   background: var(--sheet);
   border-radius: var(--radius) var(--radius) 0 0;
   box-shadow: 0 -8px 40px rgba(18, 54, 80, 0.08);
@@ -535,14 +548,25 @@
     grid-template-columns: 1fr;
   }
 
+  .soft-hero-grid {
+    min-height: 0;
+    align-items: start;
+  }
+
   .soft-hero-media {
     justify-self: center;
-    width: min(100%, 360px);
+    width: min(100%, 420px);
+    margin-bottom: -56px;
+  }
+
+  .soft-hero-media img {
+    min-height: 260px;
   }
 
   .soft-sheet {
     width: min(100% - 16px, 1180px);
-    margin-top: -48px;
+    margin-top: 0;
+    padding-top: clamp(64px, 14vw, 88px);
     border-radius: 28px 28px 0 0;
   }
 
