@@ -22,9 +22,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="anadolu-wheat-hero.webp" type="image/webp" fetchpriority="high">
-  <link rel="stylesheet" href="anadolu.css?v=ref-1">
-  <link rel="stylesheet" href="anadolu-home.css?v=ref-1">
+  <link rel="preload" as="image" href="anadolu-flour-25kg.jpg" type="image/jpeg" fetchpriority="high">
+  <link rel="stylesheet" href="anadolu.css?v=craft-4">
+  <link rel="stylesheet" href="anadolu-home.css?v=craft-4">
   <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://anadoluqida.com/#organization","name":"Anadolu Qida","legalName":"Anadoluqida MMC","url":"https://anadoluqida.com/","logo":"https://anadoluqida.com/favicon.png","email":"hello@anadoluqida.com","foundingDate":"2018-08-30","address":{"@type":"PostalAddress","addressLocality":"Bakı","addressCountry":"AZ"}},{"@type":"WebSite","@id":"https://anadoluqida.com/#website","url":"https://anadoluqida.com/","name":"Anadolu Qida","publisher":{"@id":"https://anadoluqida.com/#organization"},"inLanguage":"az"}]}
   </script>
@@ -37,7 +37,6 @@
   </script>
 </head>
 <body class="home-page craft-home">
-  <!-- 1) CREME HEADER + yırtık alt kenar -->
   <header class="site-header craft-header">
     <a class="brand" href="./" aria-label="Anadolu Qida">
       <img src="./anadolu-qida-logo.webp" alt="Anadolu Qida loqosu" width="360" height="191" decoding="async">
@@ -54,10 +53,9 @@
       <a class="header-cta" href="elaqe">Sifariş</a>
     </div>
   </header>
-  <div class="rip rip-to-hero" aria-hidden="true"></div>
+  <div class="craft-tear craft-tear-header" aria-hidden="true"></div>
 
   <main>
-    <!-- 2) HERO: sarı zemin, sol metin, sağ ESKİ buğda hero -->
     <section class="craft-hero">
       <div class="craft-shell craft-hero-grid">
         <div class="craft-hero-copy">
@@ -69,18 +67,14 @@
           <p class="craft-lead">Seçilmiş xammal və müasir istehsalla hər partiyada sabit keyfiyyət — çörək və qənnadı sənayesi üçün.</p>
           <a class="craft-btn" href="mehsullar"><span>Məhsullara baxın</span></a>
         </div>
-        <div class="craft-hero-visual">
-          <div class="cut-frame cut-frame-hero">
-            <img src="./anadolu-wheat-hero.webp" alt="Yetişmiş buğda sahəsi" width="1672" height="941" fetchpriority="high" decoding="async">
-          </div>
-          <img class="float-piece float-a" src="./anadolu-flour-5kg.jpg" alt="" width="200" height="250" decoding="async" aria-hidden="true">
-          <img class="float-piece float-b" src="./flour-bowl.jpg" alt="" width="200" height="250" decoding="async" aria-hidden="true">
+        <div class="craft-hero-visual" data-parallax>
+          <div class="craft-hero-glow" aria-hidden="true"></div>
+          <img class="craft-hero-photo" src="./anadolu-flour-25kg.jpg" alt="Anadolu əla növ 25 kq un kisəsi" width="819" height="1024" fetchpriority="high" decoding="async">
         </div>
       </div>
-      <div class="rip rip-to-cream" aria-hidden="true"></div>
+      <div class="craft-tear craft-tear-cream" aria-hidden="true"></div>
     </section>
 
-    <!-- 3) CREME: text + kəsilmiş kare foto / kəsilmiş foto + text / dairələr -->
     <section class="craft-panel craft-panel-cream">
       <div class="craft-shell craft-why">
         <div class="craft-why-copy reveal">
@@ -104,26 +98,26 @@
             </article>
           </div>
         </div>
-        <figure class="cut-frame cut-frame-square reveal reveal-media">
+        <figure class="craft-photo-frame reveal reveal-media">
           <img src="./anadolu-catalog.jpg" alt="Anadolu Qida un məhsul çeşidləri" width="682" height="1024" loading="lazy" decoding="async">
         </figure>
       </div>
 
       <div class="craft-shell craft-row">
-        <figure class="cut-frame cut-frame-square reveal reveal-media">
-          <img src="./anadolu-flour-25kg.jpg" alt="Anadolu əla növ 25 kq un kisəsi" width="819" height="1024" loading="lazy" decoding="async">
+        <figure class="craft-photo-frame reveal reveal-media">
+          <img src="./anadolu-flour-10kg.jpg" alt="Anadolu əla növ 10 kq un kisəsi" width="819" height="1024" loading="lazy" decoding="async">
         </figure>
         <div class="craft-row-copy reveal">
           <h2>Hər istehsal üçün doğru un</h2>
           <p>5 kq-dan 45 kq-a qədər qablaşdırma seçimləri ilə peşəkar istehsal üçün sabit nəticə təqdim edirik.</p>
-          <a class="craft-btn craft-btn-dark" href="mehsullar"><span>Kataloqa keçin</span></a>
+          <a class="craft-btn" href="mehsullar"><span>Kataloqa keçin</span></a>
         </div>
       </div>
 
       <div class="craft-shell craft-circles">
         <article class="craft-circle-item reveal" style="--d:0">
-          <div class="cut-circle">
-            <img src="./anadolu-flour-10kg.jpg" alt="Anadolu 10 kq un" width="819" height="1024" loading="lazy" decoding="async">
+          <div class="craft-circle-img">
+            <img src="./flour-bowl.jpg" alt="Anadolu 10 kq un kisəsi" width="819" height="1024" loading="lazy" decoding="async">
           </div>
           <div>
             <h3>Müasir istehsal</h3>
@@ -131,8 +125,8 @@
           </div>
         </article>
         <article class="craft-circle-item reveal" style="--d:1">
-          <div class="cut-circle">
-            <img src="./flour-sack.jpg" alt="Anadolu əla növ un kisəsi" width="819" height="1024" loading="lazy" decoding="async">
+          <div class="craft-circle-img">
+            <img src="./anadolu-flour-5kg.jpg" alt="Anadolu 5 kq un kisəsi" width="859" height="1024" loading="lazy" decoding="async">
           </div>
           <div>
             <h3>Seçilmiş buğda</h3>
@@ -140,26 +134,25 @@
           </div>
         </article>
       </div>
-      <div class="rip rip-to-sand" aria-hidden="true"></div>
+      <div class="craft-tear craft-tear-sand" aria-hidden="true"></div>
     </section>
 
-    <!-- 4) TAN section -->
     <section class="craft-panel craft-panel-sand">
       <div class="craft-shell craft-cta-row">
-        <figure class="cut-frame cut-frame-wide reveal reveal-media">
-          <img src="./anadolu-warehouse.jpg" alt="Anadolu Qida anbar" width="640" height="480" loading="lazy" decoding="async">
+        <figure class="craft-photo-frame reveal reveal-media">
+          <img src="./flour-sack.jpg" alt="Anadolu əla növ un kisəsi" width="819" height="1024" loading="lazy" decoding="async">
         </figure>
         <div class="craft-row-copy reveal">
           <h2>Korporativ sifarişinizi birlikdə planlayaq</h2>
           <p>Məhsul növü, miqdar və çatdırılma məlumatlarını göndərin — komandamız tez cavab verir.</p>
-          <a class="craft-btn craft-btn-dark" href="elaqe"><span>Sorğu göndərin</span></a>
+          <a class="craft-btn" href="elaqe"><span>Sorğu göndərin</span></a>
         </div>
       </div>
-      <div class="rip rip-to-footer" aria-hidden="true"></div>
+      <div class="craft-tear craft-tear-footer" aria-hidden="true"></div>
     </section>
   </main>
 
-  <footer class="site-footer craft-footer">
+  <footer class="site-footer craft-footer reveal">
     <div class="footer-brand">
       <a class="footer-wordmark" href="./">Anadolu Qida</a>
       <p>Yüksək keyfiyyətli un istehsalı və korporativ qida təchizatı.</p>
@@ -189,6 +182,6 @@
       <a class="made-by-vulcet" href="https://vulcet.com" target="_blank" rel="noopener noreferrer"><span>Made by</span> <strong>Vulcet</strong></a>
     </div>
   </footer>
-  <script src="anadolu.js?v=ref-1"></script>
+  <script src="anadolu.js?v=craft-4"></script>
 </body>
 </html>
