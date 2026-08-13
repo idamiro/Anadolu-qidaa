@@ -138,12 +138,12 @@ h3 {
   border-color: var(--ink);
 }
 
-.home-page:not(.craft-home):not(.soft-home) .brand-switch {
+.home-page:not(.craft-home) .brand-switch {
   border-color: rgba(255, 255, 255, .38);
   color: var(--white);
 }
 
-.home-page:not(.craft-home):not(.soft-home) .brand-switch span {
+.home-page:not(.craft-home) .brand-switch span {
   color: rgba(255, 255, 255, .64);
 }
 
@@ -151,7 +151,7 @@ h3 {
   display: none;
 }
 
-.home-page:not(.craft-home):not(.soft-home) .site-header {
+.home-page:not(.craft-home) .site-header {
   position: absolute;
   top: 0;
   right: 0;
@@ -173,7 +173,7 @@ h3 {
   animation: header-slide-in .38s var(--ease) both;
 }
 
-.home-page:not(.craft-home):not(.soft-home) .site-header.is-scrolled {
+.home-page:not(.craft-home) .site-header.is-scrolled {
   position: fixed;
   border-bottom-color: rgba(255, 255, 255, .12);
   background: rgba(8, 29, 46, .82);
@@ -196,11 +196,11 @@ h3 {
   }
 }
 
-.home-page:not(.craft-home):not(.soft-home) .brand img {
+.home-page:not(.craft-home) .brand img {
   filter: brightness(0) invert(1);
 }
 
-.home-page:not(.craft-home):not(.soft-home) .nav a {
+.home-page:not(.craft-home) .nav a {
   color: var(--white);
   text-shadow: 0 1px 18px rgba(4, 20, 34, .25);
 }
