@@ -138,12 +138,12 @@ h3 {
   border-color: var(--ink);
 }
 
-.home-page:not(.craft-home):not(.soft-home):not(.soft-home) .brand-switch {
+.home-page:not(.craft-home):not(.soft-home) .brand-switch {
   border-color: rgba(255, 255, 255, .38);
   color: var(--white);
 }
 
-.home-page:not(.craft-home):not(.soft-home):not(.soft-home) .brand-switch span {
+.home-page:not(.craft-home):not(.soft-home) .brand-switch span {
   color: rgba(255, 255, 255, .64);
 }
 
@@ -151,7 +151,7 @@ h3 {
   display: none;
 }
 
-.home-page:not(.craft-home):not(.soft-home):not(.soft-home) .site-header {
+.home-page:not(.craft-home):not(.soft-home) .site-header {
   position: absolute;
   top: 0;
   right: 0;
@@ -173,7 +173,7 @@ h3 {
   animation: header-slide-in .38s var(--ease) both;
 }
 
-.home-page:not(.craft-home):not(.soft-home):not(.soft-home) .site-header.is-scrolled {
+.home-page:not(.craft-home):not(.soft-home) .site-header.is-scrolled {
   position: fixed;
   border-bottom-color: rgba(255, 255, 255, .12);
   background: rgba(8, 29, 46, .82);
@@ -196,11 +196,11 @@ h3 {
   }
 }
 
-.home-page:not(.craft-home):not(.soft-home):not(.soft-home) .brand img {
+.home-page:not(.craft-home):not(.soft-home) .brand img {
   filter: brightness(0) invert(1);
 }
 
-.home-page:not(.craft-home):not(.soft-home):not(.soft-home) .nav a {
+.home-page:not(.craft-home):not(.soft-home) .nav a {
   color: var(--white);
   text-shadow: 0 1px 18px rgba(4, 20, 34, .25);
 }
@@ -1826,7 +1826,7 @@ textarea:focus {
     cursor: pointer;
   }
 
-  .home-page:not(.craft-home):not(.soft-home) .menu-toggle {
+  .home-page:not(.craft-home) .menu-toggle {
     border-color: rgba(255, 255, 255, .42);
     background: rgba(4, 22, 39, .24);
   }
@@ -1837,7 +1837,7 @@ textarea:focus {
     transition: transform .25s, opacity .25s;
   }
 
-  .home-page:not(.craft-home):not(.soft-home) .menu-toggle span {
+  .home-page:not(.craft-home) .menu-toggle span {
     background: var(--white);
   }
 
@@ -1874,12 +1874,12 @@ textarea:focus {
     transform: none;
   }
 
-  .home-page:not(.craft-home):not(.soft-home) .nav.open a {
+  .home-page:not(.craft-home) .nav.open a {
     color: var(--white);
     text-shadow: none;
   }
 
-  .home-page:not(.craft-home):not(.soft-home) .nav {
+  .home-page:not(.craft-home) .nav {
     top: 0;
     z-index: 45;
     height: 100svh;
@@ -1887,12 +1887,12 @@ textarea:focus {
     background: rgba(5, 23, 39, .98);
   }
 
-  .home-page:not(.craft-home):not(.soft-home) .nav a {
+  .home-page:not(.craft-home) .nav a {
     border-bottom-color: rgba(255, 255, 255, .14);
   }
 
-  .home-page:not(.craft-home):not(.soft-home) .brand,
-  .home-page:not(.craft-home):not(.soft-home) .menu-toggle {
+  .home-page:not(.craft-home) .brand,
+  .home-page:not(.craft-home) .menu-toggle {
     position: relative;
     z-index: 60;
   }
@@ -1918,7 +1918,7 @@ textarea:focus {
     font-size: .88rem;
   }
 
-  .home-page:not(.craft-home):not(.soft-home) .nav.open .mobile-cta {
+  .home-page:not(.craft-home) .nav.open .mobile-cta {
     color: var(--white);
   }
 
@@ -1939,13 +1939,13 @@ textarea:focus {
     border-bottom: 1px solid var(--line);
   }
 
-  .home-page:not(.craft-home):not(.soft-home) .nav.open .mobile-brand-switch,
+  .home-page:not(.craft-home) .nav.open .mobile-brand-switch,
   .mirvari-page.home-page .nav.open .mobile-brand-switch {
     border-bottom-color: rgba(255, 255, 255, .14);
     color: var(--white);
   }
 
-  .home-page:not(.craft-home):not(.soft-home) .nav.open .mobile-brand-switch span,
+  .home-page:not(.craft-home) .nav.open .mobile-brand-switch span,
   .mirvari-page.home-page .nav.open .mobile-brand-switch span {
     color: rgba(255, 255, 255, .58);
   }
