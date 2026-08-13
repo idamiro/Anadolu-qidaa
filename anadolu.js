@@ -235,33 +235,3 @@ document.querySelectorAll(".contact-form").forEach((form) => {
     }
   });
 });
-
-/* Craft home motion */
-if (body.classList.contains("craft-home") && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const parallaxNode = document.querySelector("[data-parallax]");
-  if (parallaxNode) {
-    let ticking = false;
-    const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(() => {
-        const offset = Math.min(window.scrollY * 0.12, 48);
-        parallaxNode.style.transform = `translate3d(0, ${offset}px, 0)`;
-        ticking = false;
-      });
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-  }
-
-  document.querySelectorAll(".craft-photo-frame, .craft-circle-img").forEach((frame) => {
-    frame.addEventListener("pointermove", (event) => {
-      const rect = frame.getBoundingClientRect();
-      const x = ((event.clientX - rect.left) / rect.width - 0.5) * 6;
-      const y = ((event.clientY - rect.top) / rect.height - 0.5) * 6;
-      frame.style.transform = `perspective(800px) rotateX(${-y}deg) rotateY(${x}deg) translateY(-4px)`;
-    });
-    frame.addEventListener("pointerleave", () => {
-      frame.style.transform = "";
-    });
-  });
-}
