@@ -19,7 +19,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="./vendor/leaflet/leaflet.css">
-  <link rel="stylesheet" href="anadolu.css?v=order-form-2">
+  <link rel="stylesheet" href="anadolu.css?v=order-form-3">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Anadolu Qida","item":"https://anadoluqida.com/"},{"@type":"ListItem","position":2,"name":"Mirvari Logistics","item":"https://anadoluqida.com/mirvari"},{"@type":"ListItem","position":3,"name":"Əlaqə","item":"https://anadoluqida.com/mirvari-elaqe"}]}</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHX2ENRVMX"></script>
   <script>
@@ -103,8 +103,10 @@
               <label for="logisticsPickupTextMirvari">5. Göndərilən ünvan (konum)</label>
               <input id="logisticsPickupTextMirvari" name="pickup_address" type="text" placeholder="Ünvan / izah" data-map-address="pickup">
               <div class="map-picker" data-map="pickup">
+                <button type="button" class="map-search-btn" data-map-search="pickup">Xəritədə tap</button>
+                <div class="map-results" data-map-results="pickup" hidden></div>
                 <div class="map-canvas"></div>
-                <p class="map-hint">Xəritəyə klikləyərək Google Maps pin seçin.</p>
+                <p class="map-hint">Ünvanı yazıb «Xəritədə tap» basın və ya xəritəyə klikləyin.</p>
                 <input type="hidden" name="pickup_lat" data-map-lat="pickup">
                 <input type="hidden" name="pickup_lng" data-map-lng="pickup">
                 <input type="hidden" name="pickup_maps_url" data-map-url="pickup">
@@ -116,8 +118,10 @@
               <label for="productDeliveryTextMirvari">6. Çatdırılma ünvanı (konum)</label>
               <input id="productDeliveryTextMirvari" name="delivery_address" type="text" placeholder="Şəhər, rayon, ünvan" data-map-address="delivery">
               <div class="map-picker" data-map="delivery">
+                <button type="button" class="map-search-btn" data-map-search="delivery">Xəritədə tap</button>
+                <div class="map-results" data-map-results="delivery" hidden></div>
                 <div class="map-canvas"></div>
-                <p class="map-hint">Xəritəyə klikləyərək Google Maps pin seçin.</p>
+                <p class="map-hint">Ünvanı yazıb «Xəritədə tap» basın və ya xəritəyə klikləyin.</p>
                 <input type="hidden" name="delivery_lat" data-map-lat="delivery">
                 <input type="hidden" name="delivery_lng" data-map-lng="delivery">
                 <input type="hidden" name="delivery_maps_url" data-map-url="delivery">
@@ -129,8 +133,10 @@
               <label for="logisticsDropTextMirvari">6. Göndərilmə ünvanı (ünvan + konum)</label>
               <input id="logisticsDropTextMirvari" name="dropoff_address" type="text" placeholder="Şəhər, rayon, ünvan" data-map-address="dropoff">
               <div class="map-picker" data-map="dropoff">
+                <button type="button" class="map-search-btn" data-map-search="dropoff">Xəritədə tap</button>
+                <div class="map-results" data-map-results="dropoff" hidden></div>
                 <div class="map-canvas"></div>
-                <p class="map-hint">Xəritəyə klikləyərək Google Maps pin seçin.</p>
+                <p class="map-hint">Ünvanı yazıb «Xəritədə tap» basın və ya xəritəyə klikləyin.</p>
                 <input type="hidden" name="dropoff_lat" data-map-lat="dropoff">
                 <input type="hidden" name="dropoff_lng" data-map-lng="dropoff">
                 <input type="hidden" name="dropoff_maps_url" data-map-url="dropoff">
@@ -171,6 +177,6 @@
     <a class="made-by-vulcet" href="https://vulcet.com" target="_blank" rel="noopener noreferrer"><span>Made by</span> <strong>Vulcet</strong></a></div>
   </footer>
   <script src="./vendor/leaflet/leaflet.js"></script>
-  <script src="anadolu.js?v=order-form-2"></script>
+  <script src="anadolu.js?v=order-form-3"></script>
 </body>
 </html>
