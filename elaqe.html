@@ -6,7 +6,7 @@
   <title>Əlaqə | Anadolu Qida</title>
   <meta name="description" content="Anadolu Qida məhsul və logistika sifariş forması.">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#071b2d">
+  <meta name="theme-color" content="#f7f7f7">
   <link rel="canonical" href="https://anadoluqida.com/elaqe">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="az_AZ">
@@ -19,7 +19,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="stylesheet" href="./vendor/leaflet/leaflet.css">
-  <link rel="stylesheet" href="anadolu.css?v=order-form-3">
+  <link rel="stylesheet" href="anadolu.css?v=soft-contact-1">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Anadolu Qida","item":"https://anadoluqida.com/"},{"@type":"ListItem","position":2,"name":"Əlaqə","item":"https://anadoluqida.com/elaqe"}]}</script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHX2ENRVMX"></script>
   <script>
@@ -29,7 +29,7 @@
     gtag('config', 'G-NHX2ENRVMX');
   </script>
 </head>
-<body>
+<body class="contact-page">
   <header class="site-header">
     <a class="brand" href="./" aria-label="Anadolu Qida"><img src="./anadolu-qida-logo.webp" alt="Anadolu Qida loqosu" width="360" height="191" decoding="async"></a>
     <button class="menu-toggle" type="button" aria-label="Menyunu aç" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -41,129 +41,162 @@
   </header>
 
   <main>
-    <section class="page-hero">
-      <span class="eyebrow">Əlaqə</span>
-      <h1>Sifarişinizi birlikdə planlayaq.</h1>
-      <p>Məhsul və ya logistika sifarişi göndərin. Qiymət geri dönüşdə bildiriləcək.</p>
-    </section>
-
-    <section class="section section-white">
-      <div class="container contact-layout">
-        <div class="contact-copy reveal">
-          <span class="eyebrow">Korporativ müraciət</span>
-          <h2>Dəqiq məlumat, sürətli cavab.</h2>
-          <p>Sifariş növünü seçin, ünvanı xəritədən pinləyin və məhsulları əlavə edin.</p>
-          <a class="contact-email" href="mailto:arslangokay@anadoluqida.com"><span>Məhsul sifarişi</span>arslangokay@anadoluqida.com</a>
-          <a class="contact-email" href="mailto:mustafayevaseide@anadoluqida.com"><span>Logistika sifarişi</span>mustafayevaseide@anadoluqida.com</a>
-          <div class="contact-points">
-            <div class="contact-point"><b>01</b><div><strong>Məhsul sifarişi</strong><p>Un məhsulları, çoxlu sətir.</p></div></div>
-            <div class="contact-point"><b>02</b><div><strong>Logistika</strong><p>Götürmə və çatdırılma konumu.</p></div></div>
-            <div class="contact-point"><b>03</b><div><strong>Qiymət</strong><p>Geri dönüşdə bildirilir.</p></div></div>
+    <section class="soft-contact">
+      <div class="soft-contact-shell">
+        <header class="soft-contact-head">
+          <div>
+            <span class="soft-eyebrow">Sifariş</span>
+            <h1>Əlaqə</h1>
           </div>
+          <p>Sifariş növünü seçin, ünvanı yazın və ya xəritədən pinləyin. Qiymət geri dönüşdə bildiriləcək.</p>
+        </header>
+
+        <div class="soft-contact-grid">
+          <form class="contact-form order-form soft-form" action="https://api.web3forms.com/submit" method="POST" data-order-form>
+            <input type="hidden" name="access_key" value="c033b9a2-4d5a-4f17-9a0d-0ccfbdca5cfb">
+            <input type="hidden" name="from_name" value="Anadolu Qida sifariş forması">
+            <input type="hidden" name="subject" data-form-subject value="Yeni sifariş">
+            <input type="hidden" name="recipient_email" data-form-recipient value="arslangokay@anadoluqida.com">
+            <input type="checkbox" name="botcheck" hidden>
+
+            <div class="form-grid">
+              <div class="field-full">
+                <label for="orderType">1. Sifariş növü</label>
+                <select id="orderType" name="order_type" data-order-type required>
+                  <option value="product">Məhsul sifarişi</option>
+                  <option value="logistics">Logistika sifarişi</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="voen">2. VÖEN</label>
+                <input id="voen" name="voen" type="text" inputmode="numeric" required placeholder="VÖEN">
+              </div>
+              <div class="field">
+                <label for="buyerName">3. Ad</label>
+                <input id="buyerName" name="name" type="text" required autocomplete="name" placeholder="Adınız">
+              </div>
+              <div class="field-full">
+                <label for="buyerPhone">4. Əlaqə nömrəsi</label>
+                <input id="buyerPhone" name="phone" type="tel" required autocomplete="tel" placeholder="+994 XX XXX XX XX">
+              </div>
+
+              <div class="field-full order-panel is-active" data-order-panel="product">
+                <label for="productSendAddress">5. Göndərilmə ünvanı</label>
+                <input id="productSendAddress" name="send_address_product" type="text" value="Anadolu un Fabriki" readonly>
+              </div>
+
+              <div class="field-full order-panel" data-order-panel="logistics">
+                <label for="logisticsPickupText">5. Göndərilən ünvan (konum)</label>
+                <input id="logisticsPickupText" name="pickup_address" type="text" placeholder="Ünvan / izah" data-map-address="pickup">
+                <div class="map-picker" data-map="pickup">
+                  <button type="button" class="map-search-btn" data-map-search="pickup">Xəritədə tap</button>
+                  <div class="map-results" data-map-results="pickup" hidden></div>
+                  <div class="map-canvas"></div>
+                  <p class="map-hint">Ünvanı yazıb «Xəritədə tap» basın və ya xəritəyə klikləyin.</p>
+                  <input type="hidden" name="pickup_lat" data-map-lat="pickup">
+                  <input type="hidden" name="pickup_lng" data-map-lng="pickup">
+                  <input type="hidden" name="pickup_maps_url" data-map-url="pickup">
+                  <a class="map-link" data-map-open="pickup" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
+                </div>
+              </div>
+
+              <div class="field-full order-panel is-active" data-order-panel="product">
+                <label for="productDeliveryText">6. Çatdırılma ünvanı (konum)</label>
+                <input id="productDeliveryText" name="delivery_address" type="text" placeholder="Şəhər, rayon, ünvan" data-map-address="delivery">
+                <div class="map-picker" data-map="delivery">
+                  <button type="button" class="map-search-btn" data-map-search="delivery">Xəritədə tap</button>
+                  <div class="map-results" data-map-results="delivery" hidden></div>
+                  <div class="map-canvas"></div>
+                  <p class="map-hint">Ünvanı yazıb «Xəritədə tap» basın və ya xəritəyə klikləyin.</p>
+                  <input type="hidden" name="delivery_lat" data-map-lat="delivery">
+                  <input type="hidden" name="delivery_lng" data-map-lng="delivery">
+                  <input type="hidden" name="delivery_maps_url" data-map-url="delivery">
+                  <a class="map-link" data-map-open="delivery" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
+                </div>
+              </div>
+
+              <div class="field-full order-panel" data-order-panel="logistics">
+                <label for="logisticsDropText">6. Göndərilmə ünvanı (ünvan + konum)</label>
+                <input id="logisticsDropText" name="dropoff_address" type="text" placeholder="Şəhər, rayon, ünvan" data-map-address="dropoff">
+                <div class="map-picker" data-map="dropoff">
+                  <button type="button" class="map-search-btn" data-map-search="dropoff">Xəritədə tap</button>
+                  <div class="map-results" data-map-results="dropoff" hidden></div>
+                  <div class="map-canvas"></div>
+                  <p class="map-hint">Ünvanı yazıb «Xəritədə tap» basın və ya xəritəyə klikləyin.</p>
+                  <input type="hidden" name="dropoff_lat" data-map-lat="dropoff">
+                  <input type="hidden" name="dropoff_lng" data-map-lng="dropoff">
+                  <input type="hidden" name="dropoff_maps_url" data-map-url="dropoff">
+                  <a class="map-link" data-map-open="dropoff" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
+                </div>
+              </div>
+
+              <div class="field-full order-panel is-active" data-order-panel="product">
+                <div class="product-lines-head">
+                  <span class="choice-title">7–8. Məhsullar</span>
+                  <button type="button" class="product-add-btn" data-add-product>+ Əlavə et</button>
+                </div>
+                <div class="product-lines" data-product-lines></div>
+              </div>
+
+              <div class="field-full">
+                <label for="orderNote">Əlavə qeyd</label>
+                <textarea id="orderNote" name="message" placeholder="Əlavə məlumat (istəyə bağlı)"></textarea>
+              </div>
+
+              <div class="field-full">
+                <p class="price-note">Qiymət hələlik sorğuya daxil edilmir. Geri dönüşdə bildiriləcək.</p>
+                <div class="soft-submit-row">
+                  <button type="submit">Sorğu göndər</button>
+                  <button type="submit" class="soft-submit-icon" aria-label="Göndər">↗</button>
+                </div>
+                <p class="form-status" role="status" aria-live="polite"></p>
+              </div>
+            </div>
+          </form>
+
+          <aside class="soft-contact-visual" aria-hidden="true">
+            <img src="./anadolu-wheat-hero.webp" alt="" width="900" height="1200" decoding="async">
+            <span class="soft-visual-badge">Anadolu Qida</span>
+          </aside>
         </div>
+      </div>
 
-        <form class="contact-form order-form reveal" action="https://api.web3forms.com/submit" method="POST" data-order-form>
-          <input type="hidden" name="access_key" value="c033b9a2-4d5a-4f17-9a0d-0ccfbdca5cfb">
-          <input type="hidden" name="from_name" value="Anadolu Qida sifariş forması">
-          <input type="hidden" name="subject" data-form-subject value="Yeni sifariş">
-          <input type="hidden" name="recipient_email" data-form-recipient value="arslangokay@anadoluqida.com">
-          <input type="checkbox" name="botcheck" hidden>
+      <div class="soft-info-grid">
+        <article class="soft-info-item">
+          <span class="soft-info-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5v-11Z"/><path d="m5 7 7 6 7-6"/></svg>
+          </span>
+          <h2>Məhsul sifarişi</h2>
+          <a href="mailto:arslangokay@anadoluqida.com">arslangokay@anadoluqida.com</a>
+        </article>
+        <article class="soft-info-item">
+          <span class="soft-info-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 8v4.5l3 1.5"/></svg>
+          </span>
+          <h2>İş saatları</h2>
+          <p>Bazar ertəsi–Cümə: 09:00–18:00</p>
+          <p>Şənbə–Bazar: bağlı</p>
+        </article>
+        <article class="soft-info-item">
+          <span class="soft-info-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v11a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17.5v-11Z"/><path d="m5 7 7 6 7-6"/></svg>
+          </span>
+          <h2>Logistika sifarişi</h2>
+          <a href="mailto:mustafayevaseide@anadoluqida.com">mustafayevaseide@anadoluqida.com</a>
+        </article>
+      </div>
 
-          <h2>Sifariş məlumatları</h2>
-          <p class="form-note">Qiymət forma daxil edilmir — geri dönüşdə bildiriləcək.</p>
-
-          <div class="form-grid">
-            <div class="field-full">
-              <label for="orderType">1. Sifariş növü</label>
-              <select id="orderType" name="order_type" data-order-type required>
-                <option value="product">Məhsul sifarişi</option>
-                <option value="logistics">Logistika sifarişi</option>
-              </select>
-            </div>
-
-            <div class="field">
-              <label for="voen">2. VÖEN</label>
-              <input id="voen" name="voen" type="text" inputmode="numeric" required placeholder="VÖEN">
-            </div>
-            <div class="field">
-              <label for="buyerName">3. Ad</label>
-              <input id="buyerName" name="name" type="text" required autocomplete="name">
-            </div>
-            <div class="field-full">
-              <label for="buyerPhone">4. Əlaqə nömrəsi</label>
-              <input id="buyerPhone" name="phone" type="tel" required autocomplete="tel" placeholder="+994 XX XXX XX XX">
-            </div>
-
-            <div class="field-full order-panel is-active" data-order-panel="product">
-              <label for="productSendAddress">5. Göndərilmə ünvanı</label>
-              <input id="productSendAddress" name="send_address_product" type="text" value="Anadolu un Fabriki" readonly>
-            </div>
-
-            <div class="field-full order-panel" data-order-panel="logistics">
-              <label for="logisticsPickupText">5. Göndərilən ünvan (konum)</label>
-              <input id="logisticsPickupText" name="pickup_address" type="text" placeholder="Ünvan / izah" data-map-address="pickup">
-              <div class="map-picker" data-map="pickup">
-                <button type="button" class="map-search-btn" data-map-search="pickup">Xəritədə tap</button>
-                <div class="map-results" data-map-results="pickup" hidden></div>
-                <div class="map-canvas"></div>
-                <p class="map-hint">Ünvanı yazıb «Xəritədə tap» basın və ya xəritəyə klikləyin.</p>
-                <input type="hidden" name="pickup_lat" data-map-lat="pickup">
-                <input type="hidden" name="pickup_lng" data-map-lng="pickup">
-                <input type="hidden" name="pickup_maps_url" data-map-url="pickup">
-                <a class="map-link" data-map-open="pickup" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
-              </div>
-            </div>
-
-            <div class="field-full order-panel is-active" data-order-panel="product">
-              <label for="productDeliveryText">6. Çatdırılma ünvanı (konum)</label>
-              <input id="productDeliveryText" name="delivery_address" type="text" placeholder="Şəhər, rayon, ünvan" data-map-address="delivery">
-              <div class="map-picker" data-map="delivery">
-                <button type="button" class="map-search-btn" data-map-search="delivery">Xəritədə tap</button>
-                <div class="map-results" data-map-results="delivery" hidden></div>
-                <div class="map-canvas"></div>
-                <p class="map-hint">Ünvanı yazıb «Xəritədə tap» basın və ya xəritəyə klikləyin.</p>
-                <input type="hidden" name="delivery_lat" data-map-lat="delivery">
-                <input type="hidden" name="delivery_lng" data-map-lng="delivery">
-                <input type="hidden" name="delivery_maps_url" data-map-url="delivery">
-                <a class="map-link" data-map-open="delivery" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
-              </div>
-            </div>
-
-            <div class="field-full order-panel" data-order-panel="logistics">
-              <label for="logisticsDropText">6. Göndərilmə ünvanı (ünvan + konum)</label>
-              <input id="logisticsDropText" name="dropoff_address" type="text" placeholder="Şəhər, rayon, ünvan" data-map-address="dropoff">
-              <div class="map-picker" data-map="dropoff">
-                <button type="button" class="map-search-btn" data-map-search="dropoff">Xəritədə tap</button>
-                <div class="map-results" data-map-results="dropoff" hidden></div>
-                <div class="map-canvas"></div>
-                <p class="map-hint">Ünvanı yazıb «Xəritədə tap» basın və ya xəritəyə klikləyin.</p>
-                <input type="hidden" name="dropoff_lat" data-map-lat="dropoff">
-                <input type="hidden" name="dropoff_lng" data-map-lng="dropoff">
-                <input type="hidden" name="dropoff_maps_url" data-map-url="dropoff">
-                <a class="map-link" data-map-open="dropoff" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
-              </div>
-            </div>
-
-            <div class="field-full order-panel is-active" data-order-panel="product">
-              <div class="product-lines-head">
-                <span class="choice-title">7–8. Məhsullar</span>
-                <button type="button" class="product-add-btn" data-add-product>+ Əlavə et</button>
-              </div>
-              <div class="product-lines" data-product-lines></div>
-            </div>
-
-            <div class="field-full">
-              <label for="orderNote">Əlavə qeyd</label>
-              <textarea id="orderNote" name="message" placeholder="Əlavə məlumat (istəyə bağlı)"></textarea>
-            </div>
-
-            <div class="field-full">
-              <p class="price-note">Qiymət hələlik sorğuya daxil edilmir. Geri dönüşdə bildiriləcək.</p>
-              <button type="submit">Sorğu göndər</button>
-              <p class="form-status" role="status" aria-live="polite"></p>
-            </div>
-          </div>
-        </form>
+      <div class="soft-cta-band">
+        <div class="soft-cta-copy">
+          <span class="soft-cta-badge">İndi başlayın</span>
+          <h2>Korporativ un təchizatını birlikdə planlayaq</h2>
+          <p>Məhsul və logistika sorğularınızı göndərin — komandamız geri dönüşdə qiymət və şərtləri bildirəcək.</p>
+        </div>
+        <div class="soft-cta-photos">
+          <img src="./flour-bowl.jpg" alt="Un məhsulları" width="640" height="800" loading="lazy" decoding="async">
+          <img src="./anadolu-warehouse.jpg" alt="Anadolu anbarı" width="640" height="800" loading="lazy" decoding="async">
+        </div>
       </div>
     </section>
   </main>
@@ -177,6 +210,6 @@
     <a class="made-by-vulcet" href="https://vulcet.com" target="_blank" rel="noopener noreferrer"><span>Made by</span> <strong>Vulcet</strong></a></div>
   </footer>
   <script src="./vendor/leaflet/leaflet.js"></script>
-  <script src="anadolu.js?v=order-form-3"></script>
+  <script src="anadolu.js?v=soft-contact-1"></script>
 </body>
 </html>
