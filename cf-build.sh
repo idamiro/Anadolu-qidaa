@@ -1,5 +1,6 @@
 #!/bin/sh
-# Cloudflare Pages build: strip .git so wrangler never uploads pack files (>25 MiB).
+# Cloudflare deploy command — put this in the dashboard "Deploy command" field:
+#   sh cf-build.sh
 set -e
 rm -rf .git
-echo "Cloudflare build ready (static root, .git removed)."
+npx wrangler pages deploy . --commit-dirty=true
