@@ -1,110 +1,42 @@
-/* Latin subsets + dedicated AZ glyph kits for ə/Ə and related letters */
+/* Noto Sans — full Azerbaijani glyph support (ə/Ə, ı/İ, ş/Ş, ğ/Ğ, …) */
 @font-face {
-  font-family: "Manrope";
-  src: url("./manrope-latin-ext.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  unicode-range: U+0100-018E, U+0190-0258, U+025A-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: "Manrope";
-  src: url("./manrope-latin.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 400 800;
-  font-display: swap;
-  unicode-range: U+0000-00FF, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: "Manrope";
-  src: url("./fonts/manrope-az-1.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  unicode-range: U+011E-011F, U+0130-0131, U+015E-015F, U+018F, U+0259;
-}
-
-@font-face {
-  font-family: "Manrope";
-  src: url("./fonts/manrope-az-2.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  unicode-range: U+011E-011F, U+0130-0131, U+015E-015F, U+018F, U+0259;
-}
-
-@font-face {
-  font-family: "Manrope";
-  src: url("./fonts/manrope-az-3.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  unicode-range: U+011E-011F, U+0130-0131, U+015E-015F, U+018F, U+0259;
-}
-
-@font-face {
-  font-family: "Manrope";
-  src: url("./fonts/manrope-az-4.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  unicode-range: U+011E-011F, U+0130-0131, U+015E-015F, U+018F, U+0259;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("./inter-latin-ext.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  unicode-range: U+0100-018E, U+0190-0258, U+025A-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("./inter-latin.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  unicode-range: U+0000-00FF, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
-  font-family: "Inter";
-  src: url("./fonts/inter-az-1.ttf") format("truetype");
+  font-family: "Noto Sans";
+  src: url("./fonts/noto-sans-400.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  unicode-range: U+011E-011F, U+0130-0131, U+015E-015F, U+018F, U+0259;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("./fonts/inter-az-2.ttf") format("truetype");
+  font-family: "Noto Sans";
+  src: url("./fonts/noto-sans-500.ttf") format("truetype");
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  unicode-range: U+011E-011F, U+0130-0131, U+015E-015F, U+018F, U+0259;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("./fonts/inter-az-3.ttf") format("truetype");
+  font-family: "Noto Sans";
+  src: url("./fonts/noto-sans-600.ttf") format("truetype");
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  unicode-range: U+011E-011F, U+0130-0131, U+015E-015F, U+018F, U+0259;
 }
 
 @font-face {
-  font-family: "Inter";
-  src: url("./fonts/inter-az-4.ttf") format("truetype");
+  font-family: "Noto Sans";
+  src: url("./fonts/noto-sans-700.ttf") format("truetype");
   font-style: normal;
   font-weight: 700;
   font-display: swap;
-  unicode-range: U+011E-011F, U+0130-0131, U+015E-015F, U+018F, U+0259;
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  src: url("./fonts/noto-sans-800.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
 }
 
 :root {
@@ -121,9 +53,9 @@
   --max: 1180px;
   --header: 82px;
   --ease: cubic-bezier(.2, .75, .25, 1);
-  --font-body: "Inter", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-heading: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --font-button: "Manrope", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Noto Sans", "Segoe UI", Arial, sans-serif;
+  --font-heading: "Noto Sans", "Segoe UI", Arial, sans-serif;
+  --font-button: "Noto Sans", "Segoe UI", Arial, sans-serif;
 }
 
 * {
