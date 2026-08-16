@@ -21,6 +21,10 @@ if (siteHeader) {
 }
 
 if (menuButton && nav) {
+  // Keep fixed menu outside header — backdrop-filter/sticky creates a containing block
+  // that traps position:fixed and freezes the page when menu-open locks scroll.
+  document.body.appendChild(nav);
+
   const brandSwitch = document.querySelector(".brand-switch");
   if (brandSwitch) {
     const mobileBrandSwitch = brandSwitch.cloneNode(true);
@@ -35,17 +39,13 @@ if (menuButton && nav) {
   mobileCta.textContent = isMirvari ? "Daşınma sorğusu" : "Korporativ sorğu";
   nav.appendChild(mobileCta);
 
-  let lastScrollAt = 0;
-  window.addEventListener("scroll", () => {
-    lastScrollAt = Date.now();
-  }, { passive: true });
+  let blockMenuToggleUntil = 0;
 
   const closeMenu = () => {
     nav.classList.remove("open");
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.setAttribute("aria-label", "Menyunu aç");
     body.classList.remove("menu-open");
-    nav.setAttribute("inert", "");
   };
 
   const openMenu = () => {
@@ -53,18 +53,16 @@ if (menuButton && nav) {
     menuButton.setAttribute("aria-expanded", "true");
     menuButton.setAttribute("aria-label", "Menyunu bağla");
     body.classList.add("menu-open");
-    nav.removeAttribute("inert");
   };
 
-  closeMenu();
+  window.addEventListener("scroll", () => {
+    blockMenuToggleUntil = Date.now() + 350;
+    if (nav.classList.contains("open")) closeMenu();
+  }, { passive: true });
 
   menuButton.addEventListener("click", (event) => {
-    // Ignore taps that fire right after a scroll (common mobile ghost-click)
-    if (Date.now() - lastScrollAt < 400) {
-      event.preventDefault();
-      event.stopPropagation();
-      return;
-    }
+    event.preventDefault();
+    if (Date.now() < blockMenuToggleUntil) return;
     if (nav.classList.contains("open")) closeMenu();
     else openMenu();
   });
