@@ -1,4 +1,3 @@
-# Cloudflare Workers/Pages must not upload VCS or local junk as assets
 .git
 **/.git/**
 **/*.pack
@@ -7,3 +6,11 @@ node_modules
 **/*.log
 .cursor
 agent-tools
+wrangler.toml
+cf-build.sh
+package.json
+package-lock.json
+.gitignore
+.assetsignore
+README.md
+**/*.md

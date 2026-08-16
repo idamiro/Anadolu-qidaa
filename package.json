@@ -1,0 +1,7 @@
+{
+  "name": "anadolu-qidaa",
+  "private": true,
+  "scripts": {
+    "deploy": "npx wrangler deploy"
+  }
+}

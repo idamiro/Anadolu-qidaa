@@ -1,4 +1,7 @@
-# Static site for Cloudflare Pages (use: npx wrangler pages deploy .)
+# Works with Cloudflare deploy command: npx wrangler deploy
 name = "anadolu-qidaa"
 compatibility_date = "2025-08-01"
-pages_build_output_dir = "."
+
+[assets]
+directory = "."
+not_found_handling = "404-page"
