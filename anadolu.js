@@ -355,17 +355,43 @@ const initOrderForms = () => {
       .replace(/ü/g, "u")
       .replace(/Ü/g, "U");
 
-    const uniqueQueries = (query) => {
-      const base = query.trim();
+    // Latin/English typing → Azerbaijani letters for ANY place name.
+    // Keep this conservative: e→ə is the main gap; digraphs cover sh/ch/gh.
+    const azifyLatin = (value) => value
+      .replace(/sh/gi, (m) => (m[0] === "S" ? "Ş" : "ş"))
+      .replace(/ch/gi, (m) => (m[0] === "C" ? "Ç" : "ç"))
+      .replace(/gh/gi, (m) => (m[0] === "G" ? "Ğ" : "ğ"))
+      .replace(/e/g, "ə")
+      .replace(/E/g, "Ə");
+
+    // Softer reverse: mainly ə (the “E letter”)
+    const azifyVowels = (value) => value
+      .replace(/e/g, "ə")
+      .replace(/E/g, "Ə");
+
+    const pushQuery = (bucket, value) => {
+      const trimmed = String(value || "").trim().replace(/\s+/g, " ");
+      if (!trimmed) return;
+      bucket.add(trimmed);
+      bucket.add(`${trimmed} Bakı`);
+      bucket.add(`${trimmed} Baku`);
+    };
+
+    const expandQueries = (query) => {
+      const base = query.trim().replace(/\s+/g, " ");
+      if (!base) return [];
+      const bucket = new Set();
       const latin = latinizeAz(base);
-      return [...new Set([
-        base,
-        `${base} Bakı`,
-        `${base} Baku`,
-        latin,
-        `${latin} Baku`,
-        `${latin} Bakı`
-      ].map((item) => item.trim()).filter(Boolean))];
+      const withSchwa = azifyVowels(base);
+      const latinWithSchwa = azifyVowels(latin);
+      const soft = azifyLatin(base);
+      const softLatin = azifyLatin(latin);
+
+      [base, latin, withSchwa, latinWithSchwa, soft, softLatin].forEach((item) => {
+        pushQuery(bucket, item);
+      });
+
+      return [...bucket].slice(0, 12);
     };
 
     const formatPhotonLabel = (props = {}) => {
@@ -382,16 +408,24 @@ const initOrderForms = () => {
       return [...new Set(parts)].join(", ");
     };
 
+    const inAzerbaijan = (lat, lon, countrycode) => {
+      if (String(countrycode || "").toUpperCase() === "AZ") return true;
+      return lat >= 38.3 && lat <= 42.0 && lon >= 44.5 && lon <= 51.0;
+    };
+
     const photonToResults = (data) => {
       const features = Array.isArray(data?.features) ? data.features : [];
       return features.map((feature) => {
         const [lng, lat] = feature.geometry?.coordinates || [];
         const label = formatPhotonLabel(feature.properties);
         if (!Number.isFinite(lat) || !Number.isFinite(lng) || !label) return null;
+        const countrycode = feature.properties?.countrycode || "";
         return {
           lat,
           lon: lng,
           display_name: label,
+          countrycode,
+          local: inAzerbaijan(lat, lng, countrycode),
           source: "photon"
         };
       }).filter(Boolean);
@@ -399,12 +433,18 @@ const initOrderForms = () => {
 
     const nominatimToResults = (data) => {
       if (!Array.isArray(data)) return [];
-      return data.map((item) => ({
-        lat: Number(item.lat),
-        lon: Number(item.lon),
-        display_name: item.display_name,
-        source: "nominatim"
-      })).filter((item) => Number.isFinite(item.lat) && Number.isFinite(item.lon) && item.display_name);
+      return data.map((item) => {
+        const lat = Number(item.lat);
+        const lon = Number(item.lon);
+        return {
+          lat,
+          lon,
+          display_name: item.display_name,
+          countrycode: item.address?.country_code || "az",
+          local: inAzerbaijan(lat, lon, "AZ"),
+          source: "nominatim"
+        };
+      }).filter((item) => Number.isFinite(item.lat) && Number.isFinite(item.lon) && item.display_name);
     };
 
     const dedupeResults = (results) => {
@@ -417,6 +457,11 @@ const initOrderForms = () => {
       });
     };
 
+    const preferLocalResults = (results) => {
+      const local = results.filter((item) => item.local);
+      return local.length ? local : results;
+    };
+
     const searchPhoton = async (query) => {
       const url = new URL("https://photon.komoot.io/api/");
       url.searchParams.set("q", query);
@@ -424,7 +469,8 @@ const initOrderForms = () => {
       url.searchParams.set("lon", String(BAKU[1]));
       url.searchParams.set("limit", "8");
       url.searchParams.set("lang", "default");
-      url.searchParams.set("location_bias_scale", "0.6");
+      url.searchParams.set("location_bias_scale", "0.85");
+      url.searchParams.set("bbox", "44.7,38.3,50.6,41.95");
       const response = await fetch(url.toString(), { headers: { Accept: "application/json" } });
       if (!response.ok) throw new Error("Photon failed");
       return photonToResults(await response.json());
@@ -446,29 +492,33 @@ const initOrderForms = () => {
     };
 
     const searchAddress = async (query) => {
-      const variants = uniqueQueries(query);
-      let collected = [];
+      const variants = expandQueries(query);
+      if (!variants.length) return [];
 
-      for (const variant of variants) {
-        try {
-          const photonHits = await searchPhoton(variant);
-          collected = dedupeResults([...collected, ...photonHits]);
-          if (collected.length >= 5) break;
-        } catch (_error) {
-          // try next variant / fallback
+      // Search several spellings in parallel: AZ letters AND Latin E/e equivalents
+      const photonSettled = await Promise.allSettled(
+        variants.slice(0, 8).map((variant) => searchPhoton(variant))
+      );
+
+      let collected = [];
+      photonSettled.forEach((result) => {
+        if (result.status === "fulfilled") {
+          collected = dedupeResults([...collected, ...result.value]);
         }
-      }
+      });
+
+      collected = preferLocalResults(collected);
 
       if (collected.length < 3) {
-        for (const variant of variants.slice(0, 3)) {
-          try {
-            const nominatimHits = await searchNominatim(variant);
-            collected = dedupeResults([...collected, ...nominatimHits]);
-            if (collected.length >= 6) break;
-          } catch (_error) {
-            // ignore
+        const nominatimSettled = await Promise.allSettled(
+          variants.slice(0, 4).map((variant) => searchNominatim(variant))
+        );
+        nominatimSettled.forEach((result) => {
+          if (result.status === "fulfilled") {
+            collected = dedupeResults([...collected, ...result.value]);
           }
-        }
+        });
+        collected = preferLocalResults(collected);
       }
 
       return collected.slice(0, 8);
