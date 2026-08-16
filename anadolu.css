@@ -1320,6 +1320,101 @@ textarea:focus {
   display: contents;
 }
 
+.order-panel {
+  display: none;
+  grid-column: 1 / -1;
+  gap: 10px;
+}
+
+.order-panel.is-active {
+  display: grid;
+}
+
+.product-lines-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.product-add-btn,
+.product-remove-btn {
+  font-family: var(--font-button);
+  cursor: pointer;
+}
+
+.product-add-btn {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.product-lines {
+  display: grid;
+  gap: 14px;
+}
+
+.product-line {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.product-remove-btn {
+  width: 42px;
+  height: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: transparent;
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+.map-picker {
+  display: grid;
+  gap: 8px;
+}
+
+.map-canvas {
+  width: 100%;
+  height: 240px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.map-hint,
+.price-note {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+
+.price-note {
+  margin-bottom: 12px;
+}
+
+.map-link {
+  color: #f0c14d;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+input[readonly] {
+  opacity: 0.85;
+  cursor: default;
+}
+
 .contact-form button[type="submit"] {
   min-height: 52px;
   width: 100%;
@@ -2375,12 +2470,21 @@ textarea:focus {
   }
 
   .field-full,
-  .conditional-fields {
+  .conditional-fields,
+  .order-panel {
     grid-column: auto;
   }
 
   .conditional-fields.active {
     display: contents;
+  }
+
+  .product-line {
+    grid-template-columns: 1fr;
+  }
+
+  .product-remove-btn {
+    width: 100%;
   }
 
   .site-footer {

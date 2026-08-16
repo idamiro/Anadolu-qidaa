@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Əlaqə | Mirvari Logistics</title>
-  <meta name="description" content="Mirvari Logistics daşınma sifarişi və korporativ əlaqə forması.">
+  <meta name="description" content="Mirvari Logistics məhsul və logistika sifariş forması.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#0b0c0f">
   <link rel="canonical" href="https://anadoluqida.com/mirvari-elaqe">
@@ -12,15 +12,15 @@
   <meta property="og:locale" content="az_AZ">
   <meta property="og:site_name" content="Mirvari Logistics">
   <meta property="og:title" content="Əlaqə | Mirvari Logistics">
-  <meta property="og:description" content="Daşınma sifarişi və korporativ əlaqə forması.">
+  <meta property="og:description" content="Məhsul və logistika sifariş forması.">
   <meta property="og:url" content="https://anadoluqida.com/mirvari-elaqe">
   <meta property="og:image" content="https://anadoluqida.com/mirvari-og.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="anadolu.css?v=fonts-2">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="anadolu.css?v=order-form-1">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Anadolu Qida","item":"https://anadoluqida.com/"},{"@type":"ListItem","position":2,"name":"Mirvari Logistics","item":"https://anadoluqida.com/mirvari"},{"@type":"ListItem","position":3,"name":"Əlaqə","item":"https://anadoluqida.com/mirvari-elaqe"}]}</script>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHX2ENRVMX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -43,41 +43,119 @@
   <main>
     <section class="page-hero">
       <span class="eyebrow">Əlaqə</span>
-      <h1>Daşınmanızı birlikdə planlayaq.</h1>
-      <p>Yük, götürülmə ünvanı və təhvil məlumatlarını qeyd edin. Komandamız sorğunuzu nəzərdən keçirəcək.</p>
+      <h1>Sifarişinizi birlikdə planlayaq.</h1>
+      <p>Məhsul və ya logistika sifarişi göndərin. Qiymət geri dönüşdə bildiriləcək.</p>
     </section>
 
     <section class="section section-white">
       <div class="container contact-layout">
         <div class="contact-copy reveal">
-          <span class="eyebrow">Logistika sorğusu</span>
-          <h2>Dəqiq məlumat, doğru marşrut.</h2>
-          <p>Daşınma haqqında əsas məlumatları göndərin. İcra vaxtı və xidmət şərtləri sorğudan sonra dəqiqləşdirilir.</p>
-          <a class="contact-email" href="mailto:hello@anadoluqida.com"><span>E-poçt</span>hello@anadoluqida.com</a>
+          <span class="eyebrow">Sifariş forması</span>
+          <h2>Dəqiq məlumat, doğru icra.</h2>
+          <p>Sifariş növünü seçin, ünvanı xəritədən pinləyin və lazımi məlumatları göndərin.</p>
+          <a class="contact-email" href="mailto:arslangokay@anadoluqida.com"><span>Məhsul sifarişi</span>arslangokay@anadoluqida.com</a>
+          <a class="contact-email" href="mailto:mustafayevaseide@anadoluqida.com"><span>Logistika sifarişi</span>mustafayevaseide@anadoluqida.com</a>
           <div class="contact-points">
-            <div class="contact-point"><b>01</b><div><strong>Daşınma sifarişi</strong><p>Yük, marşrut və təhvil məlumatları.</p></div></div>
-            <div class="contact-point"><b>02</b><div><strong>Anbar koordinasiyası</strong><p>Yükləmə vaxtı və çıxış planı.</p></div></div>
-            <div class="contact-point"><b>03</b><div><strong>Korporativ əməkdaşlıq</strong><p>Davamlı daşınma və xidmət modeli.</p></div></div>
+            <div class="contact-point"><b>01</b><div><strong>Məhsul sifarişi</strong><p>Un məhsulları, çoxlu sətir.</p></div></div>
+            <div class="contact-point"><b>02</b><div><strong>Logistika</strong><p>Götürmə və çatdırılma konumu.</p></div></div>
+            <div class="contact-point"><b>03</b><div><strong>Qiymət</strong><p>Geri dönüşdə bildirilir.</p></div></div>
           </div>
         </div>
 
-        <form class="contact-form reveal" action="https://api.web3forms.com/submit" method="POST">
+        <form class="contact-form order-form reveal" action="https://api.web3forms.com/submit" method="POST" data-order-form>
           <input type="hidden" name="access_key" value="c033b9a2-4d5a-4f17-9a0d-0ccfbdca5cfb">
-          <input type="hidden" name="subject" value="Mirvari Logistics saytından yeni daşınma sorğusu">
-          <input type="hidden" name="from_name" value="Mirvari Logistics veb saytı">
+          <input type="hidden" name="from_name" value="Mirvari Logistics sifariş forması">
+          <input type="hidden" name="subject" data-form-subject value="Yeni sifariş">
+          <input type="hidden" name="recipient_email" data-form-recipient value="arslangokay@anadoluqida.com">
           <input type="checkbox" name="botcheck" hidden>
-          <h2>Daşınma məlumatları</h2>
-          <p class="form-note">Məlumatları tam qeyd etməyiniz sorğunun daha tez planlanmasına kömək edir.</p>
+
+          <h2>Sifariş məlumatları</h2>
+          <p class="form-note">Qiymət forma daxil edilmir — geri dönüşdə bildiriləcək.</p>
+
           <div class="form-grid">
-            <div class="field"><label for="logisticsName">Ad / şirkət adı</label><input id="logisticsName" name="name" type="text" required autocomplete="name"></div>
-            <div class="field"><label for="logisticsEmail">E-poçt</label><input id="logisticsEmail" name="email" type="email" required autocomplete="email" placeholder="ad@şirkət.az"></div>
-            <div class="field"><label for="logisticsVoen">VÖEN</label><input id="logisticsVoen" name="voen" type="text" inputmode="numeric"></div>
-            <div class="field"><label for="pickupAddress">Yükləmə ünvanı</label><input id="pickupAddress" name="pickup_address" type="text" required placeholder="Şəhər, rayon, ünvan"></div>
-            <div class="field"><label for="dropoffAddress">Təhvil ünvanı</label><input id="dropoffAddress" name="dropoff_address" type="text" required placeholder="Şəhər, rayon, ünvan"></div>
-            <div class="field"><label for="cargoType">Yükün növü</label><input id="cargoType" name="cargo_type" type="text" required placeholder="Məhsulun adı"></div>
-            <div class="field"><label for="cargoWeight">Çəki / həcm</label><input id="cargoWeight" name="cargo_weight" type="text" placeholder="Məsələn: 10 ton"></div>
-            <div class="field-full"><label for="logisticsMessage">Əlavə qeyd</label><textarea id="logisticsMessage" name="message" required placeholder="Daşınma vaxtı və əlavə tələblər"></textarea></div>
-            <div class="field-full"><button type="submit">Sorğu göndər</button><p class="form-status" role="status" aria-live="polite"></p></div>
+            <div class="field-full">
+              <label for="orderTypeMirvari">1. Sifariş növü</label>
+              <select id="orderTypeMirvari" name="order_type" data-order-type required>
+                <option value="product">Məhsul sifarişi</option>
+                <option value="logistics" selected>Logistika sifarişi</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="voenMirvari">2. VÖEN</label>
+              <input id="voenMirvari" name="voen" type="text" inputmode="numeric" required placeholder="VÖEN">
+            </div>
+            <div class="field">
+              <label for="buyerNameMirvari">3. Ad</label>
+              <input id="buyerNameMirvari" name="name" type="text" required autocomplete="name">
+            </div>
+            <div class="field-full">
+              <label for="buyerPhoneMirvari">4. Əlaqə nömrəsi</label>
+              <input id="buyerPhoneMirvari" name="phone" type="tel" required autocomplete="tel" placeholder="+994 XX XXX XX XX">
+            </div>
+
+            <div class="field-full order-panel" data-order-panel="product">
+              <label for="productSendAddressMirvari">5. Göndərilmə ünvanı</label>
+              <input id="productSendAddressMirvari" name="send_address_product" type="text" value="Anadolu un Fabriki" readonly>
+            </div>
+
+            <div class="field-full order-panel is-active" data-order-panel="logistics">
+              <label for="logisticsPickupTextMirvari">5. Göndərilən ünvan (konum)</label>
+              <input id="logisticsPickupTextMirvari" name="pickup_address" type="text" placeholder="Ünvan / izah" data-map-address="pickup">
+              <div class="map-picker" data-map="pickup">
+                <div class="map-canvas"></div>
+                <p class="map-hint">Xəritəyə klikləyərək Google Maps pin seçin.</p>
+                <input type="hidden" name="pickup_lat" data-map-lat="pickup">
+                <input type="hidden" name="pickup_lng" data-map-lng="pickup">
+                <input type="hidden" name="pickup_maps_url" data-map-url="pickup">
+                <a class="map-link" data-map-open="pickup" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
+              </div>
+            </div>
+
+            <div class="field-full order-panel" data-order-panel="product">
+              <label for="productDeliveryTextMirvari">6. Çatdırılma ünvanı (konum)</label>
+              <input id="productDeliveryTextMirvari" name="delivery_address" type="text" placeholder="Şəhər, rayon, ünvan" data-map-address="delivery">
+              <div class="map-picker" data-map="delivery">
+                <div class="map-canvas"></div>
+                <p class="map-hint">Xəritəyə klikləyərək Google Maps pin seçin.</p>
+                <input type="hidden" name="delivery_lat" data-map-lat="delivery">
+                <input type="hidden" name="delivery_lng" data-map-lng="delivery">
+                <input type="hidden" name="delivery_maps_url" data-map-url="delivery">
+                <a class="map-link" data-map-open="delivery" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
+              </div>
+            </div>
+
+            <div class="field-full order-panel is-active" data-order-panel="logistics">
+              <label for="logisticsDropTextMirvari">6. Göndərilmə ünvanı (ünvan + konum)</label>
+              <input id="logisticsDropTextMirvari" name="dropoff_address" type="text" placeholder="Şəhər, rayon, ünvan" data-map-address="dropoff">
+              <div class="map-picker" data-map="dropoff">
+                <div class="map-canvas"></div>
+                <p class="map-hint">Xəritəyə klikləyərək Google Maps pin seçin.</p>
+                <input type="hidden" name="dropoff_lat" data-map-lat="dropoff">
+                <input type="hidden" name="dropoff_lng" data-map-lng="dropoff">
+                <input type="hidden" name="dropoff_maps_url" data-map-url="dropoff">
+                <a class="map-link" data-map-open="dropoff" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
+              </div>
+            </div>
+
+            <div class="field-full order-panel" data-order-panel="product">
+              <div class="product-lines-head">
+                <span class="choice-title">7–8. Məhsullar</span>
+                <button type="button" class="product-add-btn" data-add-product>+ Əlavə et</button>
+              </div>
+              <div class="product-lines" data-product-lines></div>
+            </div>
+
+            <div class="field-full">
+              <label for="orderNoteMirvari">Əlavə qeyd</label>
+              <textarea id="orderNoteMirvari" name="message" placeholder="Əlavə məlumat (istəyə bağlı)"></textarea>
+            </div>
+
+            <div class="field-full">
+              <p class="price-note">Qiymət hələlik sorğuya daxil edilmir. Geri dönüşdə bildiriləcək.</p>
+              <button type="submit">Sorğu göndər</button>
+              <p class="form-status" role="status" aria-live="polite"></p>
+            </div>
           </div>
         </form>
       </div>
@@ -92,6 +170,7 @@
     <div class="footer-bottom"><span>© 2026 Mirvari Logistics MMC. Bütün hüquqlar qorunur.</span>
     <a class="made-by-vulcet" href="https://vulcet.com" target="_blank" rel="noopener noreferrer"><span>Made by</span> <strong>Vulcet</strong></a></div>
   </footer>
-  <script src="anadolu.js?v=fleet-3"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZsMNDxlzAvRPZMyVb1vMsGloex4=" crossorigin=""></script>
+  <script src="anadolu.js?v=order-form-1"></script>
 </body>
 </html>

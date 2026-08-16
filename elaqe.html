@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Əlaqə | Anadolu Qida</title>
-  <meta name="description" content="Anadolu Qida məhsul sifarişi və korporativ əlaqə forması.">
+  <meta name="description" content="Anadolu Qida məhsul və logistika sifariş forması.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#071b2d">
   <link rel="canonical" href="https://anadoluqida.com/elaqe">
@@ -12,15 +12,15 @@
   <meta property="og:locale" content="az_AZ">
   <meta property="og:site_name" content="Anadolu Qida">
   <meta property="og:title" content="Əlaqə | Anadolu Qida">
-  <meta property="og:description" content="Məhsul sifarişi və korporativ əlaqə forması.">
+  <meta property="og:description" content="Məhsul və logistika sifariş forması.">
   <meta property="og:url" content="https://anadoluqida.com/elaqe">
   <meta property="og:image" content="https://anadoluqida.com/anadolu-og.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="anadolu.css?v=fonts-2">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <link rel="stylesheet" href="anadolu.css?v=order-form-1">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Anadolu Qida","item":"https://anadoluqida.com/"},{"@type":"ListItem","position":2,"name":"Əlaqə","item":"https://anadoluqida.com/elaqe"}]}</script>
-  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-NHX2ENRVMX"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -44,7 +44,7 @@
     <section class="page-hero">
       <span class="eyebrow">Əlaqə</span>
       <h1>Sifarişinizi birlikdə planlayaq.</h1>
-      <p>Məhsul, miqdar və çatdırılma məlumatlarını qeyd edin. Komandamız müraciətinizi nəzərdən keçirəcək.</p>
+      <p>Məhsul və ya logistika sifarişi göndərin. Qiymət geri dönüşdə bildiriləcək.</p>
     </section>
 
     <section class="section section-white">
@@ -52,47 +52,110 @@
         <div class="contact-copy reveal">
           <span class="eyebrow">Korporativ müraciət</span>
           <h2>Dəqiq məlumat, sürətli cavab.</h2>
-          <p>Sifarişiniz haqqında əsas məlumatları göndərin. Məhsul və təchizat şərtləri müraciətdən sonra dəqiqləşdirilir.</p>
-          <a class="contact-email" href="mailto:hello@anadoluqida.com"><span>E-poçt</span>hello@anadoluqida.com</a>
+          <p>Sifariş növünü seçin, ünvanı xəritədən pinləyin və məhsulları əlavə edin.</p>
+          <a class="contact-email" href="mailto:arslangokay@anadoluqida.com"><span>Məhsul sifarişi</span>arslangokay@anadoluqida.com</a>
+          <a class="contact-email" href="mailto:mustafayevaseide@anadoluqida.com"><span>Logistika sifarişi</span>mustafayevaseide@anadoluqida.com</a>
           <div class="contact-points">
-            <div class="contact-point"><b>01</b><div><strong>Un sifarişi</strong><p>Məhsul, miqdar və qablaşdırma.</p></div></div>
-            <div class="contact-point"><b>02</b><div><strong>Çatdırılma</strong><p>Ünvan və təhvil məlumatları.</p></div></div>
-            <div class="contact-point"><b>03</b><div><strong>Maliyyə xidməti</strong><p>Hesablaşma və əməkdaşlıq.</p></div></div>
+            <div class="contact-point"><b>01</b><div><strong>Məhsul sifarişi</strong><p>Un məhsulları, çoxlu sətir.</p></div></div>
+            <div class="contact-point"><b>02</b><div><strong>Logistika</strong><p>Götürmə və çatdırılma konumu.</p></div></div>
+            <div class="contact-point"><b>03</b><div><strong>Qiymət</strong><p>Geri dönüşdə bildirilir.</p></div></div>
           </div>
         </div>
 
-        <form class="contact-form reveal" action="https://api.web3forms.com/submit" method="POST">
+        <form class="contact-form order-form reveal" action="https://api.web3forms.com/submit" method="POST" data-order-form>
           <input type="hidden" name="access_key" value="c033b9a2-4d5a-4f17-9a0d-0ccfbdca5cfb">
-          <input type="hidden" name="subject" value="Anadolu Qida saytından yeni müraciət">
-          <input type="hidden" name="from_name" value="Anadolu Qida veb saytı">
+          <input type="hidden" name="from_name" value="Anadolu Qida sifariş forması">
+          <input type="hidden" name="subject" data-form-subject value="Yeni sifariş">
+          <input type="hidden" name="recipient_email" data-form-recipient value="arslangokay@anadoluqida.com">
           <input type="checkbox" name="botcheck" hidden>
-          <h2>Müraciət məlumatları</h2>
-          <p class="form-note">Məlumatları tam qeyd etməyiniz sorğunun daha tez cavablandırılmasına kömək edir.</p>
+
+          <h2>Sifariş məlumatları</h2>
+          <p class="form-note">Qiymət forma daxil edilmir — geri dönüşdə bildiriləcək.</p>
+
           <div class="form-grid">
-            <div class="field"><label for="buyerName">Adı / şirkət adı</label><input id="buyerName" name="name" type="text" required autocomplete="name"></div>
-            <div class="field"><label for="buyerEmail">E-poçt</label><input id="buyerEmail" name="email" type="email" required autocomplete="email" placeholder="ad@şirkət.az"></div>
-            <div class="field"><label for="voen">VÖEN</label><input id="voen" name="voen" type="text" inputmode="numeric"></div>
-            <div class="field-full"><label for="requestTopic">Müraciət mövzusu</label><select id="requestTopic" name="request_topic"><option value="product">Məhsul sifarişi</option><option value="finance">Maliyyə xidməti</option></select></div>
-
-            <div class="conditional-fields active" data-topic-panel="product">
-              <div class="field-full"><span class="choice-title">Çatdırılma daxildir?</span><div class="choice-row"><label><input type="radio" name="delivery_included" value="Bəli" checked> Bəli</label><label><input type="radio" name="delivery_included" value="Xeyr"> Xeyr</label></div></div>
-              <div class="field-full"><label for="product">Məhsul</label><select id="product" name="product">
-                <option>ANADOLU 50 kq</option><option>AĞ KİSƏ 50 kq</option><option>ANADOLU 25 kq</option><option>ANADOLU 10 kq</option><option>ANADOLU 5 kq</option>
-                <option>MİRVARİ 50 kq (təndirlik)</option><option>MİRVARİ 50 kq</option><option>MİRVARİ 25 kq</option><option>MİRVARİ 25 kq (SUPER UN)</option><option>MİRVARİ 10 kq</option><option>MİRVARİ 5 kq</option>
-                <option>BONKALİTE 35 kq</option><option>BONKALİTE 30 kq</option><option>OBOY 29 kq</option><option>1-Cİ NÖV 45 kq</option>
-                <option>KƏPƏK 20 kq</option><option>KƏPƏK 19 kq</option><option>KƏPƏK 17 kq</option><option>KƏPƏK 16 kq</option>
-                <option>BUĞDA YARMASI</option><option>TOZ SAMAN</option><option>RUS BUĞDASI</option><option>ARPA</option>
-              </select></div>
-              <div class="field"><label for="quantity">Miqdar</label><input id="quantity" name="quantity" type="text" placeholder="Məsələn: 10 ton"></div>
-              <div class="field"><label for="address">Çatdırılma ünvanı</label><input id="address" name="delivery_address" type="text" placeholder="Şəhər, rayon"></div>
+            <div class="field-full">
+              <label for="orderType">1. Sifariş növü</label>
+              <select id="orderType" name="order_type" data-order-type required>
+                <option value="product">Məhsul sifarişi</option>
+                <option value="logistics">Logistika sifarişi</option>
+              </select>
             </div>
 
-            <div class="conditional-fields" data-topic-panel="finance">
-              <div class="field-full"><label for="financeDetails">Maliyyə müraciətinin mövzusu</label><input id="financeDetails" name="finance_details" type="text" placeholder="Hesablaşma və ya əməkdaşlıq mövzusu"></div>
+            <div class="field">
+              <label for="voen">2. VÖEN</label>
+              <input id="voen" name="voen" type="text" inputmode="numeric" required placeholder="VÖEN">
+            </div>
+            <div class="field">
+              <label for="buyerName">3. Ad</label>
+              <input id="buyerName" name="name" type="text" required autocomplete="name">
+            </div>
+            <div class="field-full">
+              <label for="buyerPhone">4. Əlaqə nömrəsi</label>
+              <input id="buyerPhone" name="phone" type="tel" required autocomplete="tel" placeholder="+994 XX XXX XX XX">
             </div>
 
-            <div class="field-full"><label for="message">Əlavə qeyd</label><textarea id="message" name="message" required placeholder="Sorğunuzla bağlı əlavə məlumat"></textarea></div>
-            <div class="field-full"><button type="submit">Sorğu göndər</button><p class="form-status" role="status" aria-live="polite"></p></div>
+            <div class="field-full order-panel is-active" data-order-panel="product">
+              <label for="productSendAddress">5. Göndərilmə ünvanı</label>
+              <input id="productSendAddress" name="send_address_product" type="text" value="Anadolu un Fabriki" readonly>
+            </div>
+
+            <div class="field-full order-panel" data-order-panel="logistics">
+              <label for="logisticsPickupText">5. Göndərilən ünvan (konum)</label>
+              <input id="logisticsPickupText" name="pickup_address" type="text" placeholder="Ünvan / izah" data-map-address="pickup">
+              <div class="map-picker" data-map="pickup">
+                <div class="map-canvas"></div>
+                <p class="map-hint">Xəritəyə klikləyərək Google Maps pin seçin.</p>
+                <input type="hidden" name="pickup_lat" data-map-lat="pickup">
+                <input type="hidden" name="pickup_lng" data-map-lng="pickup">
+                <input type="hidden" name="pickup_maps_url" data-map-url="pickup">
+                <a class="map-link" data-map-open="pickup" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
+              </div>
+            </div>
+
+            <div class="field-full order-panel is-active" data-order-panel="product">
+              <label for="productDeliveryText">6. Çatdırılma ünvanı (konum)</label>
+              <input id="productDeliveryText" name="delivery_address" type="text" placeholder="Şəhər, rayon, ünvan" data-map-address="delivery">
+              <div class="map-picker" data-map="delivery">
+                <div class="map-canvas"></div>
+                <p class="map-hint">Xəritəyə klikləyərək Google Maps pin seçin.</p>
+                <input type="hidden" name="delivery_lat" data-map-lat="delivery">
+                <input type="hidden" name="delivery_lng" data-map-lng="delivery">
+                <input type="hidden" name="delivery_maps_url" data-map-url="delivery">
+                <a class="map-link" data-map-open="delivery" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
+              </div>
+            </div>
+
+            <div class="field-full order-panel" data-order-panel="logistics">
+              <label for="logisticsDropText">6. Göndərilmə ünvanı (ünvan + konum)</label>
+              <input id="logisticsDropText" name="dropoff_address" type="text" placeholder="Şəhər, rayon, ünvan" data-map-address="dropoff">
+              <div class="map-picker" data-map="dropoff">
+                <div class="map-canvas"></div>
+                <p class="map-hint">Xəritəyə klikləyərək Google Maps pin seçin.</p>
+                <input type="hidden" name="dropoff_lat" data-map-lat="dropoff">
+                <input type="hidden" name="dropoff_lng" data-map-lng="dropoff">
+                <input type="hidden" name="dropoff_maps_url" data-map-url="dropoff">
+                <a class="map-link" data-map-open="dropoff" href="#" target="_blank" rel="noopener noreferrer" hidden>Google Maps-də aç</a>
+              </div>
+            </div>
+
+            <div class="field-full order-panel is-active" data-order-panel="product">
+              <div class="product-lines-head">
+                <span class="choice-title">7–8. Məhsullar</span>
+                <button type="button" class="product-add-btn" data-add-product>+ Əlavə et</button>
+              </div>
+              <div class="product-lines" data-product-lines></div>
+            </div>
+
+            <div class="field-full">
+              <label for="orderNote">Əlavə qeyd</label>
+              <textarea id="orderNote" name="message" placeholder="Əlavə məlumat (istəyə bağlı)"></textarea>
+            </div>
+
+            <div class="field-full">
+              <p class="price-note">Qiymət hələlik sorğuya daxil edilmir. Geri dönüşdə bildiriləcək.</p>
+              <button type="submit">Sorğu göndər</button>
+              <p class="form-status" role="status" aria-live="polite"></p>
+            </div>
           </div>
         </form>
       </div>
@@ -107,6 +170,7 @@
     <div class="footer-bottom"><span>© 2026 Anadolu Qida MMC. Bütün hüquqlar qorunur.</span>
     <a class="made-by-vulcet" href="https://vulcet.com" target="_blank" rel="noopener noreferrer"><span>Made by</span> <strong>Vulcet</strong></a></div>
   </footer>
-  <script src="anadolu.js?v=seo-1"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZsMNDxlzAvRPZMyVb1vMsGloex4=" crossorigin=""></script>
+  <script src="anadolu.js?v=order-form-1"></script>
 </body>
 </html>
