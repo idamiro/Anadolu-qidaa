@@ -1433,17 +1433,22 @@ textarea:focus {
 
 .map-canvas {
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   height: 280px;
   min-height: 280px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: #dbe4ec;
   z-index: 1;
+  overflow: hidden;
 }
 
 .leaflet-container {
   width: 100%;
+  max-width: 100%;
   height: 100%;
   font: inherit;
+  overflow: hidden !important;
 }
 
 .map-hint,
@@ -2618,12 +2623,19 @@ input[readonly] {
   padding: 28px clamp(18px, 4vw, 48px) 72px;
   display: grid;
   gap: 48px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .contact-page .soft-contact-shell {
   padding: clamp(22px, 3.5vw, 42px);
   border-radius: 28px;
   background: #f5f5f5;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
 }
 
 .contact-page .soft-contact-head {
@@ -2668,7 +2680,9 @@ input[readonly] {
   grid-template-columns: minmax(0, 1.25fr) minmax(240px, 0.75fr);
   gap: clamp(28px, 4vw, 48px);
   align-items: start;
-  max-width: none;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
 }
 
 .contact-page .soft-contact-aside {
@@ -2697,10 +2711,15 @@ input[readonly] {
   padding: 0;
   background: transparent;
   color: #1a1a1a;
+  min-width: 0;
+  max-width: 100%;
+  width: 100%;
 }
 
 .contact-page .soft-form .form-grid {
   gap: 16px 18px;
+  min-width: 0;
+  width: 100%;
 }
 
 .contact-page .soft-form .field label,
@@ -2781,6 +2800,19 @@ input[readonly] {
   border: 0;
   border-radius: 18px;
   overflow: hidden;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.contact-page .soft-form .map-picker {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.contact-page .soft-form .leaflet-container {
+  max-width: 100%;
+  overflow: hidden !important;
 }
 
 .contact-page .soft-form .map-hint,
@@ -2875,6 +2907,9 @@ input[readonly] {
   color: #6a6a6a;
   font-size: 0.92rem;
   line-height: 1.45;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 .contact-page .soft-info-item a:hover {
@@ -2885,16 +2920,27 @@ input[readonly] {
   .contact-page .soft-contact-head,
   .contact-page .soft-contact-grid {
     grid-template-columns: 1fr;
+    width: 100%;
+    min-width: 0;
   }
 
   .contact-page .soft-contact-head p {
     justify-self: start;
-    max-width: 48ch;
+    max-width: none;
   }
 
   .contact-page .soft-contact-aside {
     position: relative;
     top: auto;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .contact-page .soft-form .field,
+  .contact-page .soft-form .field-full,
+  .contact-page .soft-form .order-panel {
+    min-width: 0;
+    max-width: 100%;
   }
 }
 
