@@ -2827,7 +2827,6 @@ input[readonly] {
 .contact-page .soft-submit-row {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 .contact-page .soft-form button[type="submit"] {
@@ -2839,19 +2838,6 @@ input[readonly] {
   background: #123650;
   color: #fff;
   font-weight: 800;
-}
-
-.contact-page .soft-submit-icon {
-  width: 52px;
-  min-width: 52px;
-  height: 52px;
-  min-height: 52px;
-  padding: 0;
-  border-radius: 50%;
-  display: inline-grid;
-  place-items: center;
-  font-size: 1.15rem;
-  line-height: 1;
 }
 
 .contact-page .soft-form .form-status {
@@ -2958,7 +2944,8 @@ input[readonly] {
     width: 100%;
   }
 
-  .contact-page .soft-form button[type="submit"]:not(.soft-submit-icon) {
+  .contact-page .soft-form button[type="submit"] {
     flex: 1;
+    width: 100%;
   }
 }
