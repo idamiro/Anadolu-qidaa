@@ -35,19 +35,38 @@ if (menuButton && nav) {
   mobileCta.textContent = isMirvari ? "Daşınma sorğusu" : "Korporativ sorğu";
   nav.appendChild(mobileCta);
 
+  let lastScrollAt = 0;
+  window.addEventListener("scroll", () => {
+    lastScrollAt = Date.now();
+  }, { passive: true });
+
   const closeMenu = () => {
     nav.classList.remove("open");
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.setAttribute("aria-label", "Menyunu aç");
     body.classList.remove("menu-open");
+    nav.setAttribute("inert", "");
   };
 
-  menuButton.addEventListener("click", () => {
-    const isOpen = !nav.classList.contains("open");
-    nav.classList.toggle("open", isOpen);
-    menuButton.setAttribute("aria-expanded", String(isOpen));
-    menuButton.setAttribute("aria-label", isOpen ? "Menyunu bağla" : "Menyunu aç");
-    body.classList.toggle("menu-open", isOpen);
+  const openMenu = () => {
+    nav.classList.add("open");
+    menuButton.setAttribute("aria-expanded", "true");
+    menuButton.setAttribute("aria-label", "Menyunu bağla");
+    body.classList.add("menu-open");
+    nav.removeAttribute("inert");
+  };
+
+  closeMenu();
+
+  menuButton.addEventListener("click", (event) => {
+    // Ignore taps that fire right after a scroll (common mobile ghost-click)
+    if (Date.now() - lastScrollAt < 400) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+    if (nav.classList.contains("open")) closeMenu();
+    else openMenu();
   });
 
   nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
