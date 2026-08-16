@@ -339,32 +339,164 @@ const initOrderForms = () => {
     addBtn?.addEventListener("click", addProductLine);
     if (linesRoot && !linesRoot.children.length) addProductLine();
 
-    const searchAddress = async (query) => {
+    const latinizeAz = (value) => value
+      .replace(/ə/g, "e")
+      .replace(/Ə/g, "E")
+      .replace(/ı/g, "i")
+      .replace(/İ/g, "I")
+      .replace(/ş/g, "s")
+      .replace(/Ş/g, "S")
+      .replace(/ğ/g, "g")
+      .replace(/Ğ/g, "G")
+      .replace(/ç/g, "c")
+      .replace(/Ç/g, "C")
+      .replace(/ö/g, "o")
+      .replace(/Ö/g, "O")
+      .replace(/ü/g, "u")
+      .replace(/Ü/g, "U");
+
+    const uniqueQueries = (query) => {
+      const base = query.trim();
+      const latin = latinizeAz(base);
+      return [...new Set([
+        base,
+        `${base} Bakı`,
+        `${base} Baku`,
+        latin,
+        `${latin} Baku`,
+        `${latin} Bakı`
+      ].map((item) => item.trim()).filter(Boolean))];
+    };
+
+    const formatPhotonLabel = (props = {}) => {
+      const streetLine = [props.housenumber, props.street || props.name].filter(Boolean).join(" ").trim();
+      const parts = [
+        streetLine,
+        props.name && props.name !== props.street && props.name !== streetLine ? props.name : "",
+        props.district,
+        props.locality,
+        props.city || props.town || props.village || props.county,
+        props.state,
+        props.country
+      ].filter(Boolean);
+      return [...new Set(parts)].join(", ");
+    };
+
+    const photonToResults = (data) => {
+      const features = Array.isArray(data?.features) ? data.features : [];
+      return features.map((feature) => {
+        const [lng, lat] = feature.geometry?.coordinates || [];
+        const label = formatPhotonLabel(feature.properties);
+        if (!Number.isFinite(lat) || !Number.isFinite(lng) || !label) return null;
+        return {
+          lat,
+          lon: lng,
+          display_name: label,
+          source: "photon"
+        };
+      }).filter(Boolean);
+    };
+
+    const nominatimToResults = (data) => {
+      if (!Array.isArray(data)) return [];
+      return data.map((item) => ({
+        lat: Number(item.lat),
+        lon: Number(item.lon),
+        display_name: item.display_name,
+        source: "nominatim"
+      })).filter((item) => Number.isFinite(item.lat) && Number.isFinite(item.lon) && item.display_name);
+    };
+
+    const dedupeResults = (results) => {
+      const seen = new Set();
+      return results.filter((item) => {
+        const key = `${item.display_name}|${item.lat.toFixed(5)}|${item.lon.toFixed(5)}`;
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+      });
+    };
+
+    const searchPhoton = async (query) => {
+      const url = new URL("https://photon.komoot.io/api/");
+      url.searchParams.set("q", query);
+      url.searchParams.set("lat", String(BAKU[0]));
+      url.searchParams.set("lon", String(BAKU[1]));
+      url.searchParams.set("limit", "8");
+      url.searchParams.set("lang", "default");
+      url.searchParams.set("location_bias_scale", "0.6");
+      const response = await fetch(url.toString(), { headers: { Accept: "application/json" } });
+      if (!response.ok) throw new Error("Photon failed");
+      return photonToResults(await response.json());
+    };
+
+    const searchNominatim = async (query) => {
       const url = new URL("https://nominatim.openstreetmap.org/search");
       url.searchParams.set("format", "json");
       url.searchParams.set("q", query);
-      url.searchParams.set("limit", "5");
+      url.searchParams.set("limit", "6");
       url.searchParams.set("countrycodes", "az");
       url.searchParams.set("addressdetails", "0");
-      url.searchParams.set("accept-language", "az");
-      const response = await fetch(url.toString(), {
-        headers: { Accept: "application/json" }
-      });
-      if (!response.ok) throw new Error("Geocode failed");
-      return response.json();
+      url.searchParams.set("accept-language", "az,en");
+      url.searchParams.set("viewbox", "48.8,41.6,50.5,39.9");
+      url.searchParams.set("bounded", "0");
+      const response = await fetch(url.toString(), { headers: { Accept: "application/json" } });
+      if (!response.ok) throw new Error("Nominatim failed");
+      return nominatimToResults(await response.json());
+    };
+
+    const searchAddress = async (query) => {
+      const variants = uniqueQueries(query);
+      let collected = [];
+
+      for (const variant of variants) {
+        try {
+          const photonHits = await searchPhoton(variant);
+          collected = dedupeResults([...collected, ...photonHits]);
+          if (collected.length >= 5) break;
+        } catch (_error) {
+          // try next variant / fallback
+        }
+      }
+
+      if (collected.length < 3) {
+        for (const variant of variants.slice(0, 3)) {
+          try {
+            const nominatimHits = await searchNominatim(variant);
+            collected = dedupeResults([...collected, ...nominatimHits]);
+            if (collected.length >= 6) break;
+          } catch (_error) {
+            // ignore
+          }
+        }
+      }
+
+      return collected.slice(0, 8);
     };
 
     const reverseGeocode = async (latlng) => {
+      try {
+        const photonUrl = new URL("https://photon.komoot.io/reverse");
+        photonUrl.searchParams.set("lat", String(latlng.lat));
+        photonUrl.searchParams.set("lon", String(latlng.lng));
+        photonUrl.searchParams.set("lang", "default");
+        const photonRes = await fetch(photonUrl.toString(), { headers: { Accept: "application/json" } });
+        if (photonRes.ok) {
+          const photonHits = photonToResults(await photonRes.json());
+          if (photonHits[0]?.display_name) return { display_name: photonHits[0].display_name };
+        }
+      } catch (_error) {
+        // fallback below
+      }
+
       const url = new URL("https://nominatim.openstreetmap.org/reverse");
       url.searchParams.set("format", "json");
       url.searchParams.set("lat", String(latlng.lat));
       url.searchParams.set("lon", String(latlng.lng));
       url.searchParams.set("zoom", "18");
       url.searchParams.set("addressdetails", "0");
-      url.searchParams.set("accept-language", "az");
-      const response = await fetch(url.toString(), {
-        headers: { Accept: "application/json" }
-      });
+      url.searchParams.set("accept-language", "az,en");
+      const response = await fetch(url.toString(), { headers: { Accept: "application/json" } });
       if (!response.ok) throw new Error("Reverse geocode failed");
       return response.json();
     };
@@ -380,7 +512,7 @@ const initOrderForms = () => {
       const openLink = picker.querySelector(`[data-map-open="${key}"]`);
       const addressInput = form.querySelector(`[data-map-address="${key}"]`);
       const searchBtn = picker.querySelector(`[data-map-search="${key}"]`);
-      const resultsBox = picker.querySelector(`[data-map-results="${key}"]`);
+      const resultsBox = form.querySelector(`[data-map-results="${key}"]`);
       const hint = picker.querySelector(".map-hint");
       if (!canvas) return;
 
@@ -469,25 +601,20 @@ const initOrderForms = () => {
         if (hint) hint.textContent = "Ünvan xəritədə pinləndi. Dəqiq yer üçün pini sürükləyin və ya başqa nəticə seçin.";
       };
 
-      const showResults = (results, { autoPick = false } = {}) => {
+      const showResults = (results) => {
         if (!resultsBox) return;
         clearResults();
         if (!results.length) {
-          if (hint) hint.textContent = "Ünvan tapılmadı. Yenidən yazın və ya xəritəyə klikləyin.";
+          if (hint) hint.textContent = "Yaxın ünvan tapılmadı. Başqa yazımla cəhd edin və ya xəritəyə klikləyin.";
           return;
         }
 
-        if (autoPick) applySearchResult(results[0]);
-
-        if (results.length === 1 && autoPick) return;
-
         resultsBox.hidden = false;
-        results.forEach((item, index) => {
+        results.forEach((item) => {
           const btn = document.createElement("button");
           btn.type = "button";
           btn.className = "map-result-btn";
           btn.textContent = item.display_name;
-          if (autoPick && index === 0) btn.setAttribute("aria-current", "true");
           btn.addEventListener("click", () => {
             applySearchResult(item);
             clearResults();
@@ -495,22 +622,33 @@ const initOrderForms = () => {
           resultsBox.appendChild(btn);
         });
 
-        if (!autoPick && hint) {
-          hint.textContent = "Nəticələrdən birini seçin və ya xəritəyə klikləyin.";
+        if (hint) {
+          hint.textContent = "Aşağıdakı təkliflərdən birini seçin — pin xəritədə görünəcək.";
         }
       };
 
       const runSearch = async ({ autoPick = false } = {}) => {
         const query = (addressInput?.value || "").trim();
-        if (query.length < 3) {
-          if (hint) hint.textContent = "Ünvanı yazın (ən azı 3 hərf), pin avtomatik görünəcək.";
+        if (query.length < 2) {
+          clearResults();
+          if (hint) hint.textContent = "Küçə/ünvan yazın — altında yaxın yerlər çıxacaq.";
           return;
         }
-        if (hint) hint.textContent = "Axtarılır…";
+        if (hint) hint.textContent = "Yaxın ünvanlar axtarılır…";
         if (searchBtn) searchBtn.disabled = true;
         try {
           const results = await searchAddress(query);
-          showResults(results, { autoPick: autoPick || results.length === 1 });
+          if (!results.length) {
+            showResults([]);
+            return;
+          }
+          if (autoPick) {
+            applySearchResult(results[0]);
+            if (results.length > 1) showResults(results);
+            else clearResults();
+            return;
+          }
+          showResults(results);
         } catch (_error) {
           if (hint) hint.textContent = "Axtarış alınmadı. Bir az sonra yenidən cəhd edin və ya xəritəyə klikləyin.";
           clearResults();
@@ -528,6 +666,10 @@ const initOrderForms = () => {
       searchBtn?.addEventListener("click", () => runSearch({ autoPick: true }));
 
       addressInput?.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          clearResults();
+          return;
+        }
         if (event.key !== "Enter") return;
         event.preventDefault();
         window.clearTimeout(searchTimer);
@@ -538,14 +680,14 @@ const initOrderForms = () => {
         if (suppressAddressSearch) return;
         window.clearTimeout(searchTimer);
         const query = addressInput.value.trim();
-        if (query.length < 4) {
+        if (query.length < 2) {
           clearResults();
           return;
         }
-        if (hint) hint.textContent = "Ünvan yazılır… pin bir az sonra yenilənəcək.";
+        if (hint) hint.textContent = "Yazın… altında yaxın ünvanlar çıxacaq.";
         searchTimer = window.setTimeout(() => {
-          runSearch({ autoPick: true });
-        }, 700);
+          runSearch({ autoPick: false });
+        }, 320);
       });
 
       mapRegistry.set(key, { map, setPin, canvas });

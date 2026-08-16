@@ -1412,6 +1412,13 @@ textarea:focus {
 .map-results {
   display: grid;
   gap: 6px;
+  margin: 8px 0 10px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.map-results[hidden] {
+  display: none !important;
 }
 
 .map-result-btn {
@@ -2794,6 +2801,17 @@ input[readonly] {
   border-radius: 14px;
   background: #fff;
   color: #222;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.contact-page .soft-form .map-result-btn:hover {
+  background: #f3f3f3;
+}
+
+.contact-page .soft-form .map-results {
+  padding: 6px;
+  border-radius: 16px;
+  background: #e8e8e8;
 }
 
 .contact-page .soft-form .map-canvas {
