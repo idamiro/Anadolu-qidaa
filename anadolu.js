@@ -346,10 +346,26 @@ const initOrderForms = () => {
       url.searchParams.set("limit", "5");
       url.searchParams.set("countrycodes", "az");
       url.searchParams.set("addressdetails", "0");
+      url.searchParams.set("accept-language", "az");
       const response = await fetch(url.toString(), {
         headers: { Accept: "application/json" }
       });
       if (!response.ok) throw new Error("Geocode failed");
+      return response.json();
+    };
+
+    const reverseGeocode = async (latlng) => {
+      const url = new URL("https://nominatim.openstreetmap.org/reverse");
+      url.searchParams.set("format", "json");
+      url.searchParams.set("lat", String(latlng.lat));
+      url.searchParams.set("lon", String(latlng.lng));
+      url.searchParams.set("zoom", "18");
+      url.searchParams.set("addressdetails", "0");
+      url.searchParams.set("accept-language", "az");
+      const response = await fetch(url.toString(), {
+        headers: { Accept: "application/json" }
+      });
+      if (!response.ok) throw new Error("Reverse geocode failed");
       return response.json();
     };
 
@@ -390,10 +406,35 @@ const initOrderForms = () => {
       }).addTo(map);
 
       let marker = null;
+      let suppressAddressSearch = false;
+      let searchTimer = 0;
+      let reverseTimer = 0;
+
+      const clearResults = () => {
+        if (!resultsBox) return;
+        resultsBox.innerHTML = "";
+        resultsBox.hidden = true;
+      };
+
+      const writeAddress = (value) => {
+        if (!addressInput) return;
+        suppressAddressSearch = true;
+        addressInput.value = value;
+        suppressAddressSearch = false;
+      };
+
       const setPin = (latlng, zoom = 15) => {
         const mapsUrl = `https://www.google.com/maps?q=${latlng.lat},${latlng.lng}`;
-        if (marker) marker.setLatLng(latlng);
-        else marker = window.L.marker(latlng).addTo(map);
+        if (marker) {
+          marker.setLatLng(latlng);
+        } else {
+          marker = window.L.marker(latlng, { draggable: true, autoPan: true }).addTo(map);
+          marker.on("dragend", () => {
+            const next = marker.getLatLng();
+            setPin(next, map.getZoom());
+            fillAddressFromPin(next);
+          });
+        }
         map.setView(latlng, zoom);
         if (latInput) latInput.value = String(latlng.lat);
         if (lngInput) lngInput.value = String(latlng.lng);
@@ -404,55 +445,72 @@ const initOrderForms = () => {
         }
       };
 
-      const clearResults = () => {
-        if (!resultsBox) return;
-        resultsBox.innerHTML = "";
-        resultsBox.hidden = true;
+      const fillAddressFromPin = (latlng) => {
+        window.clearTimeout(reverseTimer);
+        if (hint) hint.textContent = "Ünvan müəyyən edilir…";
+        reverseTimer = window.setTimeout(async () => {
+          try {
+            const data = await reverseGeocode(latlng);
+            if (data?.display_name) writeAddress(data.display_name);
+            if (hint) hint.textContent = "Pin və ünvan sinxronlaşdırıldı. Pini sürükləyə və ya yenidən klikləyə bilərsiniz.";
+          } catch (_error) {
+            if (hint) hint.textContent = "Pin qoyuldu, amma ünvan oxunmadı. Ünvanı əl ilə yaza bilərsiniz.";
+          }
+        }, 120);
       };
 
-      const showResults = (results) => {
+      const applySearchResult = (item) => {
+        const latlng = {
+          lat: Number(item.lat),
+          lng: Number(item.lon)
+        };
+        setPin(latlng, 16);
+        if (item.display_name) writeAddress(item.display_name);
+        if (hint) hint.textContent = "Ünvan xəritədə pinləndi. Dəqiq yer üçün pini sürükləyin və ya başqa nəticə seçin.";
+      };
+
+      const showResults = (results, { autoPick = false } = {}) => {
         if (!resultsBox) return;
         clearResults();
         if (!results.length) {
           if (hint) hint.textContent = "Ünvan tapılmadı. Yenidən yazın və ya xəritəyə klikləyin.";
           return;
         }
+
+        if (autoPick) applySearchResult(results[0]);
+
+        if (results.length === 1 && autoPick) return;
+
         resultsBox.hidden = false;
-        results.forEach((item) => {
+        results.forEach((item, index) => {
           const btn = document.createElement("button");
           btn.type = "button";
           btn.className = "map-result-btn";
           btn.textContent = item.display_name;
+          if (autoPick && index === 0) btn.setAttribute("aria-current", "true");
           btn.addEventListener("click", () => {
-            const latlng = {
-              lat: Number(item.lat),
-              lng: Number(item.lon)
-            };
-            setPin(latlng, 16);
-            if (addressInput && item.display_name) addressInput.value = item.display_name;
+            applySearchResult(item);
             clearResults();
-            if (hint) hint.textContent = "Pin seçildi. İstəsəniz xəritədə yenidən klikləyə bilərsiniz.";
           });
           resultsBox.appendChild(btn);
         });
+
+        if (!autoPick && hint) {
+          hint.textContent = "Nəticələrdən birini seçin və ya xəritəyə klikləyin.";
+        }
       };
 
-      const runSearch = async () => {
+      const runSearch = async ({ autoPick = false } = {}) => {
         const query = (addressInput?.value || "").trim();
-        if (!query) {
-          if (hint) hint.textContent = "Əvvəlcə ünvanı yazın, sonra «Xəritədə tap» basın.";
+        if (query.length < 3) {
+          if (hint) hint.textContent = "Ünvanı yazın (ən azı 3 hərf), pin avtomatik görünəcək.";
           return;
         }
         if (hint) hint.textContent = "Axtarılır…";
-        searchBtn && (searchBtn.disabled = true);
+        if (searchBtn) searchBtn.disabled = true;
         try {
           const results = await searchAddress(query);
-          showResults(results);
-          if (results.length === 1) {
-            resultsBox?.querySelector("button")?.click();
-          } else if (results.length && hint) {
-            hint.textContent = "Nəticələrdən birini seçin və ya xəritəyə klikləyin.";
-          }
+          showResults(results, { autoPick: autoPick || results.length === 1 });
         } catch (_error) {
           if (hint) hint.textContent = "Axtarış alınmadı. Bir az sonra yenidən cəhd edin və ya xəritəyə klikləyin.";
           clearResults();
@@ -462,15 +520,32 @@ const initOrderForms = () => {
       };
 
       map.on("click", (event) => {
-        setPin(event.latlng, map.getZoom());
+        setPin(event.latlng, Math.max(map.getZoom(), 14));
         clearResults();
-        if (hint) hint.textContent = "Pin seçildi. İstəsəniz ünvan yazıb yenidən axtara bilərsiniz.";
+        fillAddressFromPin(event.latlng);
       });
-      searchBtn?.addEventListener("click", runSearch);
+
+      searchBtn?.addEventListener("click", () => runSearch({ autoPick: true }));
+
       addressInput?.addEventListener("keydown", (event) => {
         if (event.key !== "Enter") return;
         event.preventDefault();
-        runSearch();
+        window.clearTimeout(searchTimer);
+        runSearch({ autoPick: true });
+      });
+
+      addressInput?.addEventListener("input", () => {
+        if (suppressAddressSearch) return;
+        window.clearTimeout(searchTimer);
+        const query = addressInput.value.trim();
+        if (query.length < 4) {
+          clearResults();
+          return;
+        }
+        if (hint) hint.textContent = "Ünvan yazılır… pin bir az sonra yenilənəcək.";
+        searchTimer = window.setTimeout(() => {
+          runSearch({ autoPick: true });
+        }, 700);
       });
 
       mapRegistry.set(key, { map, setPin, canvas });
