@@ -219,12 +219,6 @@ const initOrderForms = () => {
           ? `Logistika sifarişi → ${ORDER_RECIPIENTS.logistics}`
           : `Məhsul sifarişi → ${ORDER_RECIPIENTS.product}`;
       }
-
-      requestAnimationFrame(() => {
-        mapRegistry.forEach((entry) => {
-          entry.map.invalidateSize();
-        });
-      });
     };
 
     const createProductRow = (index) => {
@@ -294,8 +288,23 @@ const initOrderForms = () => {
       const openLink = picker.querySelector(`[data-map-open="${key}"]`);
       if (!canvas) return;
 
-      const map = window.L.map(canvas, { scrollWheelZoom: true }).setView(BAKU, 11);
-      window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      // Fix marker icons for self-hosted Leaflet
+      if (!window.__anadoluLeafletIconFixed) {
+        delete window.L.Icon.Default.prototype._getIconUrl;
+        window.L.Icon.Default.mergeOptions({
+          iconRetinaUrl: "./vendor/leaflet/images/marker-icon-2x.png",
+          iconUrl: "./vendor/leaflet/images/marker-icon.png",
+          shadowUrl: "./vendor/leaflet/images/marker-shadow.png"
+        });
+        window.__anadoluLeafletIconFixed = true;
+      }
+
+      const map = window.L.map(canvas, {
+        scrollWheelZoom: true,
+        attributionControl: true
+      }).setView(BAKU, 11);
+
+      window.L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 19,
         attribution: "&copy; OpenStreetMap"
       }).addTo(map);
@@ -315,13 +324,35 @@ const initOrderForms = () => {
       };
 
       map.on("click", (event) => setPin(event.latlng));
-      mapRegistry.set(key, { map, setPin });
+      mapRegistry.set(key, { map, setPin, canvas });
     };
 
-    ["pickup", "delivery", "dropoff"].forEach(setupMap);
-    typeSelect?.addEventListener("change", setPanelState);
-    setPanelState();
+    const refreshVisibleMaps = () => {
+      const type = typeSelect?.value || "product";
+      const keys = type === "logistics" ? ["pickup", "dropoff"] : ["delivery"];
+      keys.forEach((key) => {
+        setupMap(key);
+        const entry = mapRegistry.get(key);
+        if (!entry) return;
+        // Maps in newly shown panels need a size refresh
+        setTimeout(() => {
+          entry.map.invalidateSize();
+          entry.map.setView(entry.map.getCenter(), entry.map.getZoom());
+        }, 80);
+        setTimeout(() => entry.map.invalidateSize(), 250);
+      });
+    };
 
+    typeSelect?.addEventListener("change", () => {
+      setPanelState();
+      requestAnimationFrame(() => refreshVisibleMaps());
+    });
+    setPanelState();
+    // Wait for active panel layout before creating Leaflet maps
+    requestAnimationFrame(() => {
+      refreshVisibleMaps();
+      setTimeout(refreshVisibleMaps, 150);
+    });
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       setPanelState();

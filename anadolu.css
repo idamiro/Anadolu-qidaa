@@ -1386,10 +1386,17 @@ textarea:focus {
 
 .map-canvas {
   width: 100%;
-  height: 240px;
+  height: 280px;
+  min-height: 280px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(0, 0, 0, 0.2);
+  background: #dbe4ec;
   z-index: 1;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  font: inherit;
 }
 
 .map-hint,
