@@ -78,8 +78,10 @@ body {
   letter-spacing: 0;
 }
 
+html.menu-open,
 body.menu-open {
   overflow: hidden;
+  overscroll-behavior: none;
 }
 
 img,
@@ -2003,16 +2005,22 @@ input[readonly] {
   }
 
   .site-header {
+    z-index: 1000;
+    overflow: visible;
     grid-template-columns: 1fr auto;
     padding: 0 20px;
   }
 
   .brand {
+    position: relative;
+    z-index: 1002;
     width: 116px;
     height: auto;
   }
 
   .menu-toggle {
+    position: relative;
+    z-index: 1002;
     width: 44px;
     height: 44px;
     padding: 11px;
@@ -2051,33 +2059,63 @@ input[readonly] {
     transform: translateY(-7px) rotate(-45deg);
   }
 
+  /* Vulcet pattern: fade overlay, no off-screen translate (avoids horizontal stretch) */
   .nav {
     position: fixed;
-    top: var(--header);
-    right: 0;
-    left: auto;
-    z-index: 200;
-    width: min(100%, 100vw);
-    max-width: 100vw;
-    height: calc(100svh - var(--header));
-    padding: 26px 22px;
+    inset: 0;
+    z-index: 1001;
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: 100dvh;
+    padding: calc(var(--header) + 28px) 22px 26px;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 0;
     background: var(--white);
-    transform: translate3d(100%, 0, 0);
-    transition: transform .35s var(--ease), visibility .35s;
+    opacity: 0;
     visibility: hidden;
     pointer-events: none;
+    transform: none;
+    overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
+    transition: opacity .22s var(--ease), visibility .22s;
   }
 
   .nav.open {
-    transform: translate3d(0, 0, 0);
+    opacity: 1;
     visibility: visible;
     pointer-events: auto;
+  }
+
+  /* Sticky/fixed header traps position:fixed children — expand while open */
+  html.menu-open .site-header,
+  body.menu-open .site-header {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100dvh !important;
+    max-height: none !important;
+    overflow: visible !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    animation: none !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    background: var(--white) !important;
+    align-items: start;
+  }
+
+  html.menu-open .site-header .brand,
+  body.menu-open .site-header .brand {
+    min-height: var(--header);
+  }
+
+  html.menu-open .site-header .menu-toggle,
+  body.menu-open .site-header .menu-toggle {
+    margin-top: 13px;
   }
 
   .home-page .nav.open a {
@@ -2086,21 +2124,17 @@ input[readonly] {
   }
 
   .home-page .nav {
-    top: 0;
-    z-index: 200;
-    height: 100svh;
-    padding: calc(var(--header) + 28px) 22px 26px;
     background: rgba(5, 23, 39, .98);
+  }
+
+  html.menu-open .home-page .site-header,
+  body.menu-open.home-page .site-header {
+    background: rgba(5, 23, 39, .98) !important;
+    color: var(--white);
   }
 
   .home-page .nav a {
     border-bottom-color: rgba(255, 255, 255, .14);
-  }
-
-  .home-page .brand,
-  .home-page .menu-toggle {
-    position: relative;
-    z-index: 210;
   }
 
   .nav a {
@@ -2159,6 +2193,11 @@ input[readonly] {
 
   .mirvari-page.home-page .nav {
     background: rgba(11, 12, 15, .985);
+  }
+
+  html.menu-open .mirvari-page.home-page .site-header,
+  body.menu-open.mirvari-page.home-page .site-header {
+    background: rgba(11, 12, 15, .985) !important;
   }
 
   .mirvari-brand {

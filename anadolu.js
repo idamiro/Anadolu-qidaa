@@ -21,10 +21,8 @@ if (siteHeader) {
 }
 
 if (menuButton && nav) {
-  // Keep fixed menu outside header — backdrop-filter/sticky creates a containing block
-  // that traps position:fixed and freezes the page when menu-open locks scroll.
-  document.body.appendChild(nav);
-
+  // Vulcet-style mobile menu: inert panel, scroll lock + restore, focus trap.
+  // Header expands while open so sticky/fixed + backdrop-filter cannot trap the panel.
   const brandSwitch = document.querySelector(".brand-switch");
   if (brandSwitch) {
     const mobileBrandSwitch = brandSwitch.cloneNode(true);
@@ -39,37 +37,84 @@ if (menuButton && nav) {
   mobileCta.textContent = isMirvari ? "Daşınma sorğusu" : "Korporativ sorğu";
   nav.appendChild(mobileCta);
 
-  let blockMenuToggleUntil = 0;
+  if (!nav.id) nav.id = "site-nav";
+  menuButton.setAttribute("aria-controls", nav.id);
 
-  const closeMenu = () => {
+  let menuScrollY = 0;
+  const isMobileNav = () => window.matchMedia("(max-width: 980px)").matches;
+
+  const resetDesktopNav = () => {
     nav.classList.remove("open");
+    nav.inert = false;
+    nav.removeAttribute("aria-hidden");
     menuButton.setAttribute("aria-expanded", "false");
     menuButton.setAttribute("aria-label", "Menyunu aç");
+    document.documentElement.classList.remove("menu-open");
     body.classList.remove("menu-open");
   };
 
-  const openMenu = () => {
-    nav.classList.add("open");
-    menuButton.setAttribute("aria-expanded", "true");
-    menuButton.setAttribute("aria-label", "Menyunu bağla");
-    body.classList.add("menu-open");
+  const setMenu = (open) => {
+    if (!isMobileNav()) {
+      resetDesktopNav();
+      return;
+    }
+
+    menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.setAttribute("aria-label", open ? "Menyunu bağla" : "Menyunu aç");
+    nav.setAttribute("aria-hidden", String(!open));
+    nav.inert = !open;
+    nav.classList.toggle("open", open);
+
+    if (open) {
+      menuScrollY = window.scrollY;
+      document.documentElement.classList.add("menu-open");
+      body.classList.add("menu-open");
+      requestAnimationFrame(() => nav.querySelector("a")?.focus());
+    } else {
+      document.documentElement.classList.remove("menu-open");
+      body.classList.remove("menu-open");
+      requestAnimationFrame(() => window.scrollTo(0, menuScrollY));
+    }
   };
 
-  window.addEventListener("scroll", () => {
-    blockMenuToggleUntil = Date.now() + 350;
-    if (nav.classList.contains("open")) closeMenu();
-  }, { passive: true });
+  if (isMobileNav()) {
+    nav.inert = true;
+    nav.setAttribute("aria-hidden", "true");
+  }
 
-  menuButton.addEventListener("click", (event) => {
-    event.preventDefault();
-    if (Date.now() < blockMenuToggleUntil) return;
-    if (nav.classList.contains("open")) closeMenu();
-    else openMenu();
+  menuButton.addEventListener("click", () => {
+    setMenu(menuButton.getAttribute("aria-expanded") !== "true");
   });
 
-  nav.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => setMenu(false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (menuButton.getAttribute("aria-expanded") !== "true") return;
+
+    if (event.key === "Escape") {
+      setMenu(false);
+      menuButton.focus();
+      return;
+    }
+
+    if (event.key === "Tab") {
+      const focusable = [menuButton, ...nav.querySelectorAll("a, button")];
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 980) closeMenu();
+    if (!isMobileNav()) resetDesktopNav();
   });
 }
 
