@@ -1,0 +1,9 @@
+# Cloudflare Workers/Pages must not upload VCS or local junk as assets
+.git
+**/.git/**
+**/*.pack
+node_modules
+**/.DS_Store
+**/*.log
+.cursor
+agent-tools
